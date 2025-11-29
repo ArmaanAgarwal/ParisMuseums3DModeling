@@ -96,7 +96,7 @@ def create_material(name, color, alpha=1.0, metallic=0.0, roughness=0.5, emissio
     
     if alpha < 1.0:
         mat.blend_method = 'BLEND'
-        mat.shadow_method = 'CLIP'
+        # Note: shadow_method removed for Blender 4.x compatibility
     
     return mat
 
