@@ -1,0 +1,60 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+interface ChapterTakeawaysProps {
+  takeaways: string[];
+  nextUp?: {
+    title: string;
+    description: string;
+  };
+}
+
+export function ChapterTakeaways({
+  takeaways,
+  nextUp,
+}: ChapterTakeawaysProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-12 space-y-6"
+    >
+      {/* Key Takeaways */}
+      <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-6">
+        <h3 className="mb-4 text-lg font-semibold text-emerald-200">
+          Key Takeaways
+        </h3>
+        <ul className="space-y-2">
+          {takeaways.map((takeaway, i) => (
+            <li key={i} className="flex items-start gap-3 text-emerald-200/90">
+              <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
+              <span className="text-sm leading-relaxed">{takeaway}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Next Up */}
+      {nextUp && (
+        <div className="rounded-2xl border border-white/15 bg-white/5 p-6">
+          <div className="mb-2 text-xs font-medium uppercase tracking-wider text-white/60">
+            Next Up
+          </div>
+          <h4 className="mb-2 text-lg font-semibold text-white">
+            {nextUp.title}
+          </h4>
+          <p className="text-sm text-white/70">{nextUp.description}</p>
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+
+
+
+
+
+

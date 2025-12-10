@@ -1,0 +1,90 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { getExhibitsByZone, getZonesByLevel } from "@/data/client";
+import { getExhibitHref } from "@/lib/routes";
+
+interface TourStepLevel2ExhibitsProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
+
+export function TourStepLevel2Exhibits({ onNext, onPrevious }: TourStepLevel2ExhibitsProps) {
+  const zones = getZonesByLevel("l2");
+  const allExhibits = zones.flatMap((zone) => getExhibitsByZone(zone.id));
+
+  return (
+    <div className="min-h-screen bg-black py-20">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-12"
+        >
+          <div className="mx-auto max-w-4xl">
+            <h1 className="mb-6 text-4xl font-semibold md:text-5xl">
+              Level 2 Exhibits
+            </h1>
+            <p className="mb-6 text-xl leading-relaxed text-white/80">
+              Level 2 has {allExhibits.length} exhibits that show how technology measures and analyzes performance. Each exhibit focuses on a different measurement technology. Click any exhibit to explore it in detail.
+            </p>
+          </div>
+
+          {/* Exhibits Grid */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {allExhibits.map((exhibit, i) => (
+              <motion.div
+                key={exhibit.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Link
+                  href={`${getExhibitHref(exhibit.id)}?fromTour=1&tourStep=level2-exhibits`}
+                  className="group block h-full rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+                >
+                  <h3 className="mb-3 text-xl font-semibold group-hover:text-white/90">
+                    {exhibit.title}
+                  </h3>
+                  <p className="mb-4 text-white/70 line-clamp-3">{exhibit.thesis}</p>
+                  <div className="text-sm text-white/50 group-hover:text-white/70">
+                    View exhibit →
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Why These Exhibits */}
+          <div className="mx-auto max-w-4xl rounded-2xl border border-white/15 bg-white/5 p-8">
+            <h2 className="mb-4 text-2xl font-semibold">Why These Exhibits Belong in Level 2</h2>
+            <p className="mb-4 leading-relaxed text-white/80">
+              Each exhibit in Level 2 shows a different way that technology measures performance. Some focus on motion capture. Others show force measurement or wearable sensors. Together, they show how technology transformed performance from something we observe to something we measure with data.
+            </p>
+            <p className="leading-relaxed text-white/80">
+              As you explore these exhibits, notice how measurement technology reveals invisible patterns. Motion capture shows movement in three dimensions. Force plates measure ground reaction forces. Sensors track physiology in real time. This level shows how data makes the invisible visible.
+            </p>
+          </div>
+
+          {/* Navigation */}
+          <div className="mx-auto max-w-4xl flex justify-between">
+            <button
+              onClick={onPrevious}
+              className="rounded-xl border border-white/20 bg-white/5 px-8 py-4 font-medium transition hover:bg-white/10"
+            >
+              ← Previous
+            </button>
+            <button
+              onClick={onNext}
+              className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-4 font-medium transition hover:bg-cyan-500/30"
+            >
+              Explore First Zone →
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+

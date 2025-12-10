@@ -1,0 +1,257 @@
+"use client";
+
+import { useEffect, useRef, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTourStore } from "@/store/tourStore";
+import { TOUR_STEPS, getTourStepByIndex } from "@/data/tour";
+import { TourStepIntro } from "@/components/tour/TourStepIntro";
+import { TourStepStructure } from "@/components/tour/TourStepStructure";
+import { TourStepLevel1Entry } from "@/components/tour/TourStepLevel1Entry";
+import { TourStepLevel1Map } from "@/components/tour/TourStepLevel1Map";
+import { TourStepLevel1Exhibits } from "@/components/tour/TourStepLevel1Exhibits";
+import { TourStepLevel1Zone1 } from "@/components/tour/TourStepLevel1Zone1";
+import { TourStepLevel1Zone2 } from "@/components/tour/TourStepLevel1Zone2";
+import { TourStepLevel1Activity } from "@/components/tour/TourStepLevel1Activity";
+import { TourStepE } from "@/components/tour/TourStepE";
+import { TourStepLevel2Entry } from "@/components/tour/TourStepLevel2Entry";
+import { TourStepLevel2Map } from "@/components/tour/TourStepLevel2Map";
+import { TourStepLevel2Exhibits } from "@/components/tour/TourStepLevel2Exhibits";
+import { TourStepLevel2Zone1 } from "@/components/tour/TourStepLevel2Zone1";
+import { TourStepLevel2Zone2 } from "@/components/tour/TourStepLevel2Zone2";
+import { TourStepLevel2Activity } from "@/components/tour/TourStepLevel2Activity";
+import { TourStepG } from "@/components/tour/TourStepG";
+import { TourStepLevel3Entry } from "@/components/tour/TourStepLevel3Entry";
+import { TourStepLevel3Map } from "@/components/tour/TourStepLevel3Map";
+import { TourStepLevel3Exhibits } from "@/components/tour/TourStepLevel3Exhibits";
+import { TourStepLevel3Zone1 } from "@/components/tour/TourStepLevel3Zone1";
+import { TourStepLevel3Zone2 } from "@/components/tour/TourStepLevel3Zone2";
+import { TourStepLevel3Activity } from "@/components/tour/TourStepLevel3Activity";
+import { TourStepJ } from "@/components/tour/TourStepJ";
+
+const STEP_COMPONENTS = [
+  TourStepIntro,
+  TourStepStructure,
+  TourStepLevel1Entry,
+  TourStepLevel1Map,
+  TourStepLevel1Exhibits,
+  TourStepLevel1Zone1,
+  TourStepLevel1Zone2,
+  TourStepLevel1Activity,
+  TourStepE,
+  TourStepLevel2Entry,
+  TourStepLevel2Map,
+  TourStepLevel2Exhibits,
+  TourStepLevel2Zone1,
+  TourStepLevel2Zone2,
+  TourStepLevel2Activity,
+  TourStepG,
+  TourStepLevel3Entry,
+  TourStepLevel3Map,
+  TourStepLevel3Exhibits,
+  TourStepLevel3Zone1,
+  TourStepLevel3Zone2,
+  TourStepLevel3Activity,
+  TourStepJ,
+];
+
+function TourPageContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const {
+    isTourActive,
+    currentStepIndex,
+    setTourActive,
+    setCurrentStep,
+    goToNext,
+    goToPrevious,
+    resetTour,
+  } = useTourStore();
+  const hasInitialized = useRef(false);
+
+  // Initialize tour state on mount
+  useEffect(() => {
+    if (!hasInitialized.current) {
+      const stepParam = searchParams.get("step");
+      if (stepParam) {
+        const stepIndex = parseInt(stepParam, 10);
+        if (!isNaN(stepIndex) && stepIndex >= 0 && stepIndex < TOUR_STEPS.length) {
+          setCurrentStep(stepIndex);
+        }
+      }
+      setTourActive(true);
+      hasInitialized.current = true;
+    }
+  }, [searchParams, setTourActive, setCurrentStep]);
+
+  // Prevent browser back/forward from breaking tour
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      e.preventDefault();
+      // Sync with current tour state instead of browser history
+      const step = getTourStepByIndex(currentStepIndex);
+      if (step) {
+        window.history.pushState(
+          { tourStep: currentStepIndex },
+          "",
+          `/tour?step=${currentStepIndex}`
+        );
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [currentStepIndex]);
+
+  // Update URL when step changes
+  useEffect(() => {
+    if (hasInitialized.current) {
+      const step = getTourStepByIndex(currentStepIndex);
+      if (step) {
+        window.history.replaceState(
+          { tourStep: currentStepIndex },
+          "",
+          `/tour?step=${currentStepIndex}`
+        );
+      }
+    }
+  }, [currentStepIndex]);
+
+  const handleGoToStep = (index: number) => {
+    if (index >= 0 && index < TOUR_STEPS.length) {
+      setCurrentStep(index);
+      const step = getTourStepByIndex(index);
+      if (step?.anchor) {
+        // Scroll to anchor if needed
+        setTimeout(() => {
+          const element = document.getElementById(step.anchor);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      }
+    }
+  };
+
+  const handleNext = () => {
+    if (currentStepIndex < TOUR_STEPS.length - 1) {
+      goToNext();
+      handleGoToStep(currentStepIndex + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStepIndex > 0) {
+      goToPrevious();
+      handleGoToStep(currentStepIndex - 1);
+    } else {
+      // If at first step, go to home instead of restarting
+      router.push("/");
+    }
+  };
+
+  const handleExitTour = () => {
+    resetTour();
+    router.push("/");
+  };
+
+  const CurrentStepComponent = STEP_COMPONENTS[currentStepIndex];
+  const currentStep = getTourStepByIndex(currentStepIndex);
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Progress Bar */}
+      <div className="sticky top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur-md">
+        <div className="mx-auto max-w-7xl px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={handleExitTour}
+                className="text-sm text-white/60 hover:text-white/80 transition"
+                title="Exit tour"
+              >
+                Exit Tour
+              </button>
+              <div className="text-sm font-medium text-white/70">
+                Step {currentStepIndex + 1} of {TOUR_STEPS.length}
+              </div>
+              <div className="h-2 flex-1 max-w-md bg-white/10 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-cyan-400"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${((currentStepIndex + 1) / TOUR_STEPS.length) * 100}%` }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <select
+                value={currentStepIndex}
+                onChange={(e) => handleGoToStep(Number(e.target.value))}
+                className="rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white"
+              >
+                {TOUR_STEPS.map((step, i) => (
+                  <option key={step.id} value={i}>
+                    {i + 1}. {step.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Step Content */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentStepIndex}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.4 }}
+        >
+          <CurrentStepComponent onNext={handleNext} onPrevious={handlePrevious} />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation */}
+      <div className="sticky bottom-0 border-t border-white/10 bg-black/90 backdrop-blur-md">
+        <div className="mx-auto max-w-7xl px-4 py-4">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={handlePrevious}
+              className="rounded-xl border border-white/20 bg-white/5 px-6 py-3 font-medium transition hover:bg-white/10"
+              title={currentStepIndex === 0 ? "Return to home" : "Previous step"}
+            >
+              {currentStepIndex === 0 ? "← Home" : "← Previous"}
+            </button>
+            <div className="text-sm text-white/60">
+              {currentStep?.title || "Tour"}
+            </div>
+            <button
+              onClick={handleNext}
+              disabled={currentStepIndex === TOUR_STEPS.length - 1}
+              className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-6 py-3 font-medium transition disabled:opacity-30 disabled:cursor-not-allowed hover:bg-cyan-500/30"
+            >
+              {currentStepIndex === TOUR_STEPS.length - 1 ? "Finish" : "Next →"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function TourPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 text-lg text-white/70">Loading tour...</div>
+        </div>
+      </div>
+    }>
+      <TourPageContent />
+    </Suspense>
+  );
+}

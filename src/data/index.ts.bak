@@ -1,0 +1,11 @@
+// Central export for all museum data
+// Note: paths.ts is only exported from museum.ts for server components
+// to avoid bundling issues in client components
+export * from "./types";
+export * from "./levels";
+export * from "./zones";
+export * from "./exhibits";
+export * from "./objects";
+export * from "./didactics";
+// Do not export paths here - import directly from ./paths or ./museum for server components
+

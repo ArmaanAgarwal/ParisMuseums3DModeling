@@ -1,0 +1,111 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { getAllObjects } from "@/data";
+
+export default function TimelinePage() {
+  const objects = getAllObjects()
+    .filter((o) => o.yearNumber !== undefined)
+    .sort((a, b) => (a.yearNumber || 0) - (b.yearNumber || 0));
+
+  const eras = [
+    { name: "Ancient", start: -1000, end: 500, color: "amber" },
+    { name: "Medieval", start: 500, end: 1500, color: "orange" },
+    { name: "Early Modern", start: 1500, end: 1800, color: "yellow" },
+    { name: "Industrial", start: 1800, end: 1950, color: "green" },
+    { name: "Digital Age", start: 1950, end: 2020, color: "cyan" },
+    { name: "Future", start: 2020, end: 2030, color: "violet" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-black">
+      {/* Hero */}
+      <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950 py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-auto max-w-4xl"
+          >
+            <h1 className="mb-4 text-4xl font-semibold md:text-5xl">
+              Interactive Timeline
+            </h1>
+            <p className="text-lg text-white/70">
+              Explore how performance technology evolved across history
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-white/20" />
+
+            {/* Objects */}
+            <div className="space-y-8">
+              {objects.map((obj, i) => {
+                const era = eras.find(
+                  (e) =>
+                    obj.yearNumber! >= e.start && obj.yearNumber! < e.end
+                );
+                const eraColor = era?.color || "white";
+
+                return (
+                  <motion.div
+                    key={obj.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    className="relative flex items-start gap-6"
+                  >
+                    {/* Timeline Dot */}
+                    <div className="relative z-10 flex-shrink-0">
+                      <div
+                        className={`h-4 w-4 rounded-full border-2 border-white bg-${eraColor}-500/50`}
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 rounded-xl border border-white/15 bg-white/5 p-6">
+                      <div className="mb-2 flex items-center justify-between">
+                        <div className="text-sm font-medium text-white/60">
+                          {obj.dateLabel}
+                        </div>
+                        {era && (
+                          <span
+                            className={`rounded-full border border-${eraColor}-500/20 bg-${eraColor}-500/10 px-2 py-1 text-xs text-${eraColor}-200`}
+                          >
+                            {era.name}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="mb-2 text-lg font-semibold text-white">
+                        {obj.title}
+                      </h3>
+                      <p className="mb-4 text-sm text-white/70">{obj.subtitle}</p>
+                      <p className="mb-4 text-sm leading-relaxed text-white/80">
+                        {obj.description}
+                      </p>
+                      <Link
+                        href={`/objects/${obj.slug}`}
+                        className="inline-block text-sm text-white/70 hover:text-white/90"
+                      >
+                        View details →
+                      </Link>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+

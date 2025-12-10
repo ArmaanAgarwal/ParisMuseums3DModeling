@@ -1,0 +1,28 @@
+import { notFound } from "next/navigation";
+import { getObjectBySlug, getExhibit, getZone, getLevel, OBJECTS } from "@/data/museum";
+import { ObjectDetailContent } from "./ObjectDetailContent";
+
+export async function generateStaticParams() {
+  return OBJECTS.map((obj) => ({
+    slug: obj.slug,
+  }));
+}
+
+interface ObjectPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function ObjectPage({ params }: ObjectPageProps) {
+  const { slug } = await params;
+  const object = getObjectBySlug(slug);
+
+  if (!object) {
+    notFound();
+  }
+
+  const exhibit = object.exhibitId ? (getExhibit(object.exhibitId) ?? null) : null;
+  const zone = exhibit ? (getZone(exhibit.zoneId) ?? null) : null;
+  const level = zone ? (getLevel(zone.levelId) ?? null) : null;
+
+  return <ObjectDetailContent object={object} exhibit={exhibit} zone={zone} level={level} />;
+}

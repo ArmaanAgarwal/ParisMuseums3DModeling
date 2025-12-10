@@ -1,0 +1,41 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { LevelTransition } from "@/components/LevelTransition";
+import { TourProgressWidget } from "@/components/TourProgressWidget";
+
+export default function Transition2To3Page() {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <TourProgressWidget currentStep="transition-2-3" />
+      <LevelTransition
+        fromLevel="Level 2: Data, Motion & Body"
+        toLevel="Level 3: Futures & Immersion"
+        narrative="When data becomes guidance; when guidance becomes augmentation"
+      />
+      <div className="mx-auto max-w-4xl px-4 py-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <p className="mb-8 text-lg text-white/80 leading-relaxed">
+            You have explored how performance became data, how movement became
+            measurable, and how technology reveals invisible patterns. Now, you
+            ascend to the future—where data becomes intelligence, where
+            measurement becomes guidance, and where technology promises to
+            transform human capability itself.
+          </p>
+          <Link
+            href="/tour/level-3"
+            className="inline-block rounded-xl border border-white/20 bg-white/10 px-12 py-6 text-xl font-semibold transition hover:border-white/30 hover:bg-white/15"
+          >
+            Enter Level 3 →
+          </Link>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+

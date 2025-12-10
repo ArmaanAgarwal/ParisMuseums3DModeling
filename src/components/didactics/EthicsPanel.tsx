@@ -1,0 +1,70 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+interface EthicsPanelProps {
+  title: string;
+  context: string;
+  issues: string[];
+  questions: string[];
+}
+
+export function EthicsPanel({
+  title,
+  context,
+  issues,
+  questions,
+}: EthicsPanelProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-8"
+    >
+      <div className="mb-2 text-xs font-medium uppercase tracking-wider text-rose-300/70">
+        Ethics & Critical Questions
+      </div>
+      <h3 className="mb-4 text-xl font-semibold text-rose-200">{title}</h3>
+      
+      <p className="mb-6 leading-relaxed text-rose-200/90">{context}</p>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <h4 className="mb-3 text-sm font-semibold text-rose-200">
+            Key Issues
+          </h4>
+          <ul className="space-y-2">
+            {issues.map((issue, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-rose-200/90">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rose-400" />
+                <span>{issue}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="mb-3 text-sm font-semibold text-rose-200">
+            Questions to Consider
+          </h4>
+          <ul className="space-y-2">
+            {questions.map((question, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-rose-200/90">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rose-400" />
+                <span>{question}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+
+
+
+
+
+

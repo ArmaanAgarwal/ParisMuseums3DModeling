@@ -1,0 +1,11 @@
+// Museum Configuration
+// Three candidate names for the museum:
+// 1. "Museum of Human Performance" - Clear, direct, communicates the theme
+// 2. "The Performance Archive" - Emphasizes historical collection and documentation
+// 3. "Museum of Measurement & Movement" - Highlights the dual themes of measurement and physical achievement
+
+// Selected name (change this to switch between candidates):
+export const MUSEUM_NAME = "Museum of Human Performance";
+export const MUSEUM_SUBTITLE = "From Ancient Athletics to Future Enhancement";
+export const MUSEUM_DESCRIPTION = "Explore how humans have measured, improved, and designed performance over time. From ancient athletic equipment to modern sensors and future technologies, discover the tools and ideas that shaped human achievement.";
+

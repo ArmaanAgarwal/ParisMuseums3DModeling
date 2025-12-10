@@ -1,0 +1,83 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { getAllObjects } from "@/data";
+
+export function TimelineSlider() {
+  const objects = getAllObjects().filter((o) => o.yearNumber !== undefined);
+  const minYear = Math.min(...objects.map((o) => o.yearNumber!));
+  const maxYear = Math.max(...objects.map((o) => o.yearNumber!));
+  const [selectedYear, setSelectedYear] = useState(
+    Math.floor((minYear + maxYear) / 2)
+  );
+
+  const objectsInYear = objects.filter(
+    (o) =>
+      o.yearNumber &&
+      Math.abs(o.yearNumber - selectedYear) <=
+        Math.max(50, (maxYear - minYear) / 20)
+  );
+
+  return (
+    <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+      <h3 className="mb-6 text-xl font-semibold">Interactive Timeline</h3>
+      <p className="mb-6 text-sm text-white/70">
+        Drag the slider to explore how performance technology evolved across time
+      </p>
+
+      <div className="mb-6">
+        <input
+          type="range"
+          min={minYear}
+          max={maxYear}
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
+          className="w-full"
+        />
+        <div className="mt-2 flex justify-between text-xs text-white/60">
+          <span>{minYear < 0 ? `${Math.abs(minYear)} BCE` : `${minYear} CE`}</span>
+          <span className="font-medium text-white/90">
+            {selectedYear < 0
+              ? `${Math.abs(selectedYear)} BCE`
+              : `${selectedYear} CE`}
+          </span>
+          <span>{maxYear} CE</span>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+        <div className="mb-3 text-sm font-medium text-white/90">
+          Objects from this era ({objectsInYear.length})
+        </div>
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {objectsInYear.slice(0, 6).map((obj) => (
+            <motion.div
+              key={obj.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="rounded-lg border border-white/10 bg-white/5 p-3"
+            >
+              <div className="text-sm font-medium text-white/90">
+                {obj.title}
+              </div>
+              <div className="mt-1 text-xs text-white/60">{obj.dateLabel}</div>
+            </motion.div>
+          ))}
+        </div>
+        {objectsInYear.length === 0 && (
+          <div className="py-8 text-center text-sm text-white/50">
+            No objects found for this time period
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+

@@ -1,0 +1,317 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { RubricChecklist } from "@/components/RubricChecklist";
+import { LEVELS } from "@/data/client";
+import { MUSEUM_NAME, MUSEUM_SUBTITLE } from "@/lib/museumConfig";
+
+export default function HomePage() {
+
+  return (
+    <>
+      <div className="min-h-screen bg-black">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden border-b border-white/10">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute -top-40 left-1/2 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/10 to-transparent blur-3xl" />
+          </div>
+
+          <div className="relative mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-32">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mx-auto max-w-4xl text-center"
+            >
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/70">
+            <span className="inline-block h-2 w-2 rounded-full bg-emerald-400/80" />
+                Creative Project: Museum Design
+          </div>
+
+              <h1 className="mb-6 text-5xl font-semibold tracking-tight md:text-7xl">
+                {MUSEUM_NAME}
+              </h1>
+              <p className="mb-4 text-xl text-white/80 md:text-2xl font-light">
+                {MUSEUM_SUBTITLE}
+              </p>
+              <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/70">
+                This museum is an online museum about how humans improve performance.
+              </p>
+              <p className="mx-auto mb-4 max-w-2xl text-base leading-relaxed text-white/60">
+                This museum exists online, so anyone can visit from anywhere. That is a deliberate choice. The history of performance technology is a story of tools becoming more accessible. What started in elite training spaces and research labs moved into schools, gyms, and everyday life. This museum does the same thing by living on the web.
+              </p>
+              <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-white/60">
+                Instead of rooms and hallways, we use pages, maps, and interactive stations. The interface is our architecture. It guides visitors through a clear story, helps them compare objects across time, and lets them try simple learning activities that explain how performance measurement works.
+              </p>
+              <div className="mb-6 text-center text-sm text-white/60">
+                Estimated tour length: 45-60 minutes
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  href="/tour?step=0"
+                  className="rounded-xl border border-white/20 bg-white/10 px-8 py-4 font-semibold transition hover:border-white/30 hover:bg-white/15"
+                >
+                  Start Guided Tour
+                </Link>
+                <Link
+                  href="/collections"
+                  className="rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-medium transition hover:bg-white/10"
+                >
+                  Explore Freely
+                </Link>
+              </div>
+
+              {/* Mission Statement */}
+              <div className="mx-auto mt-12 max-w-3xl space-y-6 text-lg leading-relaxed text-white/80">
+                <div className="rounded-xl border border-white/15 bg-white/5 p-8 text-left">
+                  <h2 className="mb-4 text-2xl font-semibold text-white">Mission Statement</h2>
+                  <p className="mb-4">
+                    {MUSEUM_NAME} explores how human achievement has been
+                    measured, analyzed, and enhanced across history. This online
+                    museum tells a story in three acts: from the ancient origins
+                    of performance optimization, through the data driven revolution
+                    that made movement measurable, to the future where technology
+                    promises to transform human capability itself.
+                  </p>
+                  <p>
+                    Every object, every exhibit, every level builds on this
+                    narrative: performance optimization is not a modern invention,
+                    but a human constant. What has changed is our ability to
+                    measure, understand, and enhance it.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/15 bg-white/5 p-8 text-left">
+                  <h2 className="mb-4 text-2xl font-semibold text-white">How to Experience the Museum</h2>
+                  <p className="mb-4">
+                    We recommend starting with the Guided Tour, which takes you
+                    through the entire museum in a single narrative path. The tour
+                    covers all three levels, key objects, and interactive
+                    experiences. You can also explore freely by browsing exhibits,
+                    objects, or curated pathways.
+                  </p>
+                  <p className="mb-4">
+                    The tour includes progress tracking, so you can pause and
+                    resume at any time. All content is accessible, with clear
+                    labels, extended descriptions, and multiple ways to engage with
+                    the collection.
+                  </p>
+                  <p className="text-sm text-white/60">
+                    Accessibility: All content includes alt text, keyboard navigation,
+                    and reduced motion options. Audio descriptions available for all
+                    major objects.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/15 bg-white/5 p-8 text-left">
+                  <h2 className="mb-4 text-2xl font-semibold text-white">What You Will Learn</h2>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 text-cyan-400">•</span>
+                      <span>How performance optimization has existed across all human cultures and time periods</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 text-cyan-400">•</span>
+                      <span>How measurement technology transformed performance from observation to data</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 text-cyan-400">•</span>
+                      <span>How sensors and data visualization reveal invisible patterns in movement</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 text-cyan-400">•</span>
+                      <span>The ethical questions raised by performance enhancement technology</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+            </div>
+        </section>
+
+        {/* Museum Axis Diagram */}
+        <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950 py-20">
+          <div className="mx-auto max-w-7xl px-4 md:px-6">
+            <h2 className="mb-12 text-center text-3xl font-semibold md:text-4xl">
+              Museum Concept Diagram
+            </h2>
+
+            <div className="mx-auto max-w-5xl">
+              <div className="relative h-96 overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-8">
+                {/* Central Axis Line */}
+                <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+
+                {/* Levels Stack */}
+                <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col gap-4">
+                  {LEVELS.map((level, i) => (
+                    <motion.div
+                      key={level.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="group relative"
+                    >
+                      <Link
+                        href={`/collections?level=${level.id}`}
+                        className="block rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="text-2xl font-bold text-white/40">
+                            L{level.id.slice(1)}
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-semibold">{level.title}</div>
+                            <div className="mt-1 text-sm text-white/60">
+                              {level.summary.split('. ')[0]}.
+            </div>
+          </div>
+                  </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Side Elements */}
+                <div className="absolute left-8 top-1/2 -translate-y-1/2">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4"
+                  >
+                    <div className="text-sm font-medium text-amber-200">
+                      Brick Archive Wing
+                    </div>
+                    <div className="mt-1 text-xs text-amber-200/70">
+                      Grounded, tactile, warm
+                    </div>
+                  </motion.div>
+                </div>
+
+                <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="rounded-xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-4"
+                  >
+                    <div className="text-sm font-medium text-fuchsia-200">
+                      Exposed Tech Façade
+                    </div>
+                    <div className="mt-1 text-xs text-fuchsia-200/70">
+                      Structure, systems, circulation
+                    </div>
+                  </motion.div>
+              </div>
+
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="rounded-xl border border-sky-500/20 bg-sky-500/10 p-4"
+                  >
+                    <div className="text-sm font-medium text-sky-200">
+                      Axis + Parterre Gardens
+                    </div>
+                    <div className="mt-1 text-xs text-sky-200/70">
+                      Procession, symmetry, reflection
+                    </div>
+                  </motion.div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Level Highlights */}
+        <section className="border-b border-white/10 py-20">
+          <div className="mx-auto max-w-7xl px-4 md:px-6">
+            <h2 className="mb-12 text-center text-3xl font-semibold">
+              Three Levels of Museology
+            </h2>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {LEVELS.map((level, i) => (
+                <motion.div
+                  key={level.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group rounded-2xl border border-white/15 bg-white/5 p-8 transition hover:border-white/30 hover:bg-white/10"
+                >
+                  <Link href={`/collections?level=${level.id}`}>
+                    <div className="mb-4 text-2xl font-bold text-white/40">
+                      Level {level.id.slice(1)}
+                    </div>
+                    <h3 className="mb-2 text-xl font-semibold">{level.title}</h3>
+                    <p className="text-sm leading-relaxed text-white/60">
+                      {level.summary}
+                    </p>
+                    <div className="mt-6 flex items-center gap-2 text-sm text-white/50 group-hover:text-white/70">
+                      Explore Level {level.id.slice(1)} →
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Rubric Checklist */}
+        <section className="border-b border-white/10 py-20">
+          <div className="mx-auto max-w-7xl px-4 md:px-6">
+            <RubricChecklist />
+          </div>
+        </section>
+
+        {/* Quick Links */}
+        <section className="py-20">
+          <div className="mx-auto max-w-7xl px-4 md:px-6">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Link
+                href="/location"
+                className="rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+              >
+                <div className="font-semibold">Location</div>
+                <div className="mt-1 text-sm text-white/60">
+                  Site context & arrival
+              </div>
+              </Link>
+              <Link
+                href="/architecture"
+                className="rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+              >
+                <div className="font-semibold">Architecture</div>
+                <div className="mt-1 text-sm text-white/60">
+                  Massing & facade systems
+            </div>
+              </Link>
+              <Link
+                href="/objects"
+                className="rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+              >
+                <div className="font-semibold">Objects</div>
+                <div className="mt-1 text-sm text-white/60">
+                  10 detailed exhibits
+                </div>
+              </Link>
+              <Link
+                href="/didactics"
+                className="rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+              >
+                <div className="font-semibold">Didactics</div>
+                <div className="mt-1 text-sm text-white/60">
+                  Labels & interactives
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+          </div>
+    </>
+  );
+}

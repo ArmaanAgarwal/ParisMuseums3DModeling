@@ -1,0 +1,875 @@
+// Museum Data - Single source of truth for all museum content
+
+export type Level = "l1" | "l2" | "l3";
+
+export type InteractionType = "slider" | "quiz" | "toggles" | "sim";
+
+export interface InteractionConfig {
+  type: InteractionType;
+  questions?: Array<{
+    question: string;
+    options: string[];
+    correct?: number;
+  }>;
+  range?: {
+    min: number;
+    max: number;
+    unit: string;
+    label: string;
+  };
+  toggles?: Array<{
+    label: string;
+    description: string;
+  }>;
+  sim?: {
+    title: string;
+    description: string;
+    controls: string[];
+  };
+  // Allow top-level properties for sim type
+  title?: string;
+  description?: string;
+  controls?: string[];
+}
+
+export interface MuseumObject {
+  id: string;
+  slug: string;
+  level: Level;
+  zone: string;
+  title: string;
+  subtitle: string;
+  year: string;
+  era: string;
+  medium: string;
+  materials: string;
+  origin: string;
+  context: string;
+  whyItBelongs: string;
+  displayLocation: string;
+  lighting: string;
+  curatorText: string;
+  tags: string[];
+  durationMinutes: number;
+  interactionType: InteractionType;
+  interactionConfig: InteractionConfig;
+  facts: string[];
+  whyItMatters: string;
+  wallLabel: string;
+  extendedLabel: string;
+  imagePath: string;
+}
+
+export interface LevelInfo {
+  id: Level;
+  title: string;
+  subtitle: string;
+  description: string;
+  zones: Array<{
+    id: string;
+    name: string;
+    description: string;
+    objects: string[];
+  }>;
+}
+
+export const LEVELS: LevelInfo[] = [
+  {
+    id: "l1",
+    title: "Level 1: Origins & Icons",
+    subtitle: "History of movement, early gear, iconic artifacts",
+    description:
+      "The foundation level explores the historical roots of human performance. From ancient athletic gear to early measurement tools, this floor tells the story of how we began to understand and document physical achievement.",
+    zones: [
+      {
+        id: "intro-gallery",
+        name: "Introduction Gallery",
+        description: "Timeline wall and orientation space",
+        objects: ["ancient-sandals", "olympic-torch"],
+      },
+      {
+        id: "artifact-hall",
+        name: "Artifact Hall",
+        description: "Iconic objects from performance history",
+        objects: ["first-stopwatch", "vintage-sneakers"],
+      },
+      {
+        id: "archive-corner",
+        name: "Archive Corner",
+        description: "Rare documents and early records",
+        objects: ["first-record-book"],
+      },
+    ],
+  },
+  {
+    id: "l2",
+    title: "Level 2: Data, Motion & Body",
+    subtitle: "Measurement, performance analysis, biomechanics",
+    description:
+      "The analytical heart of the museum. Here, performance becomes data. Motion capture systems, sensor arrays, and real-time analysis transform movement into measurable insights.",
+    zones: [
+      {
+        id: "sprint-track",
+        name: "Sprint Track Zone",
+        description: "Interactive measurement strip with timing systems",
+        objects: ["motion-capture-rig", "force-plate"],
+      },
+      {
+        id: "metrics-wall",
+        name: "Metrics Wall",
+        description: "Live data visualization and analysis displays",
+        objects: ["biomechanics-sensor"],
+      },
+      {
+        id: "analysis-lab",
+        name: "Analysis Lab",
+        description: "Interactive stations for performance measurement",
+        objects: ["heart-rate-monitor", "gait-analyzer"],
+      },
+    ],
+  },
+  {
+    id: "l3",
+    title: "Level 3: Futures & Immersion",
+    subtitle: "VR arenas, AI coaching, projection rooms, sky gallery",
+    description:
+      "The future of performance. Immersive technologies merge with artificial intelligence to create new forms of training, analysis, and experience. This level looks forward to how we will understand and enhance human capability.",
+    zones: [
+      {
+        id: "vr-arena",
+        name: "VR Arena",
+        description: "Virtual reality training and simulation pods",
+        objects: ["vr-training-pod", "ai-coaching-system"],
+      },
+      {
+        id: "projection-room",
+        name: "Projection Room",
+        description: "Immersive media installations",
+        objects: ["holographic-display"],
+      },
+      {
+        id: "sky-gallery",
+        name: "Sky Gallery",
+        description: "Overlook with views to atrium and future concepts",
+        objects: ["future-prototype"],
+      },
+    ],
+  },
+];
+
+export const MUSEUM_OBJECTS: MuseumObject[] = [
+  // Level 1 Objects
+  {
+    id: "ancient-sandals",
+    slug: "ancient-sandals",
+    level: "l1",
+    zone: "intro-gallery",
+    title: "Ancient Greek Running Sandals",
+    subtitle: "c. 500 BCE",
+    year: "c. 500 BCE",
+    era: "Classical Antiquity",
+    medium: "Leather, hemp cord",
+    materials: "Tanned animal hide, natural fiber cordage, metal studs",
+    origin: "Ancient Greece, likely Olympia region",
+    context:
+      "Discovered in a burial site near the original Olympic grounds. These sandals represent the earliest documented athletic footwear designed specifically for running competitions.",
+    whyItBelongs:
+      "These sandals are foundational artifacts that demonstrate how early civilizations understood the relationship between equipment and performance. They show deliberate design choices—minimal sole thickness, flexible construction, secure lacing—that directly relate to modern performance footwear principles.",
+    displayLocation: "Level 1, Introduction Gallery, Timeline Wall (Case A-1)",
+    lighting: "Warm spotlight (3000K) from above, soft fill from vitrine base. Object sits on neutral plinth with glass case.",
+    curatorText:
+      "These sandals connect us to the origins of competitive performance. Every stitch, every choice of material, was made to optimize human movement. They are not just artifacts—they are the first chapter in our story of understanding the body in motion.",
+    tags: ["history", "footwear", "ancient", "olympics"],
+    durationMinutes: 5,
+    interactionType: "slider",
+    interactionConfig: {
+      type: "slider",
+      range: {
+        min: 0,
+        max: 100,
+        unit: "%",
+        label: "Compare sole flexibility to modern running shoes",
+      },
+    },
+    facts: [
+      "The leather was treated with natural oils to maintain flexibility in various weather conditions.",
+      "Archaeological evidence suggests these were worn by elite athletes, not everyday citizens.",
+      "The lacing system allowed for custom fit, crucial for performance.",
+      "Similar designs appear in pottery and sculpture from the same period.",
+    ],
+    whyItMatters:
+      "This object establishes the museum's core thesis: performance optimization is not a modern invention. Ancient athletes and craftspeople understood biomechanics intuitively, creating equipment that enhanced natural movement. These sandals are the prototype for every performance shoe that followed.",
+    wallLabel: "Ancient Greek Running Sandals, c. 500 BCE",
+    extendedLabel:
+      "These remarkably preserved sandals represent the earliest known athletic footwear. Crafted from tanned hide with hemp cord lacing, they demonstrate sophisticated understanding of foot biomechanics. The minimal sole and flexible construction allowed for natural foot movement while providing protection. Found near ancient Olympia, they connect us directly to the origins of competitive athletics.",
+    imagePath: "/objects/placeholders/ancient-sandals.svg",
+  },
+  {
+    id: "olympic-torch",
+    slug: "olympic-torch",
+    level: "l1",
+    zone: "intro-gallery",
+    title: "1936 Berlin Olympic Torch",
+    subtitle: "First Modern Relay",
+    year: "1936",
+    era: "Modern Olympics",
+    medium: "Aluminum, magnesium compound",
+    materials: "Hand-crafted aluminum body, magnesium-based fuel system",
+    origin: "Germany, designed for Berlin Olympics",
+    context:
+      "The first torch used in the modern Olympic torch relay tradition. This specific torch was carried through multiple European countries, symbolizing the connection between ancient and modern athletic traditions.",
+    whyItBelongs:
+      "This torch represents the moment when performance became spectacle, when individual achievement became global narrative. It marks the intersection of athleticism, technology, and cultural meaning—a theme that runs throughout the museum.",
+    displayLocation: "Level 1, Introduction Gallery, Central Vitrine (Case A-2)",
+    lighting: "Dramatic side lighting to highlight aluminum finish, ambient glow to suggest flame. Rotating plinth for 360° viewing.",
+    curatorText:
+      "The torch relay was invented for these games, transforming the Olympics into a global event. This object captures that moment of transformation—when performance left the stadium and entered the world stage.",
+    tags: ["olympics", "ceremony", "modern", "symbolism"],
+    durationMinutes: 4,
+    interactionType: "quiz",
+    interactionConfig: {
+      type: "quiz",
+      questions: [
+        {
+          question: "How many countries did the 1936 torch relay pass through?",
+          options: ["5", "7", "9", "12"],
+          correct: 1,
+        },
+        {
+          question: "What material was used for the fuel?",
+          options: ["Kerosene", "Magnesium", "Propane", "Alcohol"],
+          correct: 1,
+        },
+      ],
+    },
+    facts: [
+      "The relay concept was created by Carl Diem, inspired by ancient Greek practices.",
+      "Over 3,000 runners participated in the relay.",
+      "The torch design was chosen through a competition.",
+      "This torch traveled over 3,000 kilometers.",
+    ],
+    whyItMatters:
+      "This object demonstrates how performance culture extends beyond the physical act. The torch relay created a new form of participation and connection, showing how athletic achievement becomes cultural memory. It's a bridge between the ancient sandals and modern performance media.",
+    wallLabel: "1936 Berlin Olympic Torch",
+    extendedLabel:
+      "The first torch used in the modern Olympic torch relay, designed for the 1936 Berlin Games. This aluminum torch, with its distinctive streamlined form, was carried by over 3,000 runners across Europe. The relay concept, created by Carl Diem, transformed the Olympics into a global narrative, connecting ancient tradition with modern spectacle.",
+    imagePath: "/objects/placeholders/olympic-torch.svg",
+  },
+  {
+    id: "first-stopwatch",
+    slug: "first-stopwatch",
+    level: "l1",
+    zone: "artifact-hall",
+    title: "Heuer Stopwatch, 1916",
+    subtitle: "Precision Timing Revolution",
+    year: "1916",
+    era: "Early 20th Century",
+    medium: "Brass, glass, mechanical movement",
+    materials: "Precision-machined brass case, Swiss mechanical movement, crystal glass",
+    origin: "Switzerland, Heuer factory",
+    context:
+      "One of the first commercially available stopwatches accurate to 1/5th of a second. Used in early track and field competitions, this device transformed how we measure and understand performance.",
+    whyItBelongs:
+      "This stopwatch represents the moment when performance became quantifiable with precision. It's the bridge between subjective observation and objective measurement—the foundation of all modern performance analysis.",
+    displayLocation: "Level 1, Artifact Hall, Measurement Wall (Case B-1)",
+    lighting: "Focused spotlight on face, backlit to show internal mechanism through transparent case back. Interactive magnifier available.",
+    curatorText:
+      "Before this device, timing was approximate. After it, every second mattered. This stopwatch didn't just measure time—it created the possibility of records, of comparison, of the data-driven understanding of performance that defines Level 2.",
+    tags: ["measurement", "timing", "technology", "precision"],
+    durationMinutes: 6,
+    interactionType: "toggles",
+    interactionConfig: {
+      type: "toggles",
+      toggles: [
+        {
+          label: "Mechanism View",
+          description: "See the internal precision movement",
+        },
+        {
+          label: "Historical Context",
+          description: "Learn about early timing in sports",
+        },
+        {
+          label: "Modern Comparison",
+          description: "Compare to current timing technology",
+        },
+      ],
+    },
+    facts: [
+      "Accurate to 1/5th of a second—revolutionary for its time.",
+      "Used in the 1920 and 1924 Olympics.",
+      "The mechanical movement required hand-winding every 30 minutes.",
+      "Only 500 of this model were produced.",
+    ],
+    whyItMatters:
+      "This object is the physical manifestation of a conceptual shift: from 'fast' to 'exactly how fast.' It represents the beginning of performance as data, setting the stage for everything that follows in Level 2. Without precise measurement, there is no analysis, no improvement, no understanding of limits.",
+    wallLabel: "Heuer Stopwatch, 1916",
+    extendedLabel:
+      "A precision timing instrument that revolutionized sports measurement. This Swiss-made stopwatch, accurate to 1/5th of a second, was among the first devices to make precise performance timing accessible. Used in early Olympic competitions, it transformed how we understand athletic achievement, moving from subjective observation to objective data.",
+    imagePath: "/objects/placeholders/first-stopwatch.svg",
+  },
+  {
+    id: "vintage-sneakers",
+    slug: "vintage-sneakers",
+    level: "l1",
+    zone: "artifact-hall",
+    title: "Converse All-Stars, 1923",
+    subtitle: "The First Performance Shoe",
+    year: "1923",
+    era: "Early 20th Century",
+    medium: "Canvas, rubber, metal eyelets",
+    materials: "Heavy-duty canvas upper, vulcanized rubber sole, brass eyelets",
+    origin: "United States, Converse factory",
+    context:
+      "The first mass-produced athletic shoe designed specifically for basketball. These shoes represent the democratization of performance equipment—making specialized gear available to everyday athletes.",
+    whyItBelongs:
+      "These shoes show how performance equipment moved from custom craftsmanship to industrial design. They represent accessibility, standardization, and the beginning of performance gear as consumer product—themes that connect to Level 3's future of personalized technology.",
+    displayLocation: "Level 1, Artifact Hall, Footwear Evolution Display (Case B-2)",
+    lighting: "Soft ambient lighting with accent on sole detail. Side panel shows wear patterns from use.",
+    curatorText:
+      "These aren't just shoes—they're the blueprint. Every performance shoe since has built on these principles: flexible upper, supportive sole, secure fit. They show how good design becomes universal design.",
+    tags: ["footwear", "basketball", "design", "accessibility"],
+    durationMinutes: 4,
+    interactionType: "slider",
+    interactionConfig: {
+      type: "slider",
+      range: {
+        min: 1920,
+        max: 2024,
+        unit: "",
+        label: "Timeline: Evolution of athletic footwear",
+      },
+    },
+    facts: [
+      "Originally designed for basketball, but became popular across sports.",
+      "The rubber sole was a major innovation for court traction.",
+      "Over 800 million pairs have been sold since introduction.",
+      "The design has remained essentially unchanged for over 100 years.",
+    ],
+    whyItMatters:
+      "This object demonstrates that effective performance design is timeless. The principles established here—flexibility, support, durability—remain central to all athletic footwear. It also shows how performance equipment can become cultural icon, transcending its original function.",
+    wallLabel: "Converse All-Stars, 1923",
+    extendedLabel:
+      "The first mass-produced athletic shoe, designed specifically for basketball. These canvas and rubber shoes revolutionized athletic footwear, making performance-optimized design accessible to millions. The simple, effective design—flexible upper, supportive sole, secure lacing—established principles that remain central to athletic shoe design today.",
+    imagePath: "/objects/placeholders/vintage-sneakers.svg",
+  },
+  {
+    id: "first-record-book",
+    slug: "first-record-book",
+    level: "l1",
+    zone: "archive-corner",
+    title: "IAAF World Records Book, 1912",
+    subtitle: "The First Official Records",
+    year: "1912",
+    era: "Early 20th Century",
+    medium: "Bound volume, printed paper",
+    materials: "Leather-bound volume, archival paper, printed text and tables",
+    origin: "International Association of Athletics Federations",
+    context:
+      "The first official compilation of world records in track and field. This book established the concept of the 'world record' as a measurable, comparable standard of human achievement.",
+    whyItBelongs:
+      "This book represents the codification of performance. It transformed individual achievements into a global system of comparison and aspiration. It's the foundation of how we understand excellence—not as personal best, but as human potential.",
+    displayLocation: "Level 1, Archive Corner, Reading Nook (Display C-1)",
+    lighting: "Reading lamp illumination, low-level to protect paper. Digital facsimile available for interaction.",
+    curatorText:
+      "This book created the idea that performance could be measured against all of history, not just against today's competition. It established records as goals, as benchmarks, as the language we use to understand human limits.",
+    tags: ["records", "history", "documentation", "standards"],
+    durationMinutes: 5,
+    interactionType: "toggles",
+    interactionConfig: {
+      type: "toggles",
+      toggles: [
+        {
+          label: "View Records",
+          description: "Browse the original record listings",
+        },
+        {
+          label: "Compare to Today",
+          description: "See how records have evolved",
+        },
+        {
+          label: "Historical Context",
+          description: "Learn about early athletics organization",
+        },
+      ],
+    },
+    facts: [
+      "Established the first official world records in 12 track and field events.",
+      "Created standardized measurement protocols still used today.",
+      "The book was updated annually, creating a tradition of record-keeping.",
+      "Many records listed here stood for over 20 years.",
+    ],
+    whyItMatters:
+      "This object shows how documentation creates meaning. Without records, performance is ephemeral. With them, every achievement becomes part of a larger narrative of human capability. This book is the ancestor of all performance databases, all leaderboards, all systems that turn individual effort into collective knowledge.",
+    wallLabel: "IAAF World Records Book, 1912",
+    extendedLabel:
+      "The first official compilation of world records in track and field, published by the International Association of Athletics Federations. This leather-bound volume established the concept of the 'world record' as a measurable, comparable standard. It codified performance measurement, creating a system that transformed individual achievements into a global framework for understanding human potential.",
+    imagePath: "/objects/placeholders/first-record-book.svg",
+  },
+  // Level 2 Objects
+  {
+    id: "motion-capture-rig",
+    slug: "motion-capture-rig",
+    level: "l2",
+    zone: "sprint-track",
+    title: "Vicon Motion Capture System, 2010",
+    subtitle: "Precision Movement Analysis",
+    year: "2010",
+    era: "Digital Age",
+    medium: "Optical sensors, cameras, software",
+    materials: "Infrared cameras, retroreflective markers, computational system",
+    origin: "United Kingdom, Vicon Motion Systems",
+    context:
+      "A complete motion capture system used in professional sports analysis. This rig can track human movement with millimeter precision, transforming performance into three-dimensional data.",
+    whyItBelongs:
+      "This system represents the full realization of Level 2's theme: performance as data. It shows how modern technology can capture, analyze, and understand movement in ways that were impossible before. It's the bridge between observation and optimization.",
+    displayLocation: "Level 2, Sprint Track Zone, Active Demonstration Area",
+    lighting: "Controlled lighting to optimize marker visibility. Interactive display shows real-time capture visualization.",
+    curatorText:
+      "This system doesn't just record movement—it understands it. Every joint angle, every acceleration, every micro-adjustment becomes data. This is how we learn what makes performance better, how we find the invisible patterns that separate good from great.",
+    tags: ["motion-capture", "analysis", "technology", "biomechanics"],
+    durationMinutes: 8,
+    interactionType: "sim",
+    interactionConfig: {
+      type: "sim",
+      title: "Motion Capture Simulation",
+      description: "See how markers track movement in real-time",
+      controls: [
+        "Start capture",
+        "View skeleton overlay",
+        "Analyze joint angles",
+        "Export data",
+      ],
+    },
+    facts: [
+      "Tracks up to 200 markers simultaneously at 200 frames per second.",
+      "Used by Olympic teams for technique analysis.",
+      "Can measure joint angles accurate to 0.1 degrees.",
+      "The system generates over 1GB of data per minute of capture.",
+    ],
+    whyItMatters:
+      "This object demonstrates the power of data-driven performance analysis. It shows how technology can reveal patterns invisible to the naked eye, enabling precise optimization of technique. It represents the shift from coaching by feel to coaching by measurement—a fundamental change in how we understand and improve performance.",
+    wallLabel: "Vicon Motion Capture System, 2010",
+    extendedLabel:
+      "A professional-grade motion capture system that tracks human movement with millimeter precision. Using infrared cameras and retroreflective markers, this system transforms performance into three-dimensional data, enabling detailed biomechanical analysis. Used by Olympic teams and professional athletes, it represents the cutting edge of performance measurement technology.",
+    imagePath: "/objects/placeholders/motion-capture-rig.svg",
+  },
+  {
+    id: "force-plate",
+    slug: "force-plate",
+    level: "l2",
+    zone: "sprint-track",
+    title: "Kistler Force Plate, 2015",
+    subtitle: "Ground Reaction Force Measurement",
+    year: "2015",
+    era: "Digital Age",
+    medium: "Piezoelectric sensors, data acquisition system",
+    materials: "Precision-machined aluminum plate, piezoelectric load cells, signal processing electronics",
+    origin: "Switzerland, Kistler Instrumente",
+    context:
+      "A force plate embedded in the sprint track that measures ground reaction forces during running. This device captures the exact forces applied to the ground with each step, revealing the biomechanics of efficient movement.",
+    whyItBelongs:
+      "This device makes the invisible visible. Every step generates forces we can't see but can now measure. It represents Level 2's core mission: understanding performance through data, revealing the physics that underlie human movement.",
+    displayLocation: "Level 2, Sprint Track Zone, Embedded in Track Surface",
+    lighting: "Integrated LED indicators show active measurement. Overhead display shows force visualization.",
+    curatorText:
+      "Every step tells a story. This plate reads that story in forces—how you push off, how you land, where your weight shifts. It's like having a conversation with the ground, and the ground tells you exactly how you're moving.",
+    tags: ["biomechanics", "measurement", "force", "analysis"],
+    durationMinutes: 6,
+    interactionType: "sim",
+    interactionConfig: {
+      type: "sim",
+      title: "Force Visualization",
+      description: "See real-time ground reaction forces",
+      controls: [
+        "Step on plate",
+        "View force curve",
+        "Compare to elite athlete",
+        "Analyze efficiency",
+      ],
+    },
+    facts: [
+      "Measures forces in three dimensions (vertical, horizontal, lateral).",
+      "Sampling rate of 1000 Hz captures every microsecond of contact.",
+      "Can detect force differences as small as 0.1% of body weight.",
+      "Used to optimize running economy and prevent injury.",
+    ],
+    whyItMatters:
+      "This object demonstrates how precise measurement enables optimization. By understanding exactly how forces are applied, athletes and coaches can make micro-adjustments that lead to significant performance improvements. It represents the shift from training by volume to training by precision.",
+    wallLabel: "Kistler Force Plate, 2015",
+    extendedLabel:
+      "An embedded force measurement system that captures ground reaction forces during movement. This precision instrument measures the exact forces applied with each step, revealing the biomechanics of efficient performance. Used by elite athletes and researchers, it transforms the invisible physics of movement into actionable data.",
+    imagePath: "/objects/placeholders/force-plate.svg",
+  },
+  {
+    id: "biomechanics-sensor",
+    slug: "biomechanics-sensor",
+    level: "l2",
+    zone: "metrics-wall",
+    title: "IMU Sensor Array, 2018",
+    subtitle: "Wearable Movement Tracking",
+    year: "2018",
+    era: "Digital Age",
+    medium: "Inertial measurement unit, wireless transmission",
+    materials: "Micro-electromechanical sensors (accelerometer, gyroscope, magnetometer), wireless module, battery",
+    origin: "United States, research prototype",
+    context:
+      "A wearable sensor system that tracks movement in real-time without external cameras. These small devices, worn on the body, provide continuous biomechanical data during training and competition.",
+    whyItBelongs:
+      "This technology represents the democratization of performance analysis. Unlike the motion capture rig, these sensors can be used anywhere, anytime. They show how Level 2's data-driven approach is becoming accessible, portable, and integrated into everyday training.",
+    displayLocation: "Level 2, Metrics Wall, Interactive Display Station",
+    lighting: "Backlit display showing sensor data visualization. Sensors displayed in clear cases with magnified views.",
+    curatorText:
+      "These sensors go where athletes go. They're not confined to a lab—they're on the track, in the gym, during competition. They represent the future: performance data that's always available, always measuring, always learning.",
+    tags: ["wearable", "sensors", "real-time", "portable"],
+    durationMinutes: 5,
+    interactionType: "toggles",
+    interactionConfig: {
+      type: "toggles",
+      toggles: [
+        {
+          label: "Sensor Placement",
+          description: "Learn optimal sensor locations on the body",
+        },
+        {
+          label: "Data Stream",
+          description: "View real-time movement data",
+        },
+        {
+          label: "Analysis Dashboard",
+          description: "See how data becomes insights",
+        },
+      ],
+    },
+    facts: [
+      "Tracks movement at 200 Hz with 9 degrees of freedom.",
+      "Battery life of 8 hours continuous operation.",
+      "Wireless range of 50 meters for real-time monitoring.",
+      "Can detect movement changes as small as 0.1 degrees.",
+    ],
+    whyItMatters:
+      "This object shows how performance analysis is becoming integrated into training itself, not just post-training review. It represents the shift from periodic measurement to continuous monitoring, enabling real-time feedback and adjustment. It's the bridge to Level 3's immersive, always-on performance environment.",
+    wallLabel: "IMU Sensor Array, 2018",
+    extendedLabel:
+      "A wearable sensor system that provides real-time biomechanical data during movement. These small, wireless devices track acceleration, rotation, and orientation, enabling continuous performance monitoring without external cameras. Representing the democratization of motion analysis, they make advanced biomechanics accessible anywhere, anytime.",
+    imagePath: "/objects/placeholders/biomechanics-sensor.svg",
+  },
+  {
+    id: "heart-rate-monitor",
+    slug: "heart-rate-monitor",
+    level: "l2",
+    zone: "analysis-lab",
+    title: "Polar Heart Rate Monitor, 1982",
+    subtitle: "The First Wireless HR Monitor",
+    year: "1982",
+    era: "Digital Revolution",
+    medium: "Electronic sensor, wireless transmission",
+    materials: "Chest strap with electrodes, wireless transmitter, wrist receiver",
+    origin: "Finland, Polar Electro",
+    context:
+      "The first commercially available wireless heart rate monitor. This device revolutionized training by making real-time cardiovascular data accessible to everyday athletes, not just laboratory subjects.",
+    whyItBelongs:
+      "This device represents the moment when performance data became personal and portable. It's the ancestor of all wearable fitness technology, showing how measurement moved from the lab to the athlete's wrist. It established the principle that data should be immediate, accessible, and actionable.",
+    displayLocation: "Level 2, Analysis Lab, Historical Display (Case D-1)",
+    lighting: "Soft spotlight on device, adjacent screen shows modern heart rate visualization for comparison.",
+    curatorText:
+      "This changed everything. Before this, heart rate was something you measured in a doctor's office. After this, it became something you lived with, something that guided every training session. It's the first step toward the quantified self.",
+    tags: ["cardiovascular", "wearable", "training", "pioneering"],
+    durationMinutes: 4,
+    interactionType: "slider",
+    interactionConfig: {
+      type: "slider",
+      range: {
+        min: 50,
+        max: 200,
+        unit: "bpm",
+        label: "Explore heart rate zones and training intensity",
+      },
+    },
+    facts: [
+      "First device to transmit heart rate wirelessly to a wrist display.",
+      "Revolutionized training by enabling real-time intensity monitoring.",
+      "Led to the development of training zones and periodization.",
+      "Over 50 million units sold worldwide since introduction.",
+    ],
+    whyItMatters:
+      "This object demonstrates how accessible measurement transforms practice. By making heart rate data immediate and personal, it enabled athletes to train with precision, matching intensity to goals. It's the foundation of all modern training technology and represents the principle that data should be integrated into experience, not separate from it.",
+    wallLabel: "Polar Heart Rate Monitor, 1982",
+    extendedLabel:
+      "The first commercially available wireless heart rate monitor, revolutionizing how athletes train. This chest strap and wrist receiver system made real-time cardiovascular data accessible to everyday athletes, enabling precise intensity control and training zone management. It established the principle of wearable performance data that continues to evolve today.",
+    imagePath: "/objects/placeholders/heart-rate-monitor.svg",
+  },
+  {
+    id: "gait-analyzer",
+    slug: "gait-analyzer",
+    level: "l2",
+    zone: "analysis-lab",
+    title: "Pressure-Sensitive Gait Mat, 2020",
+    subtitle: "Step-by-Step Analysis",
+    year: "2020",
+    era: "Contemporary",
+    medium: "Pressure sensors, visualization software",
+    materials: "High-resolution pressure sensor array, data processing unit, display system",
+    origin: "United States, Tekscan Inc.",
+    context:
+      "An advanced gait analysis system that maps pressure distribution across the entire foot during walking and running. This technology reveals asymmetries, imbalances, and inefficiencies invisible to the eye.",
+    whyItBelongs:
+      "This system represents the current state of Level 2's mission: making biomechanical analysis accessible, visual, and immediately understandable. It shows how data becomes insight, how measurement becomes improvement.",
+    displayLocation: "Level 2, Analysis Lab, Interactive Station",
+    lighting: "Integrated LED visualization in mat surface. Overhead display shows pressure heat maps in real-time.",
+    curatorText:
+      "Every step is unique. This mat reads that uniqueness in pressure—where you load, how you transfer weight, where you push off. It's like having an X-ray of your movement, revealing the patterns that determine efficiency and risk.",
+    tags: ["gait", "pressure", "analysis", "biomechanics"],
+    durationMinutes: 7,
+    interactionType: "sim",
+    interactionConfig: {
+      type: "sim",
+      title: "Gait Analysis",
+      description: "Step on the mat to see your pressure distribution",
+      controls: [
+        "Walk across mat",
+        "View pressure map",
+        "Compare left/right",
+        "Analyze gait cycle",
+      ],
+    },
+    facts: [
+      "Measures pressure at 4,000 points across the foot surface.",
+      "Sampling rate of 100 Hz captures complete gait cycle.",
+      "Can detect pressure differences as small as 0.1 PSI.",
+      "Used for injury prevention, performance optimization, and footwear design.",
+    ],
+    whyItMatters:
+      "This object demonstrates how detailed measurement enables personalized optimization. By understanding exactly how an individual moves, we can identify specific areas for improvement, prevent injury, and enhance performance. It represents the shift from general training principles to personalized biomechanical analysis.",
+    wallLabel: "Pressure-Sensitive Gait Mat, 2020",
+    extendedLabel:
+      "An advanced gait analysis system that maps pressure distribution across the entire foot during movement. Using a high-resolution sensor array, this technology reveals the biomechanics of walking and running, identifying asymmetries, imbalances, and efficiency opportunities. It transforms invisible movement patterns into visual, actionable data.",
+    imagePath: "/objects/placeholders/gait-analyzer.svg",
+  },
+  // Level 3 Objects
+  {
+    id: "vr-training-pod",
+    slug: "vr-training-pod",
+    level: "l3",
+    zone: "vr-arena",
+    title: "VR Training Pod, 2023",
+    subtitle: "Immersive Performance Simulation",
+    year: "2023",
+    era: "Future",
+    medium: "Virtual reality headset, motion tracking, haptic feedback",
+    materials: "OLED displays, inside-out tracking cameras, haptic suit, computational system",
+    origin: "United States, research prototype",
+    context:
+      "A complete virtual reality training environment that allows athletes to practice in simulated conditions. This system combines visual immersion, motion tracking, and haptic feedback to create realistic training scenarios.",
+    whyItBelongs:
+      "This system represents Level 3's vision: performance training that transcends physical limitations. It shows how technology can create experiences impossible in the real world, enabling practice without constraints of location, weather, or equipment availability.",
+    displayLocation: "Level 3, VR Arena, Pod Station 1",
+    lighting: "Ambient glow from pod interior, dynamic lighting responds to virtual environment. Safety boundary indicators visible.",
+    curatorText:
+      "This is training without limits. Want to practice in perfect conditions? Done. Want to experience competition pressure? Done. Want to train in impossible scenarios? Done. This is the future: performance improvement through immersive experience.",
+    tags: ["VR", "immersion", "training", "simulation"],
+    durationMinutes: 10,
+    interactionType: "sim",
+    interactionConfig: {
+      type: "sim",
+      title: "VR Experience",
+      description: "Try a virtual training scenario",
+      controls: [
+        "Select environment",
+        "Choose difficulty",
+        "Start session",
+        "View performance metrics",
+      ],
+    },
+    facts: [
+      "Tracks full-body movement with 6 degrees of freedom.",
+      "Haptic feedback provides realistic force sensations.",
+      "Can simulate any environment or condition.",
+      "Used by professional teams for mental preparation and technique refinement.",
+    ],
+    whyItMatters:
+      "This object demonstrates how immersive technology can enhance training beyond physical constraints. It represents the future of performance development: not just measuring and analyzing, but creating new forms of practice and experience. It's the bridge between data-driven training and experiential learning.",
+    wallLabel: "VR Training Pod, 2023",
+    extendedLabel:
+      "A complete virtual reality training system that creates immersive performance simulation. Combining high-resolution displays, precise motion tracking, and haptic feedback, this system enables athletes to train in any environment or condition. It represents the future of performance development: practice without physical limitations, experience without constraints.",
+    imagePath: "/objects/placeholders/vr-training-pod.svg",
+  },
+  {
+    id: "ai-coaching-system",
+    slug: "ai-coaching-system",
+    level: "l3",
+    zone: "vr-arena",
+    title: "AI Performance Coach, 2024",
+    subtitle: "Personalized Training Intelligence",
+    year: "2024",
+    era: "Future",
+    medium: "Artificial intelligence, sensor fusion, adaptive algorithms",
+    materials: "Machine learning models, multi-modal sensor integration, real-time processing system",
+    origin: "Research collaboration, multiple institutions",
+    context:
+      "An AI system that analyzes performance data from multiple sources and provides personalized coaching feedback in real-time. This system learns from each athlete's patterns and adapts its guidance accordingly.",
+    whyItBelongs:
+      "This system represents the culmination of the museum's narrative: from measurement (Level 1) to analysis (Level 2) to intelligent optimization (Level 3). It shows how data, when processed by advanced algorithms, becomes personalized guidance—the future of performance development.",
+    displayLocation: "Level 3, VR Arena, Interactive Display Wall",
+    lighting: "Dynamic lighting responds to AI analysis visualization. Screen displays show real-time coaching interface.",
+    curatorText:
+      "This isn't just data analysis—it's understanding. The AI learns your patterns, your strengths, your weaknesses. It doesn't just tell you what happened; it tells you what to do next. This is performance coaching reimagined: personal, immediate, and continuously improving.",
+    tags: ["AI", "coaching", "personalization", "intelligence"],
+    durationMinutes: 8,
+    interactionType: "quiz",
+    interactionConfig: {
+      type: "quiz",
+      questions: [
+        {
+          question: "What data sources does the AI analyze?",
+          options: [
+            "Only heart rate",
+            "Movement, heart rate, and performance metrics",
+            "Only movement data",
+            "External factors only",
+          ],
+          correct: 1,
+        },
+        {
+          question: "How does the AI personalize coaching?",
+          options: [
+            "Uses generic templates",
+            "Learns from individual patterns",
+            "Follows fixed protocols",
+            "Randomly suggests exercises",
+          ],
+          correct: 1,
+        },
+      ],
+    },
+    facts: [
+      "Analyzes data from 15+ sensor types simultaneously.",
+      "Provides feedback within 2 seconds of movement completion.",
+      "Learns and adapts to individual athlete patterns.",
+      "Can predict injury risk with 85% accuracy.",
+    ],
+    whyItMatters:
+      "This object represents the future of performance development: not just measurement and analysis, but intelligent, personalized guidance. It shows how artificial intelligence can synthesize vast amounts of data into actionable insights, making expert-level coaching accessible to everyone. It's the logical conclusion of the museum's narrative: from understanding performance to optimizing it intelligently.",
+    wallLabel: "AI Performance Coach, 2024",
+    extendedLabel:
+      "An artificial intelligence system that provides personalized coaching feedback by analyzing multi-modal performance data in real-time. This system learns from individual athlete patterns, adapts its guidance, and synthesizes information from movement, physiology, and performance metrics into actionable insights. It represents the future of performance development: intelligent, personalized, and continuously improving.",
+    imagePath: "/objects/placeholders/ai-coaching-system.svg",
+  },
+  {
+    id: "holographic-display",
+    slug: "holographic-display",
+    level: "l3",
+    zone: "projection-room",
+    title: "Holographic Performance Visualization, 2025",
+    subtitle: "3D Movement in Space",
+    year: "2025",
+    era: "Future",
+    medium: "Volumetric display, light field projection",
+    materials: "Laser projection system, light field rendering, computational display",
+    origin: "Research prototype, multiple institutions",
+    context:
+      "A holographic display system that projects three-dimensional movement data into physical space. This technology allows viewers to see performance from any angle, in real-time, without special glasses or headsets.",
+    whyItBelongs:
+      "This system represents the future of how we visualize and understand performance. It transforms data into experience, making complex biomechanical information immediately comprehensible through spatial representation. It's the bridge between analysis and intuition.",
+    displayLocation: "Level 3, Projection Room, Central Installation",
+    lighting: "Controlled ambient lighting optimized for holographic visibility. Dynamic lighting responds to displayed content.",
+    curatorText:
+      "This is data made visible, made spatial, made real. You don't just see performance—you experience it in three dimensions. It's the difference between reading about movement and feeling it, between analysis and understanding.",
+    tags: ["holographic", "visualization", "3D", "future"],
+    durationMinutes: 6,
+    interactionType: "toggles",
+    interactionConfig: {
+      type: "toggles",
+      toggles: [
+        {
+          label: "Rotate View",
+          description: "See movement from different angles",
+        },
+        {
+          label: "Slow Motion",
+          description: "Analyze movement frame by frame",
+        },
+        {
+          label: "Overlay Data",
+          description: "See biomechanical data overlaid on movement",
+        },
+      ],
+    },
+    facts: [
+      "Projects true 3D images viewable from 360 degrees.",
+      "Resolution of 4K equivalent in three dimensions.",
+      "Can display movement in real-time or slow motion.",
+      "Enables collaborative analysis from multiple viewing angles simultaneously.",
+    ],
+    whyItMatters:
+      "This object demonstrates how visualization technology can make complex data immediately understandable. By projecting movement into physical space, it enables intuitive understanding of biomechanics that would require extensive training to interpret from traditional displays. It represents the future of performance communication: making data experiential.",
+    wallLabel: "Holographic Performance Visualization, 2025",
+    extendedLabel:
+      "A volumetric display system that projects three-dimensional movement data into physical space. Using light field projection technology, this system creates true 3D holograms viewable from any angle without special equipment. It transforms complex biomechanical data into intuitive spatial experiences, enabling immediate understanding of movement patterns and performance dynamics.",
+    imagePath: "/objects/placeholders/holographic-display.svg",
+  },
+  {
+    id: "future-prototype",
+    slug: "future-prototype",
+    level: "l3",
+    zone: "sky-gallery",
+    title: "Neural Interface Prototype, 2026",
+    subtitle: "Direct Brain-Performance Link",
+    year: "2026",
+    era: "Future",
+    medium: "Neural interface, biofeedback system",
+    materials: "Non-invasive neural sensors, signal processing, biofeedback interface",
+    origin: "Research collaboration, experimental",
+    context:
+      "An experimental system that reads neural signals during performance and provides direct feedback. This technology represents the cutting edge of performance optimization: understanding and influencing the brain-body connection.",
+    whyItBelongs:
+      "This prototype represents the ultimate future vision: performance optimization that works at the level of neural control. It shows how technology might one day enhance not just measurement and analysis, but the fundamental connection between intention and action.",
+    displayLocation: "Level 3, Sky Gallery, Future Concepts Display",
+    lighting: "Soft, futuristic glow. Interactive elements show neural signal visualization. Glass case with explanatory panels.",
+    curatorText:
+      "This is where we're going: not just measuring the body, but understanding the mind that controls it. This system reads the signals that create movement, the thoughts that become action. It's performance optimization at the source.",
+    tags: ["neural", "future", "experimental", "biofeedback"],
+    durationMinutes: 7,
+    interactionType: "sim",
+    interactionConfig: {
+      type: "sim",
+      title: "Neural Interface Demo",
+      description: "Experience how neural signals relate to performance",
+      controls: [
+        "View neural signals",
+        "See brain-body connection",
+        "Explore feedback loop",
+        "Learn about future applications",
+      ],
+    },
+    facts: [
+      "Non-invasive sensors read neural activity in real-time.",
+      "Can detect intention to move before physical action begins.",
+      "Provides feedback to optimize neural efficiency.",
+      "Currently experimental, represents future of performance technology.",
+    ],
+    whyItMatters:
+      "This object represents the ultimate frontier of performance development: optimization at the neural level. It shows how future technology might enhance not just the body's capabilities, but the brain's control of those capabilities. It's a vision of performance where measurement, analysis, and enhancement work in harmony with the fundamental systems that create movement.",
+    wallLabel: "Neural Interface Prototype, 2026",
+    extendedLabel:
+      "An experimental neural interface system that reads brain signals during performance and provides direct biofeedback. This non-invasive technology represents the cutting edge of performance optimization, working at the level of neural control to enhance the brain-body connection. While still experimental, it offers a vision of future performance development where technology enhances not just measurement and analysis, but the fundamental systems that create movement.",
+    imagePath: "/objects/placeholders/future-prototype.svg",
+  },
+];
+
+export function getObjectBySlug(slug: string): MuseumObject | undefined {
+  return MUSEUM_OBJECTS.find((obj) => obj.slug === slug);
+}
+
+export function getObjectsByLevel(level: Level): MuseumObject[] {
+  return MUSEUM_OBJECTS.filter((obj) => obj.level === level);
+}
+
+export function getLevelInfo(level: Level): LevelInfo | undefined {
+  return LEVELS.find((l) => l.id === level);
+}
+
+export function getAllObjects(): MuseumObject[] {
+  return MUSEUM_OBJECTS;
+}
+

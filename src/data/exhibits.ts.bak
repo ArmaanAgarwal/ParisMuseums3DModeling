@@ -1,0 +1,344 @@
+import { Exhibit } from "./types";
+
+export const EXHIBITS: Exhibit[] = [
+  // Level 1 Exhibits
+  {
+    id: "ancient-athletics",
+    zoneId: "intro-gallery",
+    title: "Ancient Athletics: The Foundation",
+    thesis: "The principles of performance optimization existed long before modern technology. Ancient athletes and craftspeople understood biomechanics intuitively, creating equipment that enhanced natural movement.",
+    wallText: "This exhibit traces performance back to its origins in ancient civilizations. From Greek running sandals to Roman training methods, we see how early cultures developed sophisticated approaches to physical achievement. These artifacts demonstrate that the quest to understand and enhance human performance is as old as civilization itself.",
+    keyQuestions: [
+      "How did ancient athletes optimize their equipment?",
+      "What can we learn from pre-industrial performance techniques?",
+      "How did early cultures measure and compare achievement?",
+    ],
+    objectIds: ["ancient-sandals", "greek-discus", "roman-training-gear"],
+    whyThisExhibit:
+      "This exhibit exists to establish the museum's foundational thesis: performance optimization is not a modern invention. By showing sophisticated ancient equipment and training methods, we demonstrate that the principles of biomechanics, equipment design, and systematic training were understood intuitively long before scientific measurement. This exhibit sets the stage for understanding how modern technology builds on ancient insights.",
+    whatToNotice: [
+      "The sophistication of ancient designs compared to modern equipment",
+      "How ancient craftspeople understood biomechanics without scientific measurement",
+      "The universality of performance optimization principles across time",
+      "The relationship between form and function in ancient equipment",
+    ],
+  },
+  {
+    id: "olympic-heritage",
+    zoneId: "intro-gallery",
+    title: "The Olympic Heritage",
+    thesis: "The modern Olympic movement transformed performance from local competition to global spectacle, creating new forms of measurement, documentation, and cultural meaning.",
+    wallText: "The Olympic Games represent a unique moment when performance became spectacle, when individual achievement became global narrative. This exhibit explores how the Olympics created new systems for measuring, recording, and celebrating human achievement. These systems continue to shape how we understand performance today. The Olympics established standardized competition formats, precise measurement protocols, and global record keeping systems that transformed how we compare and celebrate achievement.",
+    keyQuestions: [
+      "How did the Olympics change how we measure performance?",
+      "What role does ceremony play in performance culture?",
+      "How did global competition transform athletic achievement?",
+      "How did the Olympics create new forms of documentation and record keeping?",
+    ],
+    objectIds: ["olympic-torch", "olympic-medal-1924", "first-olympic-program"],
+    whyThisExhibit:
+      "This exhibit exists to show how performance became a global cultural phenomenon. The Olympics transformed athletic achievement from local competition to worldwide spectacle, creating systems for measurement, documentation, and celebration that continue to shape performance culture. The exhibit demonstrates how ceremony, standardization, and global competition created new meanings for performance achievement.",
+    whatToNotice: [
+      "How Olympic ceremonies transformed performance into spectacle",
+      "The standardization of competition formats and measurement protocols",
+      "How global competition created new forms of record keeping",
+      "The relationship between performance and cultural meaning",
+      "How Olympic systems influenced all levels of competition",
+    ],
+  },
+  {
+    id: "measurement-revolution",
+    zoneId: "artifact-hall",
+    title: "The Measurement Revolution",
+    thesis: "The invention of precise timing devices transformed performance from subjective observation to objective data, creating the foundation for all modern performance analysis.",
+    wallText: "Before precise measurement, performance was understood through comparison and observation. The development of accurate timing devices—stopwatches, chronographs, and later electronic systems—created a new language of performance: numbers, records, and quantifiable achievement. This exhibit shows how measurement technology changed not just how we record performance, but how we understand it.",
+    keyQuestions: [
+      "How did precise measurement change performance culture?",
+      "What is the relationship between measurement and improvement?",
+      "How do timing devices create new forms of competition?",
+    ],
+    objectIds: ["first-stopwatch", "mechanical-chronograph", "electronic-timer"],
+    whyThisExhibit:
+      "This exhibit exists to show the fundamental shift that made everything else possible: the transformation of performance from qualitative observation to quantitative measurement. Without precise timing, there could be no records, no data-driven analysis, no Level 2. This exhibit demonstrates how measurement technology didn't just record performance—it transformed how we understand and pursue it.",
+    whatToNotice: [
+      "The evolution from mechanical to electronic timing",
+      "How precision increased with each generation of technology",
+      "The relationship between measurement precision and performance understanding",
+      "How timing devices enabled new forms of competition and comparison",
+    ],
+  },
+  {
+    id: "footwear-evolution",
+    zoneId: "artifact-hall",
+    title: "Footwear Evolution",
+    thesis: "Athletic footwear represents the intersection of biomechanics, materials science, and design—showing how equipment evolves to enhance natural movement.",
+    wallText: "From ancient sandals to modern running shoes, footwear has been one of the most important tools for performance optimization. This exhibit traces the evolution of athletic footwear, showing how each generation built on previous innovations while responding to new understanding of biomechanics and materials science.",
+    keyQuestions: [
+      "How does footwear design respond to biomechanical understanding?",
+      "What role do materials play in performance equipment?",
+      "How has footwear design democratized performance optimization?",
+    ],
+    objectIds: ["vintage-sneakers", "early-running-shoe", "track-spike-evolution"],
+  },
+  {
+    id: "record-keeping",
+    zoneId: "archive-corner",
+    title: "The Art of Record Keeping",
+    thesis: "The codification of performance records transformed individual achievements into a global system of comparison and aspiration.",
+    wallText: "Records are more than numbers—they are cultural artifacts that shape how we understand human potential. This exhibit explores how record-keeping systems emerged, how they create meaning, and how they continue to drive performance culture today.",
+    keyQuestions: [
+      "How do records create meaning beyond numbers?",
+      "What role does documentation play in performance culture?",
+      "How have record-keeping systems evolved?",
+    ],
+    objectIds: ["first-record-book", "olympic-records-archive", "world-records-timeline"],
+  },
+  {
+    id: "global-sports",
+    zoneId: "early-sports",
+    title: "Global Sports Traditions",
+    thesis: "Performance culture exists across all human societies, each developing unique approaches to physical achievement and competition.",
+    wallText: "This exhibit showcases athletic traditions from around the world, demonstrating that the drive to optimize performance is universal. From Mesoamerican ball courts to Asian martial arts equipment, we see how different cultures developed sophisticated approaches to physical achievement.",
+    keyQuestions: [
+      "How do different cultures approach performance optimization?",
+      "What can we learn from non-Western athletic traditions?",
+      "How do cultural values shape performance equipment?",
+    ],
+    objectIds: ["mesoamerican-ball", "sumo-training-gear", "african-running-tradition"],
+  },
+  // Level 2 Exhibits
+  {
+    id: "motion-capture-systems",
+    zoneId: "motion-capture",
+    title: "Motion Capture Systems",
+    thesis: "Motion capture technology transforms movement into three-dimensional data, revealing patterns invisible to the naked eye and enabling precise biomechanical analysis.",
+    wallText: "This exhibit explores how motion capture systems work, from early optical systems to modern markerless technology. Visitors can see how these systems capture movement, how the data is analyzed, and how the insights are used to optimize performance.",
+    keyQuestions: [
+      "How does motion capture reveal invisible movement patterns?",
+      "What can we learn from three-dimensional movement data?",
+      "How is motion capture used in performance optimization?",
+    ],
+    objectIds: ["motion-capture-rig", "markerless-system", "biomechanics-software"],
+    whyThisExhibit:
+      "This exhibit exists to demonstrate Level 2's core theme: performance as data. Motion capture represents the pinnacle of making movement measurable and analyzable. This exhibit shows how technology reveals patterns invisible to observation, enabling precise optimization that was impossible before. It also demonstrates how laboratory technology moved into practical training use.",
+    whatToNotice: [
+      "How markers or cameras track movement in three dimensions",
+      "The precision and detail captured by these systems",
+      "How motion data is visualized and analyzed",
+      "The difference between marker-based and markerless systems",
+      "How motion capture reveals biomechanical patterns",
+    ],
+  },
+  {
+    id: "force-measurement",
+    zoneId: "biomechanics-lab",
+    title: "Force Measurement",
+    thesis: "Understanding ground reaction forces reveals the physics of movement, enabling precise optimization of technique and efficiency.",
+    wallText: "Every step, jump, and movement generates forces that we can now measure with extraordinary precision. This exhibit shows how force plates and pressure sensors capture these invisible forces, transforming them into data that reveals the biomechanics of efficient movement. Force measurement reveals the physics of performance, showing how athletes generate power, how forces are distributed, and how technique affects efficiency. This data enables precise optimization that was impossible through observation alone.",
+    keyQuestions: [
+      "How do forces relate to movement efficiency?",
+      "What can force measurement tell us about technique?",
+      "How is force data used to prevent injury?",
+      "How do force patterns reveal biomechanical insights?",
+    ],
+    objectIds: ["force-plate", "pressure-mat", "force-analysis-display"],
+    whyThisExhibit:
+      "This exhibit exists to demonstrate how invisible forces become visible through measurement. Force plates and pressure sensors reveal the physics of movement, showing how athletes generate and manage forces. This exhibit shows how measurement technology makes the invisible visible, enabling precise biomechanical analysis and technique optimization.",
+    whatToNotice: [
+      "How force plates capture ground reaction forces",
+      "The relationship between force patterns and movement efficiency",
+      "How force data reveals biomechanical insights",
+      "The precision of modern force measurement systems",
+      "How force analysis guides technique optimization",
+    ],
+  },
+  {
+    id: "wearable-revolution",
+    zoneId: "wearables-sensors",
+    title: "The Wearable Revolution",
+    thesis: "Portable sensors democratized performance data, making advanced biomechanical analysis accessible to everyday athletes.",
+    wallText: "The development of wearable sensors represents a fundamental shift: performance data moved from the laboratory to the athlete's body. This exhibit traces the evolution of wearable technology, from early heart rate monitors to modern multi-sensor systems that provide real-time feedback. Wearables transformed who has access to performance data, making advanced biomechanical and physiological analysis available to recreational athletes, not just professionals. This democratization of data represents one of the most significant shifts in performance technology.",
+    keyQuestions: [
+      "How did wearables change who has access to performance data?",
+      "What role do wearables play in training?",
+      "How is real-time feedback transforming performance?",
+      "How did portability change performance measurement?",
+    ],
+    objectIds: ["biomechanics-sensor", "heart-rate-monitor", "smart-watch-evolution", "gait-analyzer"],
+    whyThisExhibit:
+      "This exhibit exists to show how performance technology became accessible. Wearables represent the democratization of performance data, moving advanced measurement from exclusive laboratories to everyday athletes. This exhibit demonstrates how portability and miniaturization transformed who can access performance insights, fundamentally changing the landscape of performance development.",
+    whatToNotice: [
+      "How sensors became small enough to wear",
+      "The evolution from single to multi-sensor systems",
+      "How real-time feedback transforms training",
+      "The democratization of performance data access",
+      "How wearables enable continuous monitoring",
+    ],
+  },
+  {
+    id: "data-visualization",
+    zoneId: "data-visualization",
+    title: "Data Visualization",
+    thesis: "Visualizing performance data makes complex information immediately understandable, enabling intuitive insights into movement and achievement.",
+    wallText: "This exhibit explores how performance data is visualized, from simple graphs to complex three-dimensional representations. Visitors can see how visualization transforms numbers into insights, making biomechanical data accessible and actionable. Good visualization doesn't just show data; it reveals patterns, relationships, and meaning. This exhibit demonstrates how visual representation makes complex performance information immediately comprehensible, enabling coaches, athletes, and researchers to understand and act on data.",
+    keyQuestions: [
+      "How does visualization make data understandable?",
+      "What forms of visualization are most effective?",
+      "How do visualizations enable performance insights?",
+      "How does visualization transform data into action?",
+    ],
+    objectIds: ["performance-dashboard", "biomechanics-visualization", "comparative-analysis"],
+    whyThisExhibit:
+      "This exhibit exists to show how data becomes insight through visualization. Performance data is complex and abstract, but visualization makes it immediately understandable. This exhibit demonstrates how visual representation transforms numbers into patterns, patterns into insights, and insights into actionable guidance. Visualization is the bridge between measurement and understanding.",
+    whatToNotice: [
+      "How different visualization forms reveal different insights",
+      "The relationship between data complexity and visual clarity",
+      "How visualization makes patterns immediately visible",
+      "The evolution from simple graphs to complex representations",
+      "How interactive visualizations enable exploration",
+    ],
+  },
+  // Level 3 Exhibits
+  {
+    id: "virtual-reality-training",
+    zoneId: "vr-arena",
+    title: "Virtual Reality Training",
+    thesis: "VR creates training environments impossible in the real world, enabling practice without physical constraints and new forms of performance development.",
+    wallText: "Virtual reality represents a fundamental shift in how we train and prepare for performance. This exhibit explores VR training systems, showing how they create immersive experiences that enhance technique, mental preparation, and strategic understanding.",
+    keyQuestions: [
+      "How does VR enhance training beyond physical constraints?",
+      "What can VR teach us about performance?",
+      "How does immersive technology change learning?",
+    ],
+    objectIds: ["vr-training-pod", "vr-sports-sim", "haptic-feedback-system"],
+  },
+  {
+    id: "ai-coaching",
+    zoneId: "ai-coaching",
+    title: "AI Performance Coaching",
+    thesis: "Artificial intelligence synthesizes vast amounts of performance data into personalized guidance, making expert-level coaching accessible to everyone.",
+    wallText: "AI coaching systems represent the culmination of the data-driven approach to performance. This exhibit shows how machine learning algorithms analyze movement, physiology, and performance metrics to provide real-time, personalized feedback—transforming how athletes train and improve.",
+    keyQuestions: [
+      "How does AI personalize coaching?",
+      "What can AI see that humans cannot?",
+      "How will AI change the future of performance development?",
+    ],
+    objectIds: ["ai-coaching-system", "neural-interface", "predictive-analytics"],
+    whyThisExhibit:
+      "This exhibit exists to show the culmination of the museum's narrative arc: from measurement to analysis to intelligent optimization. AI coaching represents how data becomes insight, and insight becomes personalized guidance. This exhibit also raises critical questions about the future of performance development and the role of technology in human achievement.",
+    whatToNotice: [
+      "How AI analyzes multiple data streams simultaneously",
+      "The personalization of AI coaching recommendations",
+      "How AI identifies patterns humans might miss",
+      "The relationship between data quality and AI effectiveness",
+      "Questions about AI's role in performance development",
+    ],
+  },
+  {
+    id: "future-interfaces",
+    zoneId: "speculative-interfaces",
+    title: "Speculative Interfaces",
+    thesis: "Experimental technologies explore new forms of human-computer interaction, imagining how we might enhance performance through direct neural and biological interfaces.",
+    wallText: "This exhibit presents experimental and speculative technologies that push the boundaries of performance enhancement. From neural interfaces to biofeedback systems, these prototypes represent possible futures where technology and biology merge to create new forms of human capability.",
+    keyQuestions: [
+      "What are the ethical implications of performance enhancement?",
+      "How might technology change what it means to be human?",
+      "What is the future of performance optimization?",
+    ],
+    objectIds: ["holographic-display", "future-prototype", "bio-integrated-sensors"],
+  },
+  // Additional exhibits to reach 18+
+  {
+    id: "training-methods",
+    zoneId: "early-sports",
+    title: "Evolution of Training Methods",
+    thesis: "Training techniques have evolved from intuitive practice to science-based systems, reflecting our deepening understanding of human physiology and performance adaptation.",
+    wallText: "This exhibit explores how training methods have developed across history. From ancient Greek periodization to modern periodization, from intuitive practice to data-driven protocols, we see how our understanding of how to improve performance has evolved. Each era built on previous knowledge while responding to new scientific discoveries and technological capabilities.",
+    keyQuestions: [
+      "How did training methods evolve from intuition to science?",
+      "What role did measurement play in training development?",
+      "How do different cultures approach performance development?",
+      "What can we learn from historical training methods?",
+    ],
+    objectIds: ["roman-training-gear", "altitude-tent"],
+  },
+  {
+    id: "precision-measurement",
+    zoneId: "biomechanics-lab",
+    title: "The Quest for Precision",
+    thesis: "Every advance in measurement precision opened new possibilities for understanding and optimizing performance, from seconds to milliseconds to microseconds.",
+    wallText: "This exhibit traces the evolution of measurement precision in performance science. From timing devices accurate to seconds, to electronic systems measuring milliseconds, to modern systems capturing microseconds—each increase in precision revealed new patterns and possibilities. Precision measurement didn't just record performance; it transformed how we understand it.",
+    keyQuestions: [
+      "How does measurement precision affect our understanding of performance?",
+      "What becomes possible with more precise measurement?",
+      "Is there a limit to useful precision?",
+      "How does precision change training and competition?",
+    ],
+    objectIds: ["first-stopwatch", "mechanical-chronograph", "electronic-timer", "power-meter"],
+  },
+  {
+    id: "portable-technology",
+    zoneId: "wearables-sensors",
+    title: "Portable Performance Technology",
+    thesis: "The miniaturization of sensors and computing power brought performance analysis from the laboratory to the athlete's body, making data-driven training accessible to everyone.",
+    wallText: "This exhibit explores how performance technology became portable. From large laboratory systems to wearable devices, from stationary equipment to mobile sensors, technology moved from controlled environments to real-world training. This shift democratized performance analysis, making advanced measurement accessible to recreational athletes as well as professionals.",
+    keyQuestions: [
+      "How did technology become portable?",
+      "What became possible when sensors moved to the body?",
+      "How did portability change who has access to performance data?",
+      "What are the implications of always-on performance monitoring?",
+    ],
+    objectIds: ["heart-rate-monitor", "gps-watch", "biomechanics-sensor", "smart-watch-evolution"],
+  },
+  {
+    id: "visualization-revolution",
+    zoneId: "data-visualization",
+    title: "The Visualization Revolution",
+    thesis: "Visualizing performance data makes complex information immediately understandable, transforming numbers into insights and insights into action.",
+    wallText: "This exhibit explores how performance data is visualized. From simple graphs to complex three-dimensional representations, from static charts to interactive displays, visualization transforms abstract numbers into comprehensible patterns. Good visualization doesn't just show data—it reveals meaning, enabling intuitive understanding of complex biomechanical and physiological information.",
+    keyQuestions: [
+      "How does visualization make data understandable?",
+      "What forms of visualization are most effective?",
+      "How do visualizations enable performance insights?",
+      "What is the future of data visualization in performance?",
+    ],
+    objectIds: ["performance-dashboard", "biomechanics-visualization", "comparative-analysis", "holographic-display"],
+  },
+  {
+    id: "immersion-technologies",
+    zoneId: "vr-arena",
+    title: "Immersion Technologies",
+    thesis: "Virtual and augmented reality create training experiences impossible in the real world, enabling new forms of practice, preparation, and performance development.",
+    wallText: "This exhibit explores immersive technologies in performance training. Virtual reality creates simulated environments for practice. Augmented reality overlays data on real-world views. Haptic feedback provides tactile sensations. Together, these technologies enable training experiences that transcend physical limitations, allowing athletes to practice in any condition, any environment, any scenario.",
+    keyQuestions: [
+      "How do immersive technologies enhance training?",
+      "What becomes possible in virtual environments?",
+      "How does immersion change learning?",
+      "What is the future of immersive performance training?",
+    ],
+    objectIds: ["vr-training-pod", "vr-sports-sim", "haptic-feedback-system"],
+  },
+  {
+    id: "augmentation-ethics",
+    zoneId: "speculative-interfaces",
+    title: "Augmentation & Ethics",
+    thesis: "As technology enables new forms of human enhancement, we must confront fundamental questions about fairness, access, and the meaning of achievement.",
+    wallText: "This exhibit presents the ethical dimensions of performance enhancement technology. From carbon plate shoes to neural interfaces, from altitude tents to exoskeletons, technology offers ways to enhance human capability. But where do we draw the line between equipment and enhancement? Between fair advantage and unfair advantage? Between natural and artificial? These questions aren't abstract—they're being answered now, in laboratories, training facilities, and competitive arenas.",
+    keyQuestions: [
+      "What constitutes fair enhancement versus cheating?",
+      "How do we ensure equitable access to enhancement technologies?",
+      "What are the long-term implications of human augmentation?",
+      "How do we preserve the meaning of achievement in an age of enhancement?",
+    ],
+    objectIds: ["carbon-plate-shoe", "exoskeleton-prototype", "neural-interface"],
+  },
+];
+
+export function getExhibitsByZone(zoneId: string): Exhibit[] {
+  return EXHIBITS.filter((e) => e.zoneId === zoneId);
+}
+
+export function getExhibit(id: string): Exhibit | undefined {
+  return EXHIBITS.find((e) => e.id === id);
+}
+

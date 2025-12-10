@@ -1,0 +1,81 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { EXHIBITS, getZone, getLevel, getObjectsByExhibit } from "@/data";
+
+export default function ExhibitsPage() {
+  return (
+    <div className="min-h-screen bg-black">
+      {/* Hero */}
+      <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950 py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-auto max-w-4xl"
+          >
+            <h1 className="mb-4 text-4xl font-semibold md:text-5xl">
+              Exhibits
+            </h1>
+            <p className="text-lg text-white/70">
+              Explore the thematic exhibits that organize the museum's collection
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Exhibits Grid */}
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {EXHIBITS.map((exhibit, i) => {
+              const zone = getZone(exhibit.zoneId);
+              const level = zone ? getLevel(zone.levelId) : null;
+              const objects = getObjectsByExhibit(exhibit.id);
+
+              return (
+                <motion.div
+                  key={exhibit.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <Link
+                    href={`/exhibits/${exhibit.id}`}
+                    className="group block h-full rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+                  >
+                    <div className="mb-3 flex items-center gap-2">
+                      {level && (
+                        <span className="rounded-full border border-white/15 bg-white/5 px-2 py-1 text-xs text-white/70">
+                          {level.title}
+                        </span>
+                      )}
+                      {zone && (
+                        <span className="rounded-full border border-white/15 bg-white/5 px-2 py-1 text-xs text-white/70">
+                          {zone.title}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="mb-2 text-lg font-semibold group-hover:text-white/90">
+                      {exhibit.title}
+                    </h3>
+                    <p className="mb-4 text-sm text-white/70">{exhibit.thesis}</p>
+                    <div className="text-xs text-white/50">
+                      {objects.length} object{objects.length !== 1 ? "s" : ""}
+                    </div>
+                    <div className="mt-4 flex items-center gap-2 text-sm text-white/50 group-hover:text-white/70">
+                      View exhibit →
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+

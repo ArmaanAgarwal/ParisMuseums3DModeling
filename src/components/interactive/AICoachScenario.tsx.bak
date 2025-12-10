@@ -1,0 +1,189 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+export function AICoachScenario() {
+  const [goal, setGoal] = useState("endurance");
+  const [constraints, setConstraints] = useState<string[]>([]);
+  const [plan, setPlan] = useState<string | null>(null);
+
+  const goals = [
+    { id: "endurance", label: "Endurance" },
+    { id: "speed", label: "Speed" },
+    { id: "strength", label: "Strength" },
+    { id: "power", label: "Power" },
+  ];
+
+  const constraintOptions = [
+    { id: "time", label: "Limited Time (< 5 hrs/week)" },
+    { id: "injury", label: "Injury Recovery" },
+    { id: "age", label: "Age Considerations" },
+    { id: "equipment", label: "Limited Equipment" },
+  ];
+
+  const generatePlan = () => {
+    let planText = `Based on your goal of ${goals.find((g) => g.id === goal)?.label.toLowerCase()} training`;
+    
+    if (constraints.length > 0) {
+      planText += ` with constraints: ${constraints.map((c) => constraintOptions.find((o) => o.id === c)?.label).join(", ")}`;
+    }
+    
+    planText += `, the AI coach recommends:\n\n`;
+    
+    if (goal === "endurance") {
+      planText += "• 3-4 sessions per week focusing on aerobic base building\n";
+      planText += "• Progressive volume increases (5-10% weekly)\n";
+      planText += "• Recovery days between sessions\n";
+      planText += "• Heart rate zone training (Zone 2-3)\n";
+    } else if (goal === "speed") {
+      planText += "• 2-3 high-intensity sessions per week\n";
+      planText += "• Sprint intervals with full recovery\n";
+      planText += "• Technique refinement focus\n";
+      planText += "• Plyometric and power exercises\n";
+    } else if (goal === "strength") {
+      planText += "• 3-4 resistance training sessions per week\n";
+      planText += "• Progressive overload principle\n";
+      planText += "• Compound movements prioritized\n";
+      planText += "• 48-hour recovery between muscle groups\n";
+    } else {
+      planText += "• 2-3 explosive training sessions per week\n";
+      planText += "• Olympic lifts and plyometrics\n";
+      planText += "• Maximum effort with full recovery\n";
+      planText += "• Neuromuscular adaptation focus\n";
+    }
+    
+    if (constraints.includes("time")) {
+      planText += "\n• Time-efficient protocols: circuit training, supersets\n";
+    }
+    if (constraints.includes("injury")) {
+      planText += "\n• Modified exercises to avoid aggravating injury\n";
+      planText += "• Gradual progression with medical clearance\n";
+    }
+    if (constraints.includes("age")) {
+      planText += "\n• Extended warm-up and cool-down periods\n";
+      planText += "• Lower intensity, higher volume approach\n";
+    }
+    if (constraints.includes("equipment")) {
+      planText += "\n• Bodyweight and minimal equipment exercises\n";
+      planText += "• Creative use of available resources\n";
+    }
+    
+    setPlan(planText);
+  };
+
+  const toggleConstraint = (id: string) => {
+    setConstraints((prev) =>
+      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
+    );
+  };
+
+  return (
+    <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+      <h3 className="mb-6 text-xl font-semibold">AI Coach Scenario</h3>
+      <p className="mb-6 text-sm text-white/70">
+        Configure a training scenario to see how AI coaches personalize recommendations
+      </p>
+
+      <div className="space-y-6">
+        {/* Goal Selection */}
+        <div>
+          <label className="mb-3 block text-sm font-medium text-white/90">
+            Training Goal
+          </label>
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+            {goals.map((g) => (
+              <button
+                key={g.id}
+                onClick={() => setGoal(g.id)}
+                className={`rounded-lg border px-4 py-2 text-sm font-medium transition ${
+                  goal === g.id
+                    ? "border-white/30 bg-white/10 text-white"
+                    : "border-white/15 bg-white/5 text-white/70 hover:border-white/25 hover:bg-white/8"
+                }`}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Constraints */}
+        <div>
+          <label className="mb-3 block text-sm font-medium text-white/90">
+            Constraints (select all that apply)
+          </label>
+          <div className="grid gap-2 md:grid-cols-2">
+            {constraintOptions.map((option) => (
+              <label
+                key={option.id}
+                className="flex items-center gap-3 rounded-lg border border-white/15 bg-white/5 p-3 transition hover:border-white/25 hover:bg-white/8"
+              >
+                <input
+                  type="checkbox"
+                  checked={constraints.includes(option.id)}
+                  onChange={() => toggleConstraint(option.id)}
+                  className="h-4 w-4 rounded border-white/20 bg-white/5"
+                />
+                <span className="text-sm text-white/90">{option.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Generate Button */}
+        <button
+          onClick={generatePlan}
+          className="w-full rounded-xl border border-white/20 bg-white/10 px-6 py-3 font-medium text-white transition hover:bg-white/15"
+        >
+          Generate Training Plan
+        </button>
+
+        {/* Generated Plan */}
+        {plan && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-4"
+          >
+            <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/10 p-6">
+              <div className="mb-3 text-sm font-semibold text-cyan-200">
+                AI-Generated Training Plan
+              </div>
+              <pre className="whitespace-pre-wrap text-sm leading-relaxed text-cyan-200/90">
+                {plan}
+              </pre>
+            </div>
+
+            {/* Personalization Explanation */}
+            <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+              <div className="mb-2 text-xs font-medium text-white/60">
+                How AI Personalizes
+              </div>
+              <p className="text-sm text-white/80">
+                The AI analyzed your goal and constraints, then synthesized training
+                principles, biomechanics research, and performance data to create this
+                personalized plan. It adapts recommendations based on your specific
+                situation rather than using generic templates.
+              </p>
+            </div>
+
+            {/* Ethics Note */}
+            <div className="rounded-xl border border-rose-500/20 bg-rose-500/10 p-4">
+              <div className="mb-2 text-xs font-medium text-rose-200/70">
+                Ethics & Considerations
+              </div>
+              <ul className="space-y-1 text-sm text-rose-200/90">
+                <li>• AI recommendations should be validated by qualified coaches</li>
+                <li>• Personal data privacy must be protected</li>
+                <li>• Algorithmic bias can affect recommendations</li>
+                <li>• Human judgment remains essential for safety</li>
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+}
+

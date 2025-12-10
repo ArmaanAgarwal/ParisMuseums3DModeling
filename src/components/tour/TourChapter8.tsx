@@ -1,0 +1,18 @@
+"use client";
+
+import { LevelChapter } from "./LevelChapter";
+
+interface TourChapter8Props {
+  onContinue: () => void;
+}
+
+export function TourChapter8({ onContinue }: TourChapter8Props) {
+  return <LevelChapter levelId="l3" onContinue={onContinue} />;
+}
+
+
+
+
+
+
+

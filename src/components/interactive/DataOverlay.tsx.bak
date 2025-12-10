@@ -1,0 +1,103 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+const metrics = [
+  {
+    id: "force",
+    label: "Ground Reaction Force",
+    description: "The force your body applies to the ground with each step. Higher forces can indicate more power, but also more stress on joints.",
+    value: "2.5x body weight",
+  },
+  {
+    id: "cadence",
+    label: "Running Cadence",
+    description: "Steps per minute. Elite runners typically maintain 180 steps/minute. Higher cadence often means shorter, more efficient strides.",
+    value: "180 spm",
+  },
+  {
+    id: "power",
+    label: "Power Output",
+    description: "Watts produced during movement. Power = force × velocity. This metric combines strength and speed into one measure.",
+    value: "450W",
+  },
+  {
+    id: "efficiency",
+    label: "Movement Efficiency",
+    description: "How much energy is used for forward motion vs. wasted in vertical oscillation or lateral movement. Higher efficiency = better performance.",
+    value: "87%",
+  },
+];
+
+export function DataOverlay() {
+  const [activeMetrics, setActiveMetrics] = useState<Set<string>>(new Set());
+
+  const toggleMetric = (id: string) => {
+    const newSet = new Set(activeMetrics);
+    if (newSet.has(id)) {
+      newSet.delete(id);
+    } else {
+      newSet.add(id);
+    }
+    setActiveMetrics(newSet);
+  };
+
+  return (
+    <div className="rounded-xl border border-white/15 bg-white/5 p-8">
+      <h3 className="mb-6 text-xl font-semibold">What Metrics Tell Us</h3>
+      <p className="mb-6 text-sm text-white/70">
+        Toggle metrics to understand what performance data reveals
+      </p>
+
+      <div className="space-y-3 mb-6">
+        {metrics.map((metric) => (
+          <div
+            key={metric.id}
+            className="rounded-lg border border-white/10 bg-white/5 p-4"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={activeMetrics.has(metric.id)}
+                  onChange={() => toggleMetric(metric.id)}
+                  className="rounded border-white/20"
+                />
+                <span className="font-medium">{metric.label}</span>
+                {activeMetrics.has(metric.id) && (
+                  <span className="text-sm text-cyan-400">{metric.value}</span>
+                )}
+              </label>
+            </div>
+            {activeMetrics.has(metric.id) && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="mt-2 text-sm text-white/70"
+              >
+                {metric.description}
+              </motion.p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {activeMetrics.size > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 p-4"
+        >
+          <p className="text-sm text-white/90">
+            <strong>Insight:</strong> These metrics work together. For example,
+            high power output with good efficiency means an athlete is generating
+            force effectively without wasting energy. Understanding these
+            relationships is key to performance optimization.
+          </p>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+

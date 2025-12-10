@@ -1,0 +1,100 @@
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import Link from "next/link";
+import { TOUR_STEPS, TourStepId } from "@/data/museum";
+
+interface TourProgressWidgetProps {
+  currentStep: TourStepId;
+}
+
+export function TourProgressWidget({ currentStep }: TourProgressWidgetProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const currentIndex = TOUR_STEPS.findIndex((s) => s.id === currentStep);
+
+  return (
+    <div className="fixed right-4 top-4 z-50">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="rounded-lg border border-white/20 bg-black/80 backdrop-blur-md px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+      >
+        Tour Progress
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute right-0 top-12 w-64 rounded-lg border border-white/20 bg-black/95 backdrop-blur-md p-4 shadow-xl"
+          >
+            <div className="mb-4 text-sm font-semibold text-white">
+              Guided Tour Progress
+            </div>
+
+            <div className="mb-4 space-y-2">
+              {TOUR_STEPS.map((step, i) => (
+                <Link
+                  key={step.id}
+                  href={step.path}
+                  className={`block rounded px-3 py-2 text-sm transition ${
+                    i === currentIndex
+                      ? "bg-white/20 text-white"
+                      : i < currentIndex
+                      ? "text-white/70 hover:text-white"
+                      : "text-white/40"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={`h-2 w-2 rounded-full ${
+                        i === currentIndex
+                          ? "bg-cyan-400"
+                          : i < currentIndex
+                          ? "bg-white/50"
+                          : "bg-white/20"
+                      }`}
+                    />
+                    <span>{step.title}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="border-t border-white/10 pt-4">
+              <div className="mb-2 text-xs text-white/60">
+                Progress: {currentIndex + 1} of {TOUR_STEPS.length}
+              </div>
+              <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-cyan-400"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${((currentIndex + 1) / TOUR_STEPS.length) * 100}%` }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+            </div>
+
+            {currentIndex < TOUR_STEPS.length - 1 && (
+              <Link
+                href={TOUR_STEPS[currentIndex + 1].path}
+                className="mt-4 block w-full rounded-lg bg-cyan-500/20 border border-cyan-500/30 px-4 py-2 text-center text-sm font-medium text-cyan-300 transition hover:bg-cyan-500/30"
+              >
+                Continue Tour →
+              </Link>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+
+
+
+
+
+

@@ -1,0 +1,250 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { ObjectImage } from "@/components/ui/ObjectImage";
+import { useState } from "react";
+import type { MuseumObject, Exhibit, Zone, Level } from "@/data/types";
+import { getObjectHref } from "@/lib/routes";
+
+interface ObjectDetailContentProps {
+  object: MuseumObject;
+  exhibit: Exhibit | null;
+  zone: Zone | null;
+  level: Level | null;
+}
+
+export function ObjectDetailContent({ object, exhibit, zone, level }: ObjectDetailContentProps) {
+  const [interactionState, setInteractionState] = useState<any>({});
+
+  // Get related objects
+  const relatedObjects = object.relatedObjectIds
+    .map((id) => {
+      // This would need to be passed as prop or fetched
+      return null;
+    })
+    .filter(Boolean);
+
+  return (
+    <div className="min-h-screen bg-black">
+      {/* Hero */}
+      <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950 py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="mx-auto max-w-4xl">
+            <Breadcrumbs
+              items={[
+                level ? { label: level.title, href: `/tour?step=${level.id === "l1" ? 3 : level.id === "l2" ? 5 : 7}` } : undefined,
+                zone ? { label: zone.title, href: `/levels/${level?.id}/zones/${zone.id}` } : undefined,
+                exhibit ? { label: exhibit.title, href: `/exhibits/${exhibit.id}` } : undefined,
+                { label: object.title },
+              ].filter(Boolean) as Array<{ label: string; href?: string }>}
+            />
+
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              {level && (
+                <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/70">
+                  {level.title}
+                </span>
+              )}
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/70">
+                {object.dateLabel}
+              </span>
+              {object.tags.slice(0, 2).map((tag) => (
+                <span key={tag} className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/70">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <h1 className="mb-4 text-4xl font-semibold md:text-5xl">
+              {object.title}
+            </h1>
+            <p className="text-xl text-white/70">{object.subtitle}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="border-b border-white/10 py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="mx-auto max-w-4xl">
+            <div className="grid gap-12 md:grid-cols-[1fr_300px]">
+              {/* Left: Main content */}
+              <div>
+                {/* Image */}
+                <div className="mb-8">
+                  <ObjectImage
+                    src={object.media?.imagePath}
+                    alt={object.title}
+                    title={object.title}
+                    dateLabel={object.dateLabel}
+                    aspectRatio="video"
+                    priority
+                  />
+                </div>
+
+                {/* Short Label */}
+                <div className="mb-8 rounded-2xl border border-white/15 bg-white/5 p-6">
+                  <h2 className="mb-3 text-lg font-semibold">Wall Label</h2>
+                  <p className="leading-relaxed text-white/80 text-sm">
+                    {object.title}, {object.dateLabel}. {object.materials}. {object.dimensions}.
+                  </p>
+                  <p className="mt-3 leading-relaxed text-white/80 text-sm">
+                    {object.description}
+                  </p>
+                </div>
+
+                {/* Description */}
+                <div className="mb-8 rounded-2xl border border-white/15 bg-white/5 p-8">
+                  <h2 className="mb-4 text-xl font-semibold">Description</h2>
+                  <p className="leading-relaxed text-white/80">
+                    {object.description}
+                  </p>
+                </div>
+
+                {/* Significance - Historical importance */}
+                <div className="mb-8 rounded-2xl border border-white/15 bg-white/5 p-8">
+                  <h2 className="mb-4 text-xl font-semibold">Significance</h2>
+                  <p className="leading-relaxed text-white/80">
+                    {object.significance}
+                  </p>
+                </div>
+
+                {/* Why It Was Revolutionary */}
+                <div className="mb-8 rounded-2xl border border-white/15 bg-white/5 p-8">
+                  <h2 className="mb-4 text-xl font-semibold">
+                    Why It Was Revolutionary
+                  </h2>
+                  <p className="leading-relaxed text-white/80">
+                    {object.howItChangedPerformance}
+                  </p>
+                </div>
+
+                {/* Why It Matters in This Museum - Museum-specific connection */}
+                <div className="mb-8 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-8">
+                  <h2 className="mb-4 text-xl font-semibold text-cyan-300">
+                    Why It Matters in This Museum
+                  </h2>
+                  <p className="leading-relaxed text-white/90 mb-4">
+                    {object.whyItBelongs || object.whyItMatters || `This object shows how ${level?.title.toLowerCase() || "performance"} has been measured and improved over time. It connects to the museum's story of how humans have designed tools and systems to understand and enhance physical achievement.`}
+                  </p>
+                  {level && (
+                    <p className="text-sm text-white/70 italic">
+                      This object appears in {level.title}. Explore related objects on {level.id === "l1" ? "Level 2" : level.id === "l2" ? "Level 3" : "the other levels"} to see how these ideas developed further.
+                    </p>
+                  )}
+                </div>
+
+                {/* What to Notice */}
+                {object.whatToNotice && object.whatToNotice.length > 0 && (
+                  <div className="mb-8 rounded-2xl border border-white/15 bg-white/5 p-8">
+                    <h2 className="mb-4 text-xl font-semibold">What to Notice</h2>
+                    <ul className="space-y-3">
+                      {object.whatToNotice.map((notice, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="mt-1.5 text-cyan-400">•</span>
+                          <span className="text-white/80 leading-relaxed">{notice}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Related Objects */}
+                {object.relatedObjectIds.length > 0 && (
+                  <div className="mb-8 rounded-2xl border border-white/15 bg-white/5 p-8">
+                    <h2 className="mb-4 text-xl font-semibold">Related Objects</h2>
+                    <p className="mb-4 text-white/70 text-sm">
+                      Explore objects that connect to this one:
+                    </p>
+                    <div className="space-y-2">
+                      {object.relatedObjectIds.slice(0, 5).map((relatedId) => (
+                        <Link
+                          key={relatedId}
+                          href={`/objects/${relatedId}`}
+                          className="block rounded-lg border border-white/10 bg-white/5 p-3 text-sm transition hover:border-white/20 hover:bg-white/10"
+                        >
+                          View related object →
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Right: Metadata */}
+              <div className="space-y-6">
+                <div className="rounded-xl border border-white/15 bg-white/5 p-6">
+                  <h3 className="mb-4 font-semibold">Object Details</h3>
+                  <dl className="space-y-3 text-sm">
+                    <div>
+                      <dt className="text-white/60">Date</dt>
+                      <dd className="mt-1 text-white/90">{object.dateLabel}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-white/60">Materials</dt>
+                      <dd className="mt-1 text-white/90">
+                        {object.materials}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-white/60">Dimensions</dt>
+                      <dd className="mt-1 text-white/90">{object.dimensions}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-white/60">Provenance</dt>
+                      <dd className="mt-1 text-white/90">{object.provenance}</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                {exhibit && zone && level && (
+                  <div className="rounded-xl border border-white/15 bg-white/5 p-6">
+                    <h3 className="mb-4 font-semibold">Location in Museum</h3>
+                    <dl className="space-y-3 text-sm">
+                      <div>
+                        <dt className="text-white/60">Level</dt>
+                        <dd className="mt-1 text-white/90">{level.title}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-white/60">Zone</dt>
+                        <dd className="mt-1 text-white/90">
+                          <Link href={`/levels/${level.id}/zones/${zone.id}`} className="text-cyan-400 hover:text-cyan-300">
+                            {zone.title}
+                          </Link>
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="text-white/60">Exhibit</dt>
+                        <dd className="mt-1 text-white/90">
+                          <Link href={`/exhibits/${exhibit.id}`} className="text-cyan-400 hover:text-cyan-300">
+                            {exhibit.title}
+                          </Link>
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                )}
+
+                <div className="rounded-xl border border-white/15 bg-white/5 p-6">
+                  <h3 className="mb-4 font-semibold">Tags</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {object.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/70"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

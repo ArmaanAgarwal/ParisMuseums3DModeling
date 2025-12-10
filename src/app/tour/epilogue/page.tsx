@@ -1,0 +1,154 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { getAllGalleries, getAllExhibits, getAllObjects } from "@/data/client";
+
+export default function EpiloguePage() {
+  // Safe defaults - get data with fallbacks
+  const galleries = getAllGalleries();
+  const exhibits = getAllExhibits();
+  const allObjects = getAllObjects();
+  
+  // Get one gallery, one exhibit, and two objects for "Continue Exploring"
+  const continueGallery = galleries[0] || null;
+  const continueExhibit = exhibits[0] || null;
+  const continueObjects = allObjects.slice(0, 2);
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 text-center"
+        >
+          <div className="mb-4 text-sm font-medium uppercase tracking-wider text-white/60">
+            Epilogue
+          </div>
+          <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-7xl">
+            What You Take With You
+          </h1>
+        </motion.div>
+
+        <div className="mx-auto max-w-4xl space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="rounded-xl border border-white/15 bg-white/5 p-8"
+          >
+            <h2 className="mb-4 text-2xl font-semibold">Key Takeaways</h2>
+            <ul className="space-y-4 text-white/80">
+              <li className="flex items-start gap-3">
+                <span className="mt-1 text-cyan-400">•</span>
+                <span>
+                  Performance optimization is not a modern invention—ancient
+                  athletes understood biomechanics intuitively
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 text-cyan-400">•</span>
+                <span>
+                  Measurement technology transformed performance from subjective
+                  observation to objective data
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 text-cyan-400">•</span>
+                <span>
+                  Sensors and data visualization make invisible patterns visible,
+                  enabling precise optimization
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 text-cyan-400">•</span>
+                <span>
+                  The future of performance raises fundamental questions about
+                  enhancement, access, and the meaning of achievement
+                </span>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Continue Exploring - Fixed with safe defaults */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <h2 className="mb-6 text-2xl font-semibold">Continue Exploring</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {/* Gallery Link */}
+              {continueGallery && (
+                <Link
+                  href={`/galleries/${continueGallery.id}`}
+                  className="group rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-cyan-400/50 hover:bg-cyan-500/10"
+                >
+                  <div className="mb-2 text-sm font-medium text-cyan-400">Gallery</div>
+                  <h3 className="mb-2 text-lg font-semibold group-hover:text-cyan-400 transition">
+                    {continueGallery.title}
+                  </h3>
+                  <p className="mb-4 text-sm text-white/70 line-clamp-2">
+                    {continueGallery.blurb}
+                  </p>
+                  <div className="text-sm text-cyan-400">Explore Gallery →</div>
+                </Link>
+              )}
+
+              {/* Exhibit Link */}
+              {continueExhibit && (
+                <Link
+                  href={`/exhibits/${continueExhibit.id}`}
+                  className="group rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-cyan-400/50 hover:bg-cyan-500/10"
+                >
+                  <div className="mb-2 text-sm font-medium text-cyan-400">Exhibit</div>
+                  <h3 className="mb-2 text-lg font-semibold group-hover:text-cyan-400 transition">
+                    {continueExhibit.title}
+                  </h3>
+                  <p className="mb-4 text-sm text-white/70 line-clamp-2">
+                    {continueExhibit.intro}
+                  </p>
+                  <div className="text-sm text-cyan-400">Start Exhibit →</div>
+                </Link>
+              )}
+
+              {/* Object Links */}
+              {continueObjects.map((obj) => (
+                <Link
+                  key={obj.id}
+                  href={`/objects/${obj.slug}`}
+                  className="group rounded-xl border border-white/15 bg-white/5 p-6 transition hover:border-cyan-400/50 hover:bg-cyan-500/10"
+                >
+                  <div className="mb-2 text-sm font-medium text-white/60">{obj.dateLabel}</div>
+                  <h3 className="mb-2 text-lg font-semibold group-hover:text-cyan-400 transition">
+                    {obj.title}
+                  </h3>
+                  <p className="mb-4 text-sm text-white/70 line-clamp-2">
+                    {obj.shortLabel || obj.description}
+                  </p>
+                  <div className="text-sm text-cyan-400">View Object →</div>
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="text-center"
+          >
+            <Link
+              href="/"
+              className="inline-block rounded-xl border border-white/20 bg-white/10 px-12 py-6 text-xl font-semibold transition hover:border-white/30 hover:bg-white/15"
+            >
+              Return to Home
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}

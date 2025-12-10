@@ -1,0 +1,150 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface TourStepLevel3ActivityProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
+
+export function TourStepLevel3Activity({ onNext, onPrevious }: TourStepLevel3ActivityProps) {
+  const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
+
+  const futureGoals = [
+    {
+      id: "enhancement",
+      label: "Performance Enhancement",
+      description: "Technology that directly improves human capabilities. This includes exoskeletons, neural interfaces, and genetic modifications. These technologies promise to push human limits beyond what is naturally possible.",
+      challenges: ["Ethical questions about fairness", "Access and inequality", "Safety and long term effects", "What defines human achievement"],
+      potential: "Performance enhancement could help people with disabilities, extend human capabilities, and open new forms of achievement. But it also raises fundamental questions about what it means to be human.",
+    },
+    {
+      id: "prevention",
+      label: "Injury Prevention",
+      description: "Technology that predicts and prevents injuries before they happen. This includes wearable sensors that monitor movement patterns, AI that identifies risk factors, and personalized training programs.",
+      challenges: ["False positives and unnecessary restrictions", "Privacy concerns with continuous monitoring", "Cost and accessibility", "Balancing safety with performance"],
+      potential: "Injury prevention could extend athletic careers, reduce pain, and make sports safer for everyone. But it requires careful balance between protection and performance.",
+    },
+    {
+      id: "accessibility",
+      label: "Universal Access",
+      description: "Technology that makes performance training and measurement available to everyone, regardless of location, income, or ability. This includes virtual reality training, affordable sensors, and online coaching.",
+      challenges: ["Technology costs and infrastructure", "Digital divide and inequality", "Quality of virtual vs real experience", "Maintaining human connection"],
+      potential: "Universal access could democratize performance training, making elite techniques available to everyone. But it requires addressing economic and social barriers.",
+    },
+    {
+      id: "understanding",
+      label: "Deeper Understanding",
+      description: "Technology that reveals new insights about how the human body works. This includes brain imaging, genetic analysis, and real time physiological monitoring. These tools help us understand performance at the deepest levels.",
+      challenges: ["Complexity and interpretation", "Individual variation", "Ethics of genetic testing", "Privacy of biological data"],
+      potential: "Deeper understanding could lead to personalized training, better health outcomes, and new discoveries about human potential. But it requires careful ethical consideration.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-black py-20">
+      <div className="mx-auto max-w-4xl px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-12"
+        >
+          <div>
+            <h1 className="mb-6 text-4xl font-semibold md:text-5xl">
+              Interactive: Future Goals Explorer
+            </h1>
+            <p className="mb-6 text-xl leading-relaxed text-white/80">
+              Select a future goal for performance technology to explore what it promises, what challenges it faces, and what it might mean for human achievement. This shows how the future of performance is not just about technology, but about the choices we make.
+            </p>
+          </div>
+
+          {/* Goal Selector */}
+          <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+            <h2 className="mb-6 text-2xl font-semibold">Select a Future Goal</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {futureGoals.map((goal) => (
+                <button
+                  key={goal.id}
+                  onClick={() => setSelectedGoal(selectedGoal === goal.id ? null : goal.id)}
+                  className={`rounded-xl border p-4 text-left transition ${
+                    selectedGoal === goal.id
+                      ? "border-cyan-400/50 bg-cyan-500/10"
+                      : "border-white/15 bg-white/5 hover:border-white/30 hover:bg-white/10"
+                  }`}
+                >
+                  <div className="font-semibold">{goal.label}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Selected Goal Info */}
+            <AnimatePresence>
+              {selectedGoal && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mt-6 rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-6"
+                >
+                  {(() => {
+                    const goal = futureGoals.find((g) => g.id === selectedGoal);
+                    if (!goal) return null;
+                    return (
+                      <>
+                        <h3 className="mb-4 text-xl font-semibold text-cyan-300">{goal.label}</h3>
+                        <div className="mb-4">
+                          <p className="leading-relaxed text-white/90">{goal.description}</p>
+                        </div>
+                        <div className="mb-4 rounded-lg border border-cyan-500/20 bg-cyan-500/5 p-4">
+                          <div className="mb-2 text-sm font-semibold text-cyan-200">Challenges</div>
+                          <ul className="space-y-2">
+                            {goal.challenges.map((challenge, i) => (
+                              <li key={i} className="flex items-start gap-2 text-sm text-white/90">
+                                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-300" />
+                                <span>{challenge}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="rounded-lg border border-white/20 bg-white/5 p-4">
+                          <div className="mb-2 text-sm font-semibold text-white/90">Potential Impact</div>
+                          <p className="text-sm text-white/80">{goal.potential}</p>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Learning Point */}
+          <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+            <h2 className="mb-4 text-xl font-semibold">What This Teaches</h2>
+            <p className="leading-relaxed text-white/80">
+              The future of performance technology is not predetermined. Each goal offers promise and faces challenges. Enhancement could push human limits, but raises ethical questions. Prevention could make sports safer, but might restrict natural risk taking. Universal access could democratize training, but requires addressing inequality. Deeper understanding could unlock new potential, but raises privacy concerns. The choices we make about these technologies will shape what performance means in the future.
+            </p>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex justify-between">
+            <button
+              onClick={onPrevious}
+              className="rounded-xl border border-white/20 bg-white/5 px-8 py-4 font-medium transition hover:bg-white/10"
+            >
+              ← Previous
+            </button>
+            <button
+              onClick={onNext}
+              className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-4 font-medium transition hover:bg-cyan-500/30"
+            >
+              Final Reflection →
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+

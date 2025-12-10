@@ -1,0 +1,52 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ChevronRight } from "@/components/icons";
+
+interface NextInTourProps {
+  currentChapter: number;
+  totalChapters: number;
+  nextChapter?: {
+    title: string;
+    href: string;
+  };
+}
+
+export function NextInTour({
+  currentChapter,
+  totalChapters,
+  nextChapter,
+}: NextInTourProps) {
+  if (currentChapter >= totalChapters - 1) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="sticky bottom-4 z-30 mx-auto max-w-4xl px-4"
+    >
+      <div className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="text-xs font-medium uppercase tracking-wider text-white/60">
+              Next in Tour
+            </div>
+            <div className="mt-1 font-semibold text-white">
+              {nextChapter?.title || "Continue Tour"}
+            </div>
+          </div>
+          <Link
+            href={nextChapter?.href || "/tour"}
+            className="flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2 font-medium text-white transition hover:bg-white/15"
+          >
+            Continue
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+

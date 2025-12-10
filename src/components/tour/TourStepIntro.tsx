@@ -1,0 +1,144 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+
+interface TourStepIntroProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
+
+export function TourStepIntro({ onNext, onPrevious }: TourStepIntroProps) {
+  const [selectedDemo, setSelectedDemo] = useState<string | null>(null);
+
+  const demos = [
+    {
+      id: "map",
+      icon: "🗺️",
+      title: "Map",
+      description: "The map shows each level of the museum. Click zones to see what is inside. Each zone has exhibits, and each exhibit has objects.",
+      example: "Try clicking zones on the map to preview what you will see.",
+    },
+    {
+      id: "exhibit",
+      icon: "📚",
+      title: "Exhibit",
+      description: "Exhibits group objects together around a theme. Each exhibit explains why these objects belong together and what story they tell.",
+      example: "Exhibits help you understand connections between objects.",
+    },
+    {
+      id: "object",
+      icon: "🔍",
+      title: "Object",
+      description: "Object pages show detailed information about each artifact. You will see descriptions, why it matters, and what to notice.",
+      example: "Object pages are like museum labels with more detail.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-black py-20">
+      <div className="mx-auto max-w-4xl px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-12"
+        >
+          <div>
+            <h1 className="mb-6 text-4xl font-semibold md:text-5xl">
+              How to Use This Museum
+            </h1>
+            <p className="mb-6 text-xl leading-relaxed text-white/80">
+              Before we begin the tour, let us show you how the museum works. Everything is interactive, and you can explore at your own pace.
+            </p>
+          </div>
+
+          {/* Interactive Demo */}
+          <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+            <h2 className="mb-6 text-2xl font-semibold">Try These Interactive Elements</h2>
+            <p className="mb-6 text-white/70">
+              Click each icon below to learn what it does:
+            </p>
+            <div className="grid gap-4 md:grid-cols-3">
+              {demos.map((demo) => (
+                <button
+                  key={demo.id}
+                  onClick={() => setSelectedDemo(selectedDemo === demo.id ? null : demo.id)}
+                  className={`rounded-xl border p-6 text-left transition ${
+                    selectedDemo === demo.id
+                      ? "border-cyan-400/50 bg-cyan-500/10"
+                      : "border-white/15 bg-white/5 hover:border-white/30 hover:bg-white/10"
+                  }`}
+                >
+                  <div className="mb-3 text-4xl">{demo.icon}</div>
+                  <h3 className="mb-2 text-lg font-semibold">{demo.title}</h3>
+                  <AnimatePresence>
+                    {selectedDemo === demo.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mt-4 space-y-2 text-sm text-white/80"
+                      >
+                        <p>{demo.description}</p>
+                        <p className="text-cyan-400/80">{demo.example}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Key Concepts */}
+          <div className="space-y-6">
+            <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-xl font-semibold">Clickable Zones on Maps</h2>
+              <p className="mb-4 leading-relaxed text-white/80">
+                Each level has a map showing zones. Zones are areas that group related exhibits together. Click any zone to see what is inside. You can preview objects and then enter the zone to explore fully.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-xl font-semibold">Exhibit Cards and Object Groupings</h2>
+              <p className="mb-4 leading-relaxed text-white/80">
+                Exhibits group objects around a theme. Each exhibit explains why these objects belong together and what story they tell. Click an exhibit card to see all objects inside and read the exhibit wall text.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-xl font-semibold">Object Pages and Labels</h2>
+              <p className="mb-4 leading-relaxed text-white/80">
+                Object pages are like detailed museum labels. You will see what the object is, why it matters, and what to notice. Each object page connects to related objects so you can explore further.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-xl font-semibold">Timeline and Historical Comparison</h2>
+              <p className="mb-4 leading-relaxed text-white/80">
+                The timeline lets you see objects across time. You can compare how ideas developed from ancient times to today. Use it to understand the big picture of how performance technology evolved.
+              </p>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex justify-end">
+            <button
+              onClick={onNext}
+              className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-4 font-medium transition hover:bg-cyan-500/30"
+            >
+              Start the Tour →
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+

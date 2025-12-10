@@ -1,0 +1,136 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { TourProgressWidget } from "@/components/TourProgressWidget";
+
+export default function ProloguePage() {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <TourProgressWidget currentStep="prologue" />
+
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="mb-8 text-center">
+            <div className="mb-4 text-sm font-medium uppercase tracking-wider text-white/60">
+              Prologue
+            </div>
+            <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-7xl">
+              Location & Setting
+            </h1>
+          </div>
+
+          <div className="mx-auto max-w-4xl space-y-8 text-lg leading-relaxed text-white/80">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className="mb-4 text-2xl font-semibold text-white">
+                The Museum Site
+              </h2>
+              <p>
+                The Performance Museum is situated at the intersection of history,
+                technology, and human achievement. Our location reflects the museum's
+                hybrid identity: drawing from the classical logic of the Louvre's
+                central axis, the exposed systems of the Pompidou, and the grounded
+                warmth of a brick archive wing.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="rounded-xl border border-white/15 bg-white/5 p-8"
+            >
+              <h2 className="mb-4 text-2xl font-semibold text-white">
+                Arrival Sequence
+              </h2>
+              <p className="mb-4">
+                Visitors approach along a central axis that leads through formal
+                gardens, past a reflecting pool, and into the museum's main
+                entrance. This procession creates a sense of transition from the
+                everyday world into the contemplative space of the museum.
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Central axis provides clear orientation and wayfinding</li>
+                <li>• Parterre gardens offer moments of reflection</li>
+                <li>• Reflecting pool creates a threshold between exterior and interior</li>
+                <li>• Symmetrical geometry establishes calm and order</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <h2 className="mb-4 text-2xl font-semibold text-white">
+                The Museum's Narrative Arc
+              </h2>
+              <p className="mb-4">
+                As you journey through this museum, you'll discover three levels that
+                tell a complete story:
+              </p>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+                  <div className="mb-2 text-sm font-medium text-amber-400">
+                    Level 1
+                  </div>
+                  <div className="font-semibold">Origins & Icons</div>
+                  <div className="mt-2 text-sm text-white/70">
+                    Historical roots of performance
+                  </div>
+                </div>
+                <div className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 p-4">
+                  <div className="mb-2 text-sm font-medium text-cyan-400">
+                    Level 2
+                  </div>
+                  <div className="font-semibold">Data, Motion & Body</div>
+                  <div className="mt-2 text-sm text-white/70">
+                    Performance becomes measurable data
+                  </div>
+                </div>
+                <div className="rounded-lg border border-violet-500/30 bg-violet-500/10 p-4">
+                  <div className="mb-2 text-sm font-medium text-violet-400">
+                    Level 3
+                  </div>
+                  <div className="font-semibold">Futures & Immersion</div>
+                  <div className="mt-2 text-sm text-white/70">
+                    The future of human capability
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="mt-12 text-center"
+          >
+            <Link
+              href="/tour/architecture"
+              className="inline-block rounded-xl border border-white/20 bg-white/10 px-12 py-6 text-xl font-semibold transition hover:border-white/30 hover:bg-white/15"
+            >
+              Continue to The Building →
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+

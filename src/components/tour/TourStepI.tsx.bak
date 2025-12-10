@@ -1,0 +1,151 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+interface TourStepProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
+
+export function TourStepI({ onNext }: TourStepProps) {
+  return (
+    <div className="min-h-[calc(100vh-200px)] py-20">
+      <div className="mx-auto max-w-7xl px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="mb-8 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/70">
+              Step I: Didactics & Participation
+            </div>
+            <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-7xl">
+              How We Teach & Engage
+            </h1>
+            <p className="text-xl text-white/70">
+              Museum-grade educational materials and interactive experiences
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-4xl space-y-8">
+            <div className="rounded-xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-2xl font-semibold">Wall Texts</h2>
+              <p className="mb-4 text-white/80">
+                Each level, zone, and exhibit includes comprehensive wall text
+                panels that provide context, curatorial interpretation, and
+                learning goals. These panels use a curatorial voice to explain
+                "what you're seeing" and "why it matters."
+              </p>
+              <p className="text-white/80">
+                Wall texts are positioned at comfortable reading heights with
+                high contrast for accessibility. They include section headers,
+                interpretive paragraphs, and "key questions" that guide visitor
+                thinking.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-2xl font-semibold">Object Labels</h2>
+              <p className="mb-4 text-white/80">
+                Every object has both a short label (for quick reference) and an
+                extended label (for deeper understanding). Extended labels
+                include:
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Provenance and historical context</li>
+                <li>• Significance for the Performance Museum</li>
+                <li>• "Why this is revolutionary" explanation</li>
+                <li>• "What changed after this" historical progression</li>
+                <li>• Interpretive prompts for visitors</li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-8">
+              <h2 className="mb-4 text-2xl font-semibold text-cyan-300">
+                Interactive Touchscreen Mock
+              </h2>
+              <p className="mb-4 text-white/90">
+                Throughout the museum, interactive touchscreen stations provide
+                deeper exploration. Each station includes tabs for:
+              </p>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <h3 className="mb-2 font-semibold">Context</h3>
+                  <p className="text-sm text-white/70">
+                    Historical background and cultural significance
+                  </p>
+                </div>
+                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <h3 className="mb-2 font-semibold">Close Look</h3>
+                  <p className="text-sm text-white/70">
+                    Detailed examination with zoom and annotations
+                  </p>
+                </div>
+                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <h3 className="mb-2 font-semibold">Data</h3>
+                  <p className="text-sm text-white/70">
+                    Metrics, measurements, and technical specifications
+                  </p>
+                </div>
+                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <h3 className="mb-2 font-semibold">Try It</h3>
+                  <p className="text-sm text-white/70">
+                    Interactive simulations and participatory activities
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-2xl font-semibold">
+                Participation Activities
+              </h2>
+              <div className="space-y-4">
+                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <h3 className="mb-2 font-semibold">Measure Your Jump</h3>
+                  <p className="text-sm text-white/70">
+                    Interactive station where visitors can measure their vertical
+                    jump using force plate technology, seeing real-time data
+                    visualization and comparing to elite benchmarks.
+                  </p>
+                </div>
+                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <h3 className="mb-2 font-semibold">Motion Capture Silhouette</h3>
+                  <p className="text-sm text-white/70">
+                    Visitors can create their own motion capture silhouette,
+                    seeing how movement is transformed into data and compared to
+                    biomechanical patterns.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-2xl font-semibold">
+                Video & Projection Loops
+              </h2>
+              <p className="text-white/80">
+                Large-scale projection displays show historical footage, motion
+                capture visualizations, and future technology demonstrations.
+                These loops run continuously, providing ambient context and
+                deeper understanding of performance evolution.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <Link
+                href="/didactics"
+                className="inline-block rounded-xl border border-white/20 bg-white/10 px-8 py-4 font-semibold transition hover:bg-white/15"
+              >
+                Explore All Didactics →
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+

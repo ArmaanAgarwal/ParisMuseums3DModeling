@@ -1,0 +1,13 @@
+{
+  "_comment": "Manual image overrides. Format: { \"slug\": \"image-url-or-source-url\" }",
+  "_example": {
+    "ancient-sandals": "https://commons.wikimedia.org/wiki/File:Ancient_sandals.jpg"
+  }
+}
+
+
+
+
+
+
+

@@ -1,0 +1,156 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+interface TourStepProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
+
+export function TourStepC({ onNext }: TourStepProps) {
+  return (
+    <div className="min-h-[calc(100vh-200px)] flex items-center justify-center py-20">
+      <div className="mx-auto max-w-4xl px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="mb-6 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/70">
+              Step C: Architecture DNA
+            </div>
+            <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-7xl">
+              If This Museum Were Built
+            </h1>
+            <p className="text-xl text-white/70">
+              The architectural concept and why each element matters
+            </p>
+          </div>
+
+          <div className="space-y-8 text-lg leading-relaxed text-white/80">
+            <div className="rounded-xl border border-white/15 bg-white/5 p-8">
+              <h2 className="mb-4 text-2xl font-semibold text-white">
+                Three Architectural Traditions
+              </h2>
+              <p className="mb-6">
+                If the Performance Museum were built as a physical structure,
+                it would synthesize three distinct architectural approaches,
+                each contributing essential meaning to the visitor experience.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-8">
+              <h3 className="mb-4 text-xl font-semibold text-amber-300">
+                Louvre Logic: The Central Axis
+              </h3>
+              <p className="mb-4">
+                The museum's primary circulation follows a strong central axis,
+                creating clear orientation and a sense of procession. This axis
+                connects the arrival sequence through the building, providing
+                wayfinding and establishing calm, ordered geometry.
+              </p>
+              <p className="mb-4">
+                <strong>Why this matters:</strong> The central axis reflects the
+                museum's narrative structure—a clear progression from origins
+                through data to futures. Just as the Louvre's axis creates
+                discipline and clarity, our axis creates a coherent journey
+                through performance history. The axis also represents the
+                "measurement line"—the progression from qualitative to
+                quantitative understanding.
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Formal gardens and reflecting pool establish threshold</li>
+                <li>• Symmetrical layout creates balance and order</li>
+                <li>• Processional quality guides visitor flow</li>
+                <li>• Clear wayfinding supports the narrative journey</li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-8">
+              <h3 className="mb-4 text-xl font-semibold text-cyan-300">
+                Pompidou Energy: Exposed Systems
+              </h3>
+              <p className="mb-4">
+                One facade reveals the building's technical infrastructure:
+                exposed structure, color-coded systems, and visible circulation.
+                This transparency reflects the museum's theme of making the
+                invisible visible—showing how performance technology works.
+              </p>
+              <p className="mb-4">
+                <strong>Why this matters:</strong> The exposed systems metaphor
+                directly connects to Level 2's mission: revealing how sensors,
+                data, and measurement work. Just as the Pompidou makes
+                infrastructure visible, our museum makes performance technology
+                transparent. The color-coded systems (pipes, frames, circulation)
+                mirror how we categorize and understand performance data.
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Exposed structure shows how things work</li>
+                <li>• Color-coded systems organize complexity</li>
+                <li>• Transparent, industrial-modern aesthetic</li>
+                <li>• Visible circulation reflects data flow</li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-orange-500/30 bg-orange-500/10 p-8">
+              <h3 className="mb-4 text-xl font-semibold text-orange-300">
+                Brick Archive Wing: Grounded Warmth
+              </h3>
+              <p className="mb-4">
+                A distinct brick-clad wing houses archival materials and
+                historical collections. This grounded, tactile space provides
+                contrast to the technical facade, creating a warm, bookish
+                interior that connects to the museum's historical foundations.
+              </p>
+              <p className="mb-4">
+                <strong>Why this matters:</strong> The brick archive wing
+                represents Level 1's historical foundation—grounded, tactile,
+                connected to the past. While the Pompidou facade shows the
+                future of technology, the brick wing shows the continuity of
+                human achievement. The warmth and materiality create an intimate
+                space for contemplation, just as Level 1 invites reflection on
+                ancient principles that remain relevant.
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Brick construction for warmth and texture</li>
+                <li>• Clearly connected to main building (not floating)</li>
+                <li>• Interior glow creates intimate reading spaces</li>
+                <li>• Grounded materiality reflects historical foundation</li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-white/15 bg-white/5 p-8">
+              <h3 className="mb-4 text-xl font-semibold text-white">
+                How Architecture Supports the Narrative
+              </h3>
+              <p className="mb-4">
+                The three-level vertical journey mirrors the three-act narrative:
+                Level 1 (grounded, historical) connects to the brick archive
+                wing. Level 2 (technical, analytical) connects to the exposed
+                Pompidou facade. Level 3 (future, experimental) extends upward
+                into the sky gallery. The central axis provides the thread that
+                connects all three, just as measurement connects all three eras
+                of performance.
+              </p>
+              <p>
+                Light is used strategically: calm daylight on Level 1 for
+                contemplation, dramatic spotlights on Level 2 for technical
+                displays, immersive projection on Level 3 for future experiences.
+                Circulation supports the story: visitors ascend through time,
+                from ancient foundations to future possibilities.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+

@@ -1,0 +1,179 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { TourProgressWidget } from "@/components/TourProgressWidget";
+
+export default function ArchitecturePage() {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <TourProgressWidget currentStep="architecture" />
+
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="mb-8 text-center">
+            <div className="mb-4 text-sm font-medium uppercase tracking-wider text-white/60">
+              The Building
+            </div>
+            <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-7xl">
+              Architectural DNA
+            </h1>
+          </div>
+
+          <div className="mx-auto max-w-4xl space-y-12 text-lg leading-relaxed text-white/80">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className="mb-4 text-2xl font-semibold text-white">
+                Three Architectural Traditions
+              </h2>
+              <p className="mb-6">
+                The Performance Museum synthesizes three distinct architectural
+                approaches, each contributing to the visitor experience:
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="rounded-xl border border-white/15 bg-white/5 p-8"
+            >
+              <h3 className="mb-4 text-xl font-semibold text-amber-400">
+                Louvre Logic: The Central Axis
+              </h3>
+              <p className="mb-4">
+                The museum's primary circulation follows a strong central axis,
+                creating clear orientation and a sense of procession. This axis
+                connects the arrival sequence through the building, providing
+                wayfinding and establishing a calm, ordered geometry.
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Central axis for clear orientation</li>
+                <li>• Symmetrical layout creates balance</li>
+                <li>• Processional quality guides visitor flow</li>
+                <li>• Formal gardens and reflecting pool establish threshold</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="rounded-xl border border-white/15 bg-white/5 p-8"
+            >
+              <h3 className="mb-4 text-xl font-semibold text-cyan-400">
+                Pompidou Energy: Exposed Systems
+              </h3>
+              <p className="mb-4">
+                One facade reveals the building's technical infrastructure:
+                exposed structure, color-coded systems, and visible circulation.
+                This transparency reflects the museum's theme of making the
+                invisible visible—showing how performance technology works.
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Exposed structure and systems</li>
+                <li>• Color-coded pipes and frames</li>
+                <li>• Transparent, industrial-modern aesthetic</li>
+                <li>• Visible circulation and mechanical systems</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="rounded-xl border border-white/15 bg-white/5 p-8"
+            >
+              <h3 className="mb-4 text-xl font-semibold text-orange-400">
+                Brick Archive Wing: Grounded Warmth
+              </h3>
+              <p className="mb-4">
+                A distinct brick-clad wing houses archival materials and
+                historical collections. This grounded, tactile space provides
+                contrast to the technical facade, creating a warm, bookish
+                interior that connects to the museum's historical foundations.
+              </p>
+              <ul className="space-y-2 text-white/70">
+                <li>• Brick construction for warmth and texture</li>
+                <li>• Clearly connected to main building (not floating)</li>
+                <li>• Interior glow creates intimate reading spaces</li>
+                <li>• Grounded, tactile materiality</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+              className="rounded-xl border border-white/15 bg-white/5 p-8"
+            >
+              <h3 className="mb-4 text-xl font-semibold text-white">
+                Massing Strategy
+              </h3>
+              <p className="mb-4">
+                The building's form responds to its program: three distinct
+                levels, each with its own identity and material language. The
+                structure is organized vertically, with each level building on
+                the narrative of the one below.
+              </p>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div>
+                  <div className="mb-2 text-sm font-medium text-amber-400">
+                    Level 1
+                  </div>
+                  <div className="text-sm text-white/70">
+                    Warm materials, historical artifacts, grounded display
+                  </div>
+                </div>
+                <div>
+                  <div className="mb-2 text-sm font-medium text-cyan-400">
+                    Level 2
+                  </div>
+                  <div className="text-sm text-white/70">
+                    Cool tones, technical displays, interactive systems
+                  </div>
+                </div>
+                <div>
+                  <div className="mb-2 text-sm font-medium text-violet-400">
+                    Level 3
+                  </div>
+                  <div className="text-sm text-white/70">
+                    Immersive environments, future technologies, experimental
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="mt-12 text-center"
+          >
+            <Link
+              href="/tour/level-1"
+              className="inline-block rounded-xl border border-white/20 bg-white/10 px-12 py-6 text-xl font-semibold transition hover:border-white/30 hover:bg-white/15"
+            >
+              Enter Level 1: Origins & Icons →
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+

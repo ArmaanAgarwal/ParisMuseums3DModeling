@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-12-04T20:55:03.751Z",
+  "total": 4,
+  "success": 1,
+  "failed": 2,
+  "suspicious": 0,
+  "entries": [
+    {
+      "slug": "iaaf-records-book-2012",
+      "title": "IAAF World Records Book, 2012 Edition",
+      "dateLabel": "2012",
+      "success": false,
+      "reason": "No valid candidate found"
+    },
+    {
+      "slug": "sumo-ukiyo-e",
+      "title": "Ukiyo-e Print: Sumo Wrestlers Training, 1850s",
+      "dateLabel": "c. 1850",
+      "success": true,
+      "chosenSource": "The Met Museum",
+      "institution": "The Metropolitan Museum of Art",
+      "score": 90,
+      "license": "Public Domain",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/37189",
+      "thumbnailUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP148842.jpg"
+    },
+    {
+      "slug": "kenyan-running-photo",
+      "title": "Photograph: Kipchoge Keino Training, 1968",
+      "dateLabel": "1968",
+      "success": false,
+      "reason": "No valid candidate found"
+    },
+    {
+      "slug": "ai-coaching-system",
+      "title": "AI Performance Coach System (Speculative Prototype), 2024",
+      "dateLabel": "2024",
+      "success": false,
+      "reason": "Speculative/future object - using placeholder"
+    }
+  ]
+}

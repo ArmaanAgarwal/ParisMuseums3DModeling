@@ -1,0 +1,119 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { getAllObjects, type MuseumObject } from "@/lib/museumData";
+
+export default function ObjectsPage() {
+  const objects = getAllObjects();
+
+  return (
+    <div className="min-h-screen bg-black">
+      {/* Hero */}
+      <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950 py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-auto max-w-4xl"
+          >
+            <h1 className="mb-4 text-4xl font-semibold md:text-5xl">
+              Museum Objects
+            </h1>
+            <p className="text-lg text-white/70">
+              Explore 10 detailed objects that anchor the museum's collection,
+              each with full metadata, display information, and didactic
+              materials.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Objects Grid */}
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="mb-8 flex items-center justify-between">
+            <div className="text-white/60">
+              {objects.length} objects across 3 levels
+            </div>
+            <div className="flex gap-2">
+              <button className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm hover:bg-white/10">
+                Filter by Level
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {objects.map((obj, i) => (
+              <ObjectCard key={obj.id} object={obj} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function ObjectCard({ object, index }: { object: MuseumObject; index: number }) {
+  const levelLabels: Record<string, string> = {
+    l1: "Level 1",
+    l2: "Level 2",
+    l3: "Level 3",
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05 }}
+    >
+      <Link
+        href={`/objects/${object.slug}`}
+        className="group block h-full rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:border-white/30 hover:bg-white/10"
+      >
+        {/* Image placeholder */}
+        <div className="relative mb-4 aspect-video overflow-hidden rounded-xl bg-white/5">
+          <div className="absolute inset-0 flex items-center justify-center text-white/30">
+            <div className="text-center">
+              <div className="text-4xl">📷</div>
+              <div className="mt-2 text-xs">Image placeholder</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="mb-2 flex items-center gap-2">
+          <span className="rounded-full border border-white/15 bg-white/5 px-2 py-1 text-xs text-white/70">
+            {levelLabels[object.level]}
+          </span>
+          <span className="rounded-full border border-white/15 bg-white/5 px-2 py-1 text-xs text-white/70">
+            {object.year}
+          </span>
+        </div>
+
+        <h3 className="mb-2 text-lg font-semibold group-hover:text-white/90">
+          {object.title}
+        </h3>
+        <p className="mb-4 text-sm text-white/70">{object.subtitle}</p>
+
+        <div className="flex flex-wrap gap-2">
+          {object.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/60"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-4 flex items-center gap-2 text-sm text-white/50 group-hover:text-white/70">
+          View details →
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
