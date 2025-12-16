@@ -1,7 +1,8 @@
 // Unified Museum Data Model - Single Source of Truth
 // This file consolidates all museum data into a hierarchical structure
 
-import { Level, Zone, Exhibit, MuseumObject, LevelId } from "./types";
+import { Level, Exhibit, MuseumObject, LevelId } from "./types";
+import type { Zone } from "./zones";
 import { LEVELS, getLevel as getLevelFromLevels } from "./levels";
 import { ZONES } from "./zones";
 import { EXHIBITS } from "./exhibits";
@@ -29,9 +30,9 @@ export function getObjectsByExhibit(exhibitId: string): MuseumObject[] {
 export function getObjectsByLevel(levelId: string): MuseumObject[] {
   const zones = getZonesByLevel(levelId);
   const zoneIds = zones.map((z) => z.id);
-  const exhibits = EXHIBITS.filter((e) => zoneIds.includes(e.zoneId));
+  const exhibits = EXHIBITS.filter((e) => e.zoneId && zoneIds.includes(e.zoneId));
   const exhibitIds = exhibits.map((e) => e.id);
-  return OBJECTS.filter((obj) => exhibitIds.includes(obj.exhibitId));
+  return OBJECTS.filter((obj) => obj.exhibitId && exhibitIds.includes(obj.exhibitId));
 }
 
 export function getFeaturedObjects(count: number = 10): MuseumObject[] {

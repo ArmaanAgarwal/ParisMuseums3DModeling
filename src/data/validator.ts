@@ -4,6 +4,7 @@ import { EXHIBITS } from "./exhibits";
 import { ZONES } from "./zones";
 import { LEVELS } from "./levels";
 import { PATHWAYS } from "./paths";
+import type { LevelId } from "./types";
 import { getExhibitHref, getZoneHref, getObjectHref, validateRouteExists } from "@/lib/routes";
 
 export function validateDataIntegrity() {
@@ -16,25 +17,29 @@ export function validateDataIntegrity() {
     errors.push(`Duplicate object slugs found: ${duplicateSlugs.join(", ")}`);
   }
 
-  // Check all objects have valid exhibit references
+  // Check all objects have valid exhibit references (if exhibitId is present)
   OBJECTS.forEach((obj) => {
-    const exhibit = EXHIBITS.find((e) => e.id === obj.exhibitId);
-    if (!exhibit) {
-      errors.push(`Object "${obj.id}" references non-existent exhibit "${obj.exhibitId}"`);
+    if (obj.exhibitId) {
+      const exhibit = EXHIBITS.find((e) => e.id === obj.exhibitId);
+      if (!exhibit) {
+        errors.push(`Object "${obj.id}" references non-existent exhibit "${obj.exhibitId}"`);
+      }
     }
   });
 
-  // Check all exhibits have valid zone references
+  // Check all exhibits have valid zone references (if zoneId is present)
   EXHIBITS.forEach((exhibit) => {
-    const zone = ZONES.find((z) => z.id === exhibit.zoneId);
-    if (!zone) {
-      errors.push(`Exhibit "${exhibit.id}" references non-existent zone "${exhibit.zoneId}"`);
+    if (exhibit.zoneId) {
+      const zone = ZONES.find((z) => z.id === exhibit.zoneId);
+      if (!zone) {
+        errors.push(`Exhibit "${exhibit.id}" references non-existent zone "${exhibit.zoneId}"`);
+      }
     }
   });
 
   // Check all zones have valid level references
   ZONES.forEach((zone) => {
-    const level = LEVELS.find((l) => l.id === zone.levelId);
+    const level = LEVELS.find((l) => l.id === (zone.levelId as LevelId));
     if (!level) {
       errors.push(`Zone "${zone.id}" references non-existent level "${zone.levelId}"`);
     }
@@ -52,7 +57,7 @@ export function validateDataIntegrity() {
 
   // Check exhibit object references
   EXHIBITS.forEach((exhibit) => {
-    exhibit.objectIds.forEach((objectId) => {
+    exhibit.stopIds.forEach((objectId) => {
       const object = OBJECTS.find((o) => o.id === objectId);
       if (!object) {
         errors.push(`Exhibit "${exhibit.id}" references non-existent object "${objectId}"`);

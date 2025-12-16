@@ -25,7 +25,7 @@ export function TourShell({
   children,
 }: TourShellProps) {
   const [showTourMap, setShowTourMap] = useState(false);
-  const { t } = useTranslation();
+  const { t, tSafe } = useTranslation();
 
   const progress = ((currentStep + 1) / tourConfig.stops.length) * 100;
   const currentStop = tourConfig.stops[currentStep];
@@ -48,24 +48,24 @@ export function TourShell({
               onClick={onBack}
               className="text-sm text-white/60 hover:text-white transition"
             >
-              {t("ui.common.backToSelection")}
+              {tSafe("ui.common.backToSelection", "Back to selection")}
             </button>
             <div className="flex items-center gap-4">
               {galleryTitle && (
                 <div className="text-sm text-white/60">
-                  {galleryTitle} • {t("ui.tourUI.stepLabel", { current: currentStep + 1, total: tourConfig.stops.length })}
+                  {galleryTitle} • {tSafe("ui.tourUI.stepLabel", `Step ${currentStep + 1} of ${tourConfig.stops.length}`, { current: currentStep + 1, total: tourConfig.stops.length })}
                 </div>
               )}
               {!galleryTitle && (
                 <div className="text-sm text-white/60">
-                  {t("ui.tourUI.stepLabel", { current: currentStep + 1, total: tourConfig.stops.length })}
+                  {tSafe("ui.tourUI.stepLabel", `Step ${currentStep + 1} of ${tourConfig.stops.length}`, { current: currentStep + 1, total: tourConfig.stops.length })}
                 </div>
               )}
               <button
                 onClick={() => setShowTourMap(true)}
                 className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
               >
-                {t("ui.common.tourMap")}
+                {tSafe("ui.common.tourMap", "Tour Map")}
               </button>
             </div>
           </div>
@@ -104,7 +104,7 @@ export function TourShell({
               disabled={currentStep === 0}
               className="rounded-xl border border-white/20 bg-white/5 px-6 py-3 font-medium text-white transition disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10"
             >
-              {t("ui.buttons.previous")}
+              {tSafe("ui.buttons.previous", "Previous")}
             </button>
             
             <div className="flex items-center gap-4">
@@ -128,7 +128,7 @@ export function TourShell({
                 value=""
                 className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm text-white focus:border-cyan-500/50 focus:outline-none"
               >
-                <option value="">Jump to Gallery</option>
+                <option value="">{tSafe("tour.jumpToGallery", "Jump to Gallery")}</option>
                 {GALLERIES.map((g) => (
                   <option key={g.id} value={g.id}>
                     {g.title}
@@ -150,7 +150,7 @@ export function TourShell({
               }}
               className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-6 py-3 font-medium text-white transition hover:bg-cyan-500/30"
             >
-              {currentStep >= tourConfig.stops.length - 1 ? t("ui.buttons.finish") : t("ui.buttons.next")}
+              {currentStep >= tourConfig.stops.length - 1 ? tSafe("ui.buttons.finish", "Finish") : tSafe("ui.buttons.next", "Next")}
             </button>
           </div>
         </div>
@@ -174,7 +174,7 @@ export function TourShell({
               className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/15 bg-black p-8"
             >
               <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-2xl font-bold">{t("ui.common.tourMap")}</h2>
+                <h2 className="text-2xl font-bold">{tSafe("ui.common.tourMap", "Tour Map")}</h2>
                 <button
                   onClick={() => setShowTourMap(false)}
                   className="rounded-lg border border-white/15 bg-white/5 p-2 text-white/70 hover:bg-white/10"
@@ -212,14 +212,14 @@ export function TourShell({
                         </div>
                         <div className="flex-1">
                           <div className="mb-1 text-xs font-medium text-white/60">
-                            {stop.type === "context" ? "Context Stop" : "Object"}
+                            {stop.type === "context" ? tSafe("tour.contextStop", "Context Stop") : tSafe("common.object", "Object")}
                           </div>
                           <div className="font-semibold text-white">
                             {stop.type === "context" ? stop.title : object?.title || stop.title}
                           </div>
                         </div>
                         {isCurrent && (
-                          <div className="text-xs text-cyan-400">{t("ui.common.current")}</div>
+                          <div className="text-xs text-cyan-400">{tSafe("ui.common.current", "Current")}</div>
                         )}
                       </div>
                     </button>

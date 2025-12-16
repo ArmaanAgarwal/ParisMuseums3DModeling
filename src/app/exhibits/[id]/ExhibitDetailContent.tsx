@@ -84,3 +84,4 @@ export function ExhibitDetailContent({ exhibit, objects }: ExhibitDetailContentP
   );
 }
 
+

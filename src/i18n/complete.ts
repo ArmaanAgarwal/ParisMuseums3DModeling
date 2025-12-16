@@ -45,11 +45,6 @@ export const completeTranslations = {
         tourMap: "Tour Map",
         current: "Current",
       },
-      tour: {
-        guidedTourHeading: "Guided Tour",
-        selectYourTour: "Select Your Tour",
-        tourAllInnovations: "Tour All Innovations",
-      },
       tourUI: {
         stepLabel: "Step {{current}} of {{total}}",
       },
@@ -169,11 +164,11 @@ export const completeTranslations = {
       "heuer-stopwatch-1960s": {
         title: "Heuer Mechanical Stopwatch",
         subtitle: "Time made visible",
-        wallLabel: "Heuer mechanical stopwatch, c. 1960s. Used by track officials and coaches to standardize timing at meets and training sessions. Made time visible—and turned performance into a number.",
-        curatorNote: "This stopwatch didn't just measure time; it changed who had authority over performance. Before mechanical timing, officials and coaches judged speed by watching. After, the stopwatch became the final word. This shift wasn't neutral—it favored athletes whose performance could be measured in seconds, and it created a new language of splits and intervals that coaches and athletes learned to speak. The stopwatch reveals our culture's obsession with quantification: we trust numbers more than eyes.",
-        whySignificant: "The stopwatch represents a cultural shift toward quantification and standardization in sport. It emerged during a period when sport was becoming more professionalized, televised, and competitive. The tool didn't just measure performance—it changed how we understand excellence, shifting from subjective judgment to objective measurement. This change had profound implications: it made performance comparable across time and place, but it also narrowed what 'counted' as achievement to what could be measured in seconds. The stopwatch became a symbol of modernity and precision, reflecting broader cultural values about objectivity, fairness, and progress.",
-        signatureMoment: "Imagine a 1960s track meet: the starter's pistol fires, and as runners sprint down the straightaway, an official stands at the finish line with a Heuer stopwatch in hand. When the first runner crosses, the official clicks the button, and a number appears—a time that will be recorded, compared, and remembered. This moment represents a fundamental shift: performance is no longer just 'fast' or 'slow' as judged by human eyes, but a precise number that can be compared across athletes, venues, and eras. The stopwatch transformed sport from subjective experience to objective data.",
-        whyItMatters: "The stopwatch transformed sport by making time comparable across venues, eras, and athletes. Before mechanical timing, records were inconsistent—a 'fast' time in one place might not mean the same thing elsewhere. The stopwatch solved this by creating a universal standard. Once timing became mechanical, athletes began training to specific splits rather than just 'feeling fast.' Coaches could compare performances across sessions. Competition became standardized, with times serving as objective records that could be verified and compared. By the 1970s, split times had become the language of track and field training. The stopwatch didn't just measure performance—it changed what performance meant, shifting authority from human judgment to mechanical precision.",
+        wallLabel: "Heuer mechanical stopwatch, c. 1960s. Used by track officials and coaches to standardize timing at meets and training sessions. Made time visible, and turned performance into a number.",
+        curatorNote: "This stopwatch didn't just measure time; it changed who had authority over performance. Before mechanical timing, officials and coaches judged speed by watching. After, the stopwatch became the final word. This shift wasn't neutral, and it favored athletes whose performance could be measured in seconds, and it created a new language of splits and intervals that coaches and athletes learned to speak. The stopwatch reveals our culture's obsession with quantification: we trust numbers more than eyes.",
+        whySignificant: "The stopwatch represents a cultural shift toward quantification and standardization in sport. It emerged during a period when sport was becoming more professionalized, televised, and competitive. The tool didn't just measure performance, it changed how we understand excellence, shifting from subjective judgment to objective measurement. This change had profound implications: it made performance comparable across time and place, but it also narrowed what 'counted' as achievement to what could be measured in seconds. The stopwatch became a symbol of modernity and precision, reflecting broader cultural values about objectivity, fairness, and progress.",
+        signatureMoment: "Imagine a 1960s track meet: the starter's pistol fires, and as runners sprint down the straightaway, an official stands at the finish line with a Heuer stopwatch in hand. When the first runner crosses, the official clicks the button, and a number appears, a time that will be recorded, compared, and remembered. This moment represents a fundamental shift: performance is no longer just 'fast' or 'slow' as judged by human eyes, but a precise number that can be compared across athletes, venues, and eras. The stopwatch transformed sport from subjective experience to objective data.",
+        whyItMatters: "The stopwatch transformed sport by making time comparable across venues, eras, and athletes. Before mechanical timing, records were inconsistent, and a 'fast' time in one place might not mean the same thing elsewhere. The stopwatch solved this by creating a universal standard. Once timing became mechanical, athletes began training to specific splits rather than just 'feeling fast.' Coaches could compare performances across sessions. Competition became standardized, with times serving as objective records that could be verified and compared. By the 1970s, split times had become the language of track and field training. The stopwatch didn't just measure performance, it changed what performance meant, shifting authority from human judgment to mechanical precision.",
         howItWorksParagraph: "The stopwatch uses a mechanical movement with carefully calibrated gears to measure elapsed time. When started, a spring unwinds at a constant rate, driving gears that move the hands. The precision comes from the gear ratios, which divide time into consistent intervals. This mechanical consistency replaced the variability of human timing, providing a reliable standard for measuring performance.",
         tradeoffs: [
           "Fairness: Mechanical precision made timing more objective, but early stopwatches were expensive, creating access barriers for less-funded programs",
@@ -183,10 +178,34 @@ export const completeTranslations = {
           "Standardization: While making competition more comparable, standardization also made it more uniform, potentially limiting individual expression"
         ],
         reflectionFeedback: {
-          accuracy: "You prioritize precision and objectivity. The stopwatch represents a shift toward mechanical authority—where numbers replace human judgment. This makes competition more fair and comparable, but it also raises questions: what forms of excellence can't be measured in seconds? When we trust the stopwatch completely, we might miss the athlete's form, strategy, or the context of their performance. The stopwatch gives us accuracy, but accuracy isn't the same thing as understanding.",
-          context: "You recognize that timing doesn't exist in a vacuum. The stopwatch's meaning changed depending on where and when it was used—at elite competitions versus local meets, in the 1960s versus today. Early stopwatches were expensive, creating access barriers. The same tool that made competition fairer also made it more exclusive. Context matters: who could afford the stopwatch? Who had access to coaches who understood split times? The stopwatch standardized timing, but it didn't standardize access.",
-          fairness: "You value fairness above all. The stopwatch made timing objective, but objectivity doesn't guarantee equity. Early stopwatches were expensive, creating barriers for less-funded programs. The same tool that made competition fairer also made it more exclusive. Fairness requires more than mechanical precision—it requires equal access to tools, training, and opportunity. The stopwatch standardized timing, but it didn't standardize access or opportunity."
+          accuracy: "You prioritize precision and objectivity. The stopwatch represents a shift toward mechanical authority, where numbers replace human judgment. This makes competition more fair and comparable, but it also raises questions: what forms of excellence can't be measured in seconds? When we trust the stopwatch completely, we might miss the athlete's form, strategy, or the context of their performance. The stopwatch gives us accuracy, but accuracy isn't the same thing as understanding.",
+          context: "You recognize that timing doesn't exist in a vacuum. The stopwatch's meaning changed depending on where and when it was used, at elite competitions versus local meets, in the 1960s versus today. Early stopwatches were expensive, creating access barriers. The same tool that made competition fairer also made it more exclusive. Context matters: who could afford the stopwatch? Who had access to coaches who understood split times? The stopwatch standardized timing, but it didn't standardize access.",
+          fairness: "You value fairness above all. The stopwatch made timing objective, but objectivity doesn't guarantee equity. Early stopwatches were expensive, creating barriers for less-funded programs. The same tool that made competition fairer also made it more exclusive. Fairness requires more than mechanical precision. It requires equal access to tools, training, and opportunity. The stopwatch standardized timing, but it didn't standardize access or opportunity."
         }
+      },
+      "leather-medicine-ball-early": {
+        title: "Stitched Leather Medicine Ball",
+        subtitle: "Repetition and discipline",
+        wallLabel: "A stitched leather medicine ball from early physical training culture. It made strength work portable, shared, and simple enough to teach at scale.",
+        curatorNote: "This object sits between old-fashioned 'keep fit' culture and modern strength and conditioning. It is not precise like a sensor, but it is a system, a shared tool that makes training repeatable.",
+        whySignificant: "Once strength training became portable, it could spread. The medicine ball helped move performance work from private expertise into public practice, which is a step toward today's standardized training programs.",
+        signatureMoment: "In a crowded gym class, the ball moves from hand to hand like a lesson plan. The drill is simple, throw, catch, brace, reset, but it quietly changes what training is. Strength becomes a routine you can teach to a group, not a secret technique reserved for specialists.",
+        whyItMatters: "Once strength training became portable, it could spread. The medicine ball helped move performance work from private expertise into public practice, which is a step toward today's standardized training programs.",
+        specificUseCases: [
+          "Trainers used medicine balls for partner throws and catches to build coordination and safe, repeatable power.",
+          "Schools used them to teach general strength when students had no access to barbells or formal gyms.",
+          "Military programs adopted them for conditioning because they were durable, portable, and easy to standardize.",
+          "Community centers used medicine balls to bring strength work into public recreation, not just elite clubs.",
+          "Athletes used them at home because the tool traveled, and the exercises did not require machines."
+        ],
+        howItWorksParagraph: "The medicine ball works by providing weighted resistance for dynamic exercises. Unlike fixed machines, it enables partner work, throwing, and full-body movements. The ball's weight creates resistance that builds strength through functional movements. Its portability means it can be used in any space, making strength training accessible without specialized facilities.",
+        tradeoffs: [
+          "Accessibility: Simple design made training accessible, but limited exercise variety compared to specialized machines",
+          "Effectiveness: Portable and affordable, but may not provide the same targeted resistance as modern equipment",
+          "Safety: Simple design reduces injury risk from complex machines, but improper use can still cause strain",
+          "Progression: Variable weights allow progression, but may be limited compared to adjustable resistance machines",
+          "Democratization: Made strength training accessible, but simple tools might not meet elite training needs"
+        ]
       },
       // Add other 11 objects here with same structure
     },
@@ -229,10 +248,16 @@ export const completeTranslations = {
       howItWorks: "How it works",
       tradeoffs: "Tradeoffs",
       whereYoudSeeIt: "Where You'd See It",
+      object: "Object",
+      questionToCarryForward: "Question to Carry Forward",
+      lookForThisNext: "Look for This Next",
+      changeAnswer: "Change My Answer",
+      yourPerspective: "Your Perspective",
     },
     
     // Tour content
     tour: {
+      jumpToGallery: "Jump to Gallery",
       contextStop: "Context Stop",
       whatToNoticeNext: "What to Notice Next",
       whatToNoticeNextDesc: "As you explore the objects in this gallery, notice how they address the problem and tradeoffs we've discussed.",
@@ -291,59 +316,6 @@ export const completeTranslations = {
           },
           meta: {
             duration: "12-15 min",
-            stops: "6 stops",
-          },
-        },
-      },
-      galleryCards: {
-        allInnovations: {
-          title: "Tour All Innovations",
-          description: "Experience the complete museum journey across all three galleries.",
-          meta: {
-            complete: "Complete",
-            duration: "20–25 min",
-            stops: "10 stops",
-          },
-        },
-        origins: {
-          title: "Origins & Icons",
-          description: "Foundational moments when performance became public, standardized, and measurable.",
-          tags: {
-            standardization: "Standardization",
-            spectacle: "Spectacle",
-            earlyMeasurement: "Early measurement",
-            trainingCulture: "Training culture",
-          },
-          meta: {
-            duration: "12–15 min",
-            stops: "6 stops",
-          },
-        },
-        dataMotionBody: {
-          title: "Data, Motion & Body",
-          description: "When performance becomes a dataset—sensors, models, biomechanics, and feedback loops.",
-          tags: {
-            wearables: "Wearables",
-            biomechanics: "Biomechanics",
-            quantification: "Quantification",
-            feedbackSystems: "Feedback systems",
-          },
-          meta: {
-            duration: "12–15 min",
-            stops: "6 stops",
-          },
-        },
-        recoveryEthicsFuture: {
-          title: "Recovery, Ethics & Future",
-          description: "Optimization, recovery tech, and the ethical line between advantage and unfairness.",
-          tags: {
-            recoveryTech: "Recovery tech",
-            enhancementDebates: "Enhancement debates",
-            fairness: "Fairness",
-            futurePrediction: "Future prediction",
-          },
-          meta: {
-            duration: "12–15 min",
             stops: "6 stops",
           },
         },
@@ -661,6 +633,11 @@ export const completeTranslations = {
       howItWorks: "Comment cela fonctionne",
       tradeoffs: "Limites et compromis",
       whereYoudSeeIt: "Où vous le verriez",
+      object: "Objet",
+      questionToCarryForward: "Question à emporter",
+      lookForThisNext: "À surveiller ensuite",
+      changeAnswer: "Changer ma réponse",
+      yourPerspective: "Votre perspective",
     },
     
     objects: {
@@ -685,9 +662,19 @@ export const completeTranslations = {
           context: "Vous reconnaissez que le chronométrage n'existe pas dans le vide. La signification du chronomètre changeait selon l'endroit et le moment où il était utilisé—aux compétitions d'élite versus les compétitions locales, dans les années 1960 versus aujourd'hui. Les premiers chronomètres étaient chers, créant des barrières d'accès. Le même outil qui rendait la compétition plus équitable la rendait aussi plus exclusive. Le contexte compte : qui pouvait se permettre le chronomètre ? Qui avait accès aux entraîneurs qui comprenaient les fractions de temps ? Le chronomètre a standardisé le chronométrage, mais il n'a pas standardisé l'accès.",
           fairness: "Vous valorisez l'équité avant tout. Le chronomètre a rendu le chronométrage objectif, mais l'objectivité ne garantit pas l'équité. Les premiers chronomètres étaient chers, créant des barrières pour les programmes moins financés. Le même outil qui rendait la compétition plus équitable la rendait aussi plus exclusive. L'équité nécessite plus que la précision mécanique—elle nécessite un accès égal aux outils, à l'entraînement et aux opportunités. Le chronomètre a standardisé le chronométrage, mais il n'a pas standardisé l'accès ou les opportunités."
         }
+      },
+      "leather-medicine-ball-early": {
+        title: "Médecine-ball en cuir cousu",
+        subtitle: "Répétition et discipline",
+        wallLabel: "Un médecine-ball en cuir cousu issu de la culture des débuts de l'entraînement physique. Il a rendu le travail de force portable, collectif, et assez simple pour être enseigné à grande échelle.",
+        curatorNote: "Cet objet se situe entre la culture 'garder la forme' d'antan et la musculation moderne. Il n'est pas précis comme un capteur, mais c'est un système, un outil partagé qui rend l'entraînement reproductible.",
+        whySignificant: "Une fois que l'entraînement musculaire est devenu portable, il pouvait se répandre. Le médecine-ball a aidé à faire passer le travail de performance de l'expertise privée à la pratique publique, ce qui est un pas vers les programmes d'entraînement standardisés d'aujourd'hui.",
+        signatureMoment: "Dans une salle de sport bondée, le ballon passe de main en main comme un plan de cours. L'exercice est simple, lancer, attraper, stabiliser, recommencer, mais il change silencieusement ce qu'est l'entraînement. La force devient une routine que vous pouvez enseigner à un groupe, pas une technique secrète réservée aux spécialistes.",
+        whyItMatters: "Une fois que l'entraînement musculaire est devenu portable, il pouvait se répandre. Le médecine-ball a aidé à faire passer le travail de performance de l'expertise privée à la pratique publique, ce qui est un pas vers les programmes d'entraînement standardisés d'aujourd'hui."
       }
     },
     tour: {
+      jumpToGallery: "Aller à la galerie",
       contextStop: "Arrêt contextuel",
       whatToNoticeNext: "Ce qu'il faut remarquer ensuite",
       whatToNoticeNextDesc: "En explorant les objets de cette galerie, remarquez comment ils abordent le problème et les compromis dont nous avons discuté.",
@@ -992,6 +979,7 @@ export const completeTranslations = {
       howItWorks: "Cómo funciona",
       tradeoffs: "Compensaciones",
       whereYoudSeeIt: "Dónde lo verías",
+      object: "Objeto",
     },
     
     objects: {
@@ -1016,9 +1004,19 @@ export const completeTranslations = {
           context: "Reconoces que el cronometraje no existe en el vacío. El significado del cronómetro cambió según dónde y cuándo se usaba—en competiciones de élite versus competiciones locales, en los años 1960 versus hoy. Los primeros cronómetros eran caros, creando barreras de acceso. La misma herramienta que hizo que la competición fuera más justa también la hizo más exclusiva. El contexto importa: ¿quién podía permitirse el cronómetro? ¿Quién tenía acceso a entrenadores que entendían las fracciones de tiempo? El cronómetro estandarizó el cronometraje, pero no estandarizó el acceso.",
           fairness: "Valoras la equidad por encima de todo. El cronómetro hizo que el cronometraje fuera objetivo, pero la objetividad no garantiza la equidad. Los primeros cronómetros eran caros, creando barreras para programas con menos financiación. La misma herramienta que hizo que la competición fuera más justa también la hizo más exclusiva. La equidad requiere más que precisión mecánica—requiere acceso igual a herramientas, entrenamiento y oportunidades. El cronómetro estandarizó el cronometraje, pero no estandarizó el acceso o las oportunidades."
         }
+      },
+      "leather-medicine-ball-early": {
+        title: "Balón medicinal de cuero cosido",
+        subtitle: "Repetición y disciplina",
+        wallLabel: "Un balón medicinal de cuero cosido de la cultura temprana del entrenamiento físico. Volvió el trabajo de fuerza portátil, compartido y lo bastante simple como para enseñarlo a gran escala.",
+        curatorNote: "Este objeto se sitúa entre la cultura 'mantenerse en forma' antigua y el entrenamiento de fuerza moderno. No es preciso como un sensor, pero es un sistema, una herramienta compartida que hace el entrenamiento reproducible.",
+        whySignificant: "Una vez que el entrenamiento de fuerza se volvió portátil, pudo extenderse. El balón medicinal ayudó a mover el trabajo de rendimiento de la experiencia privada a la práctica pública, lo cual es un paso hacia los programas de entrenamiento estandarizados de hoy.",
+        signatureMoment: "En una clase de gimnasio abarrotada, el balón pasa de mano en mano como un plan de clase. El ejercicio es simple, lanzar, atrapar, estabilizar, reiniciar, pero cambia silenciosamente lo que es el entrenamiento. La fuerza se convierte en una rutina que puedes enseñar a un grupo, no una técnica secreta reservada para especialistas.",
+        whyItMatters: "Una vez que el entrenamiento de fuerza se volvió portátil, pudo extenderse. El balón medicinal ayudó a mover el trabajo de rendimiento de la experiencia privada a la práctica pública, lo cual es un paso hacia los programas de entrenamiento estandarizados de hoy."
       }
     },
     tour: {
+      jumpToGallery: "Ir a la galería",
       contextStop: "Parada contextual",
       whatToNoticeNext: "Qué notar a continuación",
       whatToNoticeNextDesc: "Al explorar los objetos en esta galería, note cómo abordan el problema y las compensaciones que hemos discutido.",
@@ -1098,6 +1096,22 @@ export const completeTranslations = {
             }
           }
         }
+      },
+      "leather-medicine-ball-early": {
+        title: "Balón medicinal de cuero cosido",
+        subtitle: "Repetición y disciplina",
+        wallLabel: "Un balón medicinal de cuero cosido de la cultura temprana del entrenamiento físico. Volvió el trabajo de fuerza portátil, compartido y lo bastante simple como para enseñarlo a gran escala.",
+        curatorNote: "Este objeto se sitúa entre la cultura 'mantenerse en forma' antigua y el entrenamiento de fuerza moderno. No es preciso como un sensor, pero es un sistema, una herramienta compartida que hace el entrenamiento reproducible.",
+        whySignificant: "Una vez que el entrenamiento de fuerza se volvió portátil, pudo extenderse. El balón medicinal ayudó a mover el trabajo de rendimiento de la experiencia privada a la práctica pública, lo cual es un paso hacia los programas de entrenamiento estandarizados de hoy.",
+        signatureMoment: "En una clase de gimnasio abarrotada, el balón pasa de mano en mano como un plan de clase. El ejercicio es simple, lanzar, atrapar, estabilizar, reiniciar, pero cambia silenciosamente lo que es el entrenamiento. La fuerza se convierte en una rutina que puedes enseñar a un grupo, no una técnica secreta reservada para especialistas.",
+        whyItMatters: "Una vez que el entrenamiento de fuerza se volvió portátil, pudo extenderse. El balón medicinal ayudó a mover el trabajo de rendimiento de la experiencia privada a la práctica pública, lo cual es un paso hacia los programas de entrenamiento estandarizados de hoy.",
+        specificUseCases: [
+          "Los entrenadores usaban balones medicinales para lanzamientos y recepciones en pareja para desarrollar coordinación y potencia segura y reproducible.",
+          "Las escuelas los usaban para enseñar fuerza general cuando los estudiantes no tenían acceso a barras o gimnasios formales.",
+          "Los programas militares los adoptaron para acondicionamiento porque eran duraderos, portátiles y fáciles de estandarizar.",
+          "Los centros comunitarios usaban balones medicinales para llevar el trabajo de fuerza a la recreación pública, no solo a clubes de élite.",
+          "Los atletas los usaban en casa porque la herramienta era transportable, y los ejercicios no requerían máquinas."
+        ]
       }
     }
   }

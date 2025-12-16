@@ -20,6 +20,7 @@ import { EXHIBITS } from "../src/data/exhibits";
 import { ZONES } from "../src/data/zones";
 import { TOUR_STEPS } from "../src/data/tour";
 import { LEVELS } from "../src/data/levels";
+import type { LevelId } from "../src/data/types";
 
 interface AuditError {
   type: string;
@@ -37,10 +38,10 @@ const exhibitIds = new Set(EXHIBITS.map(ex => ex.id));
 const zoneIds = new Set(ZONES.map(z => z.id));
 const levelIds = new Set(LEVELS.map(l => l.id));
 
-// Check 1: All exhibit objectIds reference existing objects
+// Check 1: All exhibit stopIds reference existing objects
 console.log("Checking exhibit object references...");
 for (const exhibit of EXHIBITS) {
-  for (const objectId of exhibit.objectIds) {
+  for (const objectId of exhibit.stopIds) {
     if (!objectIds.has(objectId)) {
       errors.push({
         type: "MISSING_OBJECT_REFERENCE",
@@ -51,10 +52,10 @@ for (const exhibit of EXHIBITS) {
   }
 }
 
-// Check 2: All zone references in exhibits exist
+// Check 2: All zone references in exhibits exist (if zoneId is present)
 console.log("Checking zone references...");
 for (const exhibit of EXHIBITS) {
-  if (!zoneIds.has(exhibit.zoneId)) {
+  if (exhibit.zoneId && !zoneIds.has(exhibit.zoneId)) {
     errors.push({
       type: "MISSING_ZONE_REFERENCE",
       message: `Exhibit "${exhibit.id}" references non-existent zone "${exhibit.zoneId}"`,
@@ -66,7 +67,7 @@ for (const exhibit of EXHIBITS) {
 // Check 3: All zone levelId references exist
 console.log("Checking level references...");
 for (const zone of ZONES) {
-  if (!levelIds.has(zone.levelId)) {
+  if (!levelIds.has(zone.levelId as LevelId)) {
     errors.push({
       type: "MISSING_LEVEL_REFERENCE",
       message: `Zone "${zone.id}" references non-existent level "${zone.levelId}"`,
@@ -75,10 +76,10 @@ for (const zone of ZONES) {
   }
 }
 
-// Check 4: All objects reference existing exhibits
+// Check 4: All objects reference existing exhibits (if exhibitId is present)
 console.log("Checking object exhibit references...");
 for (const obj of OBJECTS) {
-  if (!exhibitIds.has(obj.exhibitId)) {
+  if (obj.exhibitId && !exhibitIds.has(obj.exhibitId)) {
     errors.push({
       type: "MISSING_EXHIBIT_REFERENCE",
       message: `Object "${obj.slug}" references non-existent exhibit "${obj.exhibitId}"`,
@@ -129,32 +130,22 @@ for (const obj of OBJECTS) {
   seenIds.add(obj.id);
 }
 
-// Check 8: Objects referenced in exhibits actually exist in those exhibits
+// Check 8: Objects referenced in exhibits actually exist
 console.log("Checking exhibit-object consistency...");
 for (const exhibit of EXHIBITS) {
-  const exhibitObjects = OBJECTS.filter(obj => obj.exhibitId === exhibit.id);
-  const exhibitObjectIds = new Set(exhibitObjects.map(obj => obj.id));
-  
-  for (const objectId of exhibit.objectIds) {
-    if (!exhibitObjectIds.has(objectId)) {
+  // Check that all stopIds reference valid objects
+  for (const objectId of exhibit.stopIds) {
+    if (!objectIds.has(objectId)) {
       errors.push({
         type: "EXHIBIT_OBJECT_MISMATCH",
-        message: `Exhibit "${exhibit.id}" lists object "${objectId}" but object belongs to different exhibit`,
+        message: `Exhibit "${exhibit.id}" lists object "${objectId}" that doesn't exist`,
         details: { exhibitId: exhibit.id, objectId }
       });
     }
   }
   
-  // Check if exhibit lists all objects that belong to it
-  for (const obj of exhibitObjects) {
-    if (!exhibit.objectIds.includes(obj.id)) {
-      errors.push({
-        type: "MISSING_OBJECT_IN_EXHIBIT",
-        message: `Object "${obj.slug}" belongs to exhibit "${exhibit.id}" but is not listed in exhibit.objectIds`,
-        details: { exhibitId: exhibit.id, objectSlug: obj.slug, objectId: obj.id }
-      });
-    }
-  }
+  // Note: In the new model, objects belong to galleries, not exhibits
+  // Exhibits reference objects via stopIds, which is already validated above
 }
 
 // Check 9: Image status validation

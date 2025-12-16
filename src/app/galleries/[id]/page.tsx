@@ -19,3 +19,4 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   return <GalleryDetailContent gallery={gallery} objects={objects} />;
 }
 
+

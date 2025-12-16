@@ -42,7 +42,19 @@ export function useTranslation() {
     return translation;
   };
   
-  return { t, language };
+  // Safe translation helper that always falls back to English, never shows keys
+  const tSafe = (key: string, fallback: string, params?: Record<string, string | number>): string => {
+    const translated = t(key, params);
+    // If translation returns the same key or empty, use fallback
+    const keyParts = key.split(".");
+    const lastKeyPart = keyParts[keyParts.length - 1] || "";
+    if (translated === key || translated === lastKeyPart || translated === "..." || !translated) {
+      return fallback;
+    }
+    return translated;
+  };
+  
+  return { t, tSafe, language };
 }
 
 // Helper to get object content in current language

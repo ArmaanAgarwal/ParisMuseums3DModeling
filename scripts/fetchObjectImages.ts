@@ -20,7 +20,7 @@
  * Usage:
  *   npx tsx scripts/fetchObjectImages.ts --only-missing
  *   npx tsx scripts/fetchObjectImages.ts --review
- */messed u 
+ */
 
 import * as fs from "fs";
 import * as path from "path";

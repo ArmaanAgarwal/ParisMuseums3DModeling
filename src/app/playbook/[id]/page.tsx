@@ -10,6 +10,7 @@ import { getAllObjects, getObjectById } from "@/data/client";
 import { getPlaybookScenario, determineOutcome, type PlaybookOutcomeProfile } from "@/data/playbook";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import type { MuseumObject } from "@/data/types";
 
 export default function PlaybookScenarioPage() {
   const params = useParams();
@@ -138,9 +139,9 @@ export default function PlaybookScenarioPage() {
     ...scenario.recommendedObjectIds,
     ...scenario.riskyObjectIds,
     ...scenario.neutralObjectIds
-  ].map(id => getObjectById(id)).filter(Boolean);
+  ].map(id => getObjectById(id)).filter((obj): obj is MuseumObject => obj !== undefined);
 
-  const selectedObjectsData = selectedObjects.map(id => getObjectById(id)).filter(Boolean);
+  const selectedObjectsData = selectedObjects.map(id => getObjectById(id)).filter((obj): obj is MuseumObject => obj !== undefined);
 
   if (showOutcome && outcome) {
     return (
@@ -187,7 +188,7 @@ export default function PlaybookScenarioPage() {
                     return (
                       <div key={key}>
                         <div className="mb-2 flex items-center justify-between text-sm">
-                          <span className="text-white/70 capitalize">{displayLabel}</span>
+                          <span className="text-white/70 capitalize">{metricLabel}</span>
                           <span className={`font-semibold ${value > 0 ? 'text-green-400' : value < 0 ? 'text-red-400' : 'text-white/60'}`}>
                             {value > 0 ? '+' : ''}{value}
                           </span>

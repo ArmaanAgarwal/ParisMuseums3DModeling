@@ -179,3 +179,4 @@ export function ExhibitPlayer({ exhibit, objects, onClose }: ExhibitPlayerProps)
   );
 }
 
+

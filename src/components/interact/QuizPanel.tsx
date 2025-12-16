@@ -179,3 +179,4 @@ export function QuizPanel({ title, questions, className = "" }: QuizPanelProps) 
   );
 }
 
+

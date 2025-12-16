@@ -2,6 +2,9 @@
 
 import type { Exhibit } from "./types";
 
+// Re-export the type for convenience
+export type { Exhibit };
+
 const EXHIBITS_DATA: Exhibit[] = [
   {
     id: "quantified-athlete",

@@ -3,7 +3,7 @@
 import { use } from "react";
 import Link from "next/link";
 import { getPathway } from "@/data/paths";
-import { getObject } from "@/data/objects";
+import { getObject } from "@/data/client";
 import { notFound } from "next/navigation";
 
 interface PathwayPageProps {

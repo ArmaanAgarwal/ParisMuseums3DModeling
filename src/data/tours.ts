@@ -46,8 +46,11 @@ export interface TourConfig {
   stops: TourStop[];
 }
 
+// Legacy function - not used, kept for reference
+// Object stops are created directly in getTourAllConfig and getGalleryTourConfig
 function createTourStop(
   objectId: string,
+  title: string,
   whyItMatters: string,
   reflectionPrompt: string,
   interactionType: "choice" | "slider" = "choice",
@@ -55,7 +58,10 @@ function createTourStop(
   sliderConfig?: TourStop["sliderConfig"]
 ): TourStop {
   return {
+    type: "object",
     objectId,
+    title,
+    content: "", // Not used for object stops, but required by interface
     whyItMatters,
     reflectionPrompt,
     interactionType,
@@ -89,6 +95,7 @@ export function getTourAllConfig(): TourConfig {
       type: "object" as const,
       objectId: obj.id,
       title: obj.title,
+      content: "", // Not used for object stops, but required by interface
     })),
     
     // Data gallery: 1 context + 3 objects
@@ -108,6 +115,7 @@ export function getTourAllConfig(): TourConfig {
       type: "object" as const,
       objectId: obj.id,
       title: obj.title,
+      content: "", // Not used for object stops, but required by interface
     })),
     
     // Recovery gallery: 1 context + 3 objects
@@ -127,6 +135,7 @@ export function getTourAllConfig(): TourConfig {
       type: "object" as const,
       objectId: obj.id,
       title: obj.title,
+      content: "", // Not used for object stops, but required by interface
     })),
   ];
 
@@ -194,6 +203,7 @@ export function getGalleryTourConfig(galleryId: string): TourConfig | null {
     type: "object" as const,
     objectId: obj.id,
     title: obj.title,
+    content: "", // Not used for object stops, but required by interface
   }));
 
   // Structure: context stop, all objects, context stop (if 4+ objects, otherwise just 1 context)

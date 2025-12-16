@@ -112,10 +112,10 @@ function MapContent() {
                           <h4 className="mb-2 font-semibold text-white/90 group-hover:text-white">
                             {exhibit.title}
                           </h4>
-                          <p className="mb-3 text-sm text-white/70">{exhibit.thesis}</p>
+                          <p className="mb-3 text-sm text-white/70">{exhibit.thesis || exhibit.intro}</p>
                           <div className="text-xs text-white/50">
-                            {exhibit.objectIds.length} object
-                            {exhibit.objectIds.length !== 1 ? "s" : ""}
+                            {exhibit.stopIds.length} object
+                            {exhibit.stopIds.length !== 1 ? "s" : ""}
                           </div>
                         </Link>
                       ))}

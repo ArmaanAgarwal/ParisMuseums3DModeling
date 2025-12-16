@@ -348,3 +348,4 @@ export function getAllObjects(): MuseumObject[] {
   return OBJECTS;
 }
 
+

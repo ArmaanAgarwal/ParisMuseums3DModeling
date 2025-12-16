@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { TourProgressWidget } from "@/components/TourProgressWidget";
 import { getZone, getExhibitsByZone, getLevel } from "@/data/museum";
+import type { LevelId } from "@/data/types";
 import { notFound } from "next/navigation";
 
 interface ZonePageProps {
@@ -14,7 +15,7 @@ interface ZonePageProps {
 export default function ZonePage({ params }: ZonePageProps) {
   const { zoneId } = use(params);
   const zone = getZone(zoneId);
-  const level = zone ? getLevel(zone.levelId) : null;
+  const level = zone ? getLevel(zone.levelId as LevelId) : null;
   const exhibits = zone ? getExhibitsByZone(zone.id) : [];
 
   if (!zone || !level) {
@@ -60,7 +61,7 @@ export default function ZonePage({ params }: ZonePageProps) {
             >
               <h2 className="mb-4 text-2xl font-semibold">What to Notice</h2>
               <ul className="space-y-2">
-                {zone.whatToNotice.map((notice, i) => (
+                {zone.whatToNotice.map((notice: string, i: number) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="mt-1 text-amber-400">•</span>
                     <span className="text-white/80">{notice}</span>

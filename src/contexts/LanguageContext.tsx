@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from "react";
 
 export type Language = "en" | "fr" | "es";
 
@@ -24,15 +24,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
     if (typeof window !== "undefined") {
       localStorage.setItem("museumLanguage", lang);
     }
-  };
+  }, []);
+
+  const value = useMemo(() => ({ language, setLanguage }), [language, setLanguage]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
@@ -45,4 +47,5 @@ export function useLanguage() {
   }
   return context;
 }
+
 

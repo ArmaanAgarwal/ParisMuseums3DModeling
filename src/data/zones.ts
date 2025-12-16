@@ -8,6 +8,21 @@ export interface Zone {
   positionOnMap: { x: number; y: number; w: number; h: number };
   zoneIntent: string;
   whatToNotice: string[];
+  // Optional interaction properties (for backward compatibility)
+  interactionType?: "compare" | "timeline" | "try-it";
+  interactionConfig?: {
+    compare?: {
+      optionA: { label: string; description: string; explanation: string };
+      optionB: { label: string; description: string; explanation: string };
+    };
+    timeline?: {
+      events: Array<{ year: number; label: string; description: string }>;
+    };
+    tryIt?: {
+      type: "reaction-time" | "stride-frequency" | "heart-rate-zone" | "force-meter";
+      title: string;
+    };
+  };
 }
 
 export const ZONES: Zone[] = [

@@ -19,3 +19,4 @@ export default async function ExhibitPage({ params }: ExhibitPageProps) {
   return <ExhibitDetailContent exhibit={exhibit} objects={objects} />;
 }
 
+

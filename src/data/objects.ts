@@ -2,6 +2,9 @@
 
 import { MuseumObject } from "./types";
 
+// Re-export the type for convenience
+export type { MuseumObject };
+
 export const OBJECTS: MuseumObject[] = [
   // Gallery 1: Origins & Icons
   {
@@ -14,14 +17,14 @@ export const OBJECTS: MuseumObject[] = [
     yearOrEra: "c. 1960s",
     year: 1960,
     tags: ["Measurement", "Timing", "Competition"],
-    shortLabel: "A hand-held stopwatch made time visible—and turned performance into a number.",
+    shortLabel: "A hand-held stopwatch made time visible, and turned performance into a number.",
     longDescription: "Mechanical stopwatches helped formalize modern sport by standardizing timing. Once time became legible, athletes trained for splits, not just wins. This artifact represents the shift from human judgment to instrumented authority.",
     imagePath: "/objects/heuer-mechanical-stopwatch.jpg",
     imageSearchQuery: "Heuer mechanical stopwatch vintage",
     sourceName: "Heuer (TAG Heuer) product history / museum images",
     debatePrompt: "Should timing be left to human judgment, or does mechanical precision make competition fairer?",
     measurementAngle: "Stopwatches transformed subjective 'fast' into objective seconds and milliseconds. Athletes began training to specific splits, not just 'feeling fast.'",
-    designAngle: "The stopwatch's design prioritized readability and reliability—making time a shared, verifiable fact rather than a personal experience.",
+    designAngle: "The stopwatch's design prioritized readability and reliability, making time a shared, verifiable fact rather than a personal experience.",
     media: {
       imagePath: "/objects/heuer-mechanical-stopwatch.jpg",
       imageAlt: "Vintage Heuer mechanical stopwatch",
@@ -40,14 +43,14 @@ export const OBJECTS: MuseumObject[] = [
     materials: "Metal case, mechanical movement, glass face",
     dimensions: "Approx. 5cm diameter",
     didactics: {
-      wallLabel: "Heuer mechanical stopwatch, c. 1960s. Used by track officials and coaches to standardize timing at meets and training sessions. Made time visible—and turned performance into a number.",
-      curatorNote: "This stopwatch didn't just measure time; it changed who had authority over performance. Before mechanical timing, officials and coaches judged speed by watching. After, the stopwatch became the final word. This shift wasn't neutral—it favored athletes whose performance could be measured in seconds, and it created a new language of splits and intervals that coaches and athletes learned to speak. The stopwatch reveals our culture's obsession with quantification: we trust numbers more than eyes.",
+      wallLabel: "Heuer mechanical stopwatch, c. 1960s. Used by track officials and coaches to standardize timing at meets and training sessions. Made time visible, and turned performance into a number.",
+      curatorNote: "This stopwatch didn't just measure time, it changed who had authority over performance. Before mechanical timing, officials and coaches judged speed by watching. After, the stopwatch became the final word. This shift favored athletes whose performance could be measured in seconds, and it created a new language of splits and intervals that coaches and athletes learned to speak. The stopwatch reveals our culture's obsession with quantification: we trust numbers more than eyes.",
       whereYoudSeeIt: [
-        "Track meets and officiating—timing races and verifying records",
-        "Coaching sessions—measuring split times and pacing strategies",
-        "Training facilities—athletes learning to run to specific intervals",
-        "Broadcast timing—television coverage showing elapsed time on screen",
-        "Record-keeping—official timing for world records and personal bests"
+        "Track meets and officiating, timing races and verifying records",
+        "Coaching sessions, measuring split times and pacing strategies",
+        "Training facilities, where athletes learned to run to specific intervals",
+        "Broadcast timing, with television coverage showing elapsed time on screen",
+        "Record-keeping, providing official timing for world records and personal bests"
       ],
       specificUseCases: [
         "1960s track meets: Officials used handheld stopwatches to verify finishes and record official times for races, replacing subjective visual judgments with mechanical precision.",
@@ -56,9 +59,9 @@ export const OBJECTS: MuseumObject[] = [
         "Record verification: Athletic federations used stopwatch timing to verify world records and personal bests, creating a standardized system for comparing performances across eras and venues.",
         "Training facilities: Athletes learned to interpret split times, transforming their relationship with performance from subjective experience to objective data."
       ],
-      signatureMoment: "Imagine a 1960s track meet: the starter's pistol fires, and as runners sprint down the straightaway, an official stands at the finish line with a Heuer stopwatch in hand. When the first runner crosses, the official clicks the button, and a number appears—a time that will be recorded, compared, and remembered. This moment represents a fundamental shift: performance is no longer just 'fast' or 'slow' as judged by human eyes, but a precise number that can be compared across athletes, venues, and eras. The stopwatch transformed sport from subjective experience to objective data.",
-      whyItMatters: "The stopwatch transformed sport by making time comparable across venues, eras, and athletes. Before mechanical timing, records were inconsistent—a 'fast' time in one place might not mean the same thing elsewhere. The stopwatch solved this by creating a universal standard. Once timing became mechanical, athletes began training to specific splits rather than just 'feeling fast.' Coaches could compare performances across sessions. Competition became standardized, with times serving as objective records that could be verified and compared. By the 1970s, split times had become the language of track and field training. The stopwatch didn't just measure performance—it changed what performance meant, shifting authority from human judgment to mechanical precision.",
-      whySignificant: "The stopwatch represents a cultural shift toward quantification and standardization in sport. It emerged during a period when sport was becoming more professionalized, televised, and competitive. The tool didn't just measure performance—it changed how we understand excellence, shifting from subjective judgment to objective measurement. This change had profound implications: it made performance comparable across time and place, but it also narrowed what 'counted' as achievement to what could be measured in seconds. The stopwatch became a symbol of modernity and precision, reflecting broader cultural values about objectivity, fairness, and progress.",
+      signatureMoment: "Imagine a 1960s track meet: the starter's pistol fires, and as runners sprint down the straightaway, an official stands at the finish line with a Heuer stopwatch in hand. When the first runner crosses, the official clicks the button, and a number appears, a time that will be recorded, compared, and remembered. This moment represents a fundamental shift: performance is no longer just 'fast' or 'slow' as judged by human eyes, but a precise number that can be compared across athletes, venues, and eras. The stopwatch transformed sport from subjective experience to objective data.",
+      whyItMatters: "The stopwatch transformed sport by making time comparable across venues, eras, and athletes. Before mechanical timing, records were inconsistent, a 'fast' time in one place might not mean the same thing elsewhere. The stopwatch solved this by creating a universal standard. Once timing became mechanical, athletes began training to specific splits rather than just 'feeling fast.' Coaches could compare performances across sessions. Competition became standardized, with times serving as objective records that could be verified and compared. By the 1970s, split times had become the language of track and field training. The stopwatch didn't just measure performance, it changed what performance meant, shifting authority from human judgment to mechanical precision.",
+      whySignificant: "The stopwatch represents a cultural shift toward quantification and standardization in sport. It emerged during a period when sport was becoming more professionalized, televised, and competitive. The tool didn't just measure performance, it changed how we understand excellence, shifting from subjective judgment to objective measurement. This change had implications: it made performance comparable across time and place, but it also narrowed what 'counted' as achievement to what could be measured in seconds. The stopwatch became a symbol of modernity and precision, reflecting broader cultural values about objectivity, fairness, and progress.",
       signatureDetail: "Standardized timing made split times a training language.",
       debatePrompt: "When timing becomes the authority, who gets to decide what counts as a 'real' improvement?",
       howItWorks: {
@@ -87,19 +90,19 @@ export const OBJECTS: MuseumObject[] = [
       reflectionChoices: [
         {
           value: "Accuracy matters most",
-          feedback: "You prioritize precision and objectivity. The stopwatch represents a shift toward mechanical authority—where numbers replace human judgment. This makes competition more fair and comparable, but it also raises questions: what forms of excellence can't be measured in seconds? When we trust the stopwatch completely, we might miss the athlete's form, strategy, or the context of their performance. The stopwatch gives us accuracy, but accuracy isn't the same thing as understanding.",
+          feedback: "You prioritize precision and objectivity. The stopwatch represents a shift toward mechanical authority, where numbers replace human judgment. This makes competition more fair and comparable, but it also raises questions: what forms of excellence can't be measured in seconds? When we trust the stopwatch completely, we might miss the athlete's form, strategy, or the context of their performance. The stopwatch gives us accuracy, but accuracy isn't the same thing as understanding.",
           followUpQuestion: "What gets lost when we replace human judgment with mechanical precision?",
           lookForThisNext: "polar-hrm-1980s"
         },
         {
           value: "Context matters most",
-          feedback: "You recognize that timing doesn't exist in a vacuum. The stopwatch's meaning changed depending on where and when it was used—at elite competitions versus local meets, in the 1960s versus today. Early stopwatches were expensive, creating access barriers. The same tool that made competition fairer also made it more exclusive. Context matters: who could afford the stopwatch? Who had access to coaches who understood split times? The stopwatch standardized timing, but it didn't standardize access.",
+          feedback: "You recognize that timing doesn't exist in a vacuum. The stopwatch's meaning changed depending on where and when it was used, at elite competitions versus local meets, in the 1960s versus today. Early stopwatches were expensive, creating access barriers. The same tool that made competition fairer also made it more exclusive. Context matters: who could afford the stopwatch? Who had access to coaches who understood split times? The stopwatch standardized timing, but it didn't standardize access.",
           followUpQuestion: "How does context shape whether an innovation expands or restricts access to sport?",
           lookForThisNext: "track-spikes-vintage"
         },
         {
           value: "Fairness matters most",
-          feedback: "You're concerned with equity and access. The stopwatch made timing more objective, which should make competition fairer. But early models were expensive—favoring wealthier programs and athletes. The mechanical precision it offered was only available to those who could afford it. This creates a tension: the same tool that made competition more fair also made it more exclusive. Fairness isn't just about accurate measurement—it's about who gets to participate in measured competition.",
+          feedback: "You're concerned with equity and access. The stopwatch made timing more objective, which should make competition fairer. But early models were expensive, favoring wealthier programs and athletes. The mechanical precision it offered was only available to those who could afford it. This creates a tension: the same tool that made competition more fair also made it more exclusive. Fairness isn't just about accurate measurement. It's about who gets to participate in measured competition.",
           followUpQuestion: "Can a tool be fair if not everyone has access to it?",
           lookForThisNext: "nike-vaporfly"
         }

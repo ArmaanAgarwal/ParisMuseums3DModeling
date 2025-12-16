@@ -21,9 +21,9 @@ const objectsPageSet = new Set(OBJECTS.map(obj => obj.slug));
 const tourSet = new Set<string>();
 
 // Collect all slugs referenced in Tour
-// Tour references objects via: exhibits -> objectIds -> objects
+// Tour references objects via: exhibits -> stopIds -> objects
 for (const exhibit of EXHIBITS) {
-  for (const objectId of exhibit.objectIds) {
+  for (const objectId of exhibit.stopIds) {
     const obj = OBJECTS.find(o => o.id === objectId);
     if (obj) {
       tourSet.add(obj.slug);

@@ -3,7 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ObjectImage } from "@/components/ui/ObjectImage";
-import type { Zone, Exhibit, MuseumObject } from "@/data/types";
+import type { Exhibit, MuseumObject } from "@/data/types";
+import type { Zone } from "@/data/zones";
 import { getObjectHref } from "@/lib/routes";
 import { PREVIEW_OBJECT_COUNT } from "@/data/constants";
 

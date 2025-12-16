@@ -41,7 +41,7 @@ export function TourReflectionPanel({
   currentAnswer,
   showFeedback,
 }: TourReflectionPanelProps) {
-  const { t } = useTranslation();
+  const { t, tSafe } = useTranslation();
   const [showChangeAnswer, setShowChangeAnswer] = useState(false);
 
   const selectedChoice = currentAnswer !== null ? choices[currentAnswer] : null;
@@ -110,7 +110,7 @@ export function TourReflectionPanel({
 
   return (
     <div className="rounded-xl border border-white/15 bg-white/5 p-6">
-      <h3 className="mb-4 text-lg font-semibold">{t("common.reflection") || "Reflection"}</h3>
+      <h3 className="mb-4 text-lg font-semibold">{tSafe("common.reflection", "Reflection")}</h3>
       <p className="mb-6 text-white/80 leading-relaxed">{prompt}</p>
 
       {/* Choices */}
@@ -169,7 +169,7 @@ export function TourReflectionPanel({
           {/* Question to carry forward */}
           <div className="rounded-lg border border-purple-500/30 bg-purple-500/10 p-4">
             <div className="mb-2 text-xs font-semibold text-purple-400 uppercase tracking-wide">
-              Question to Carry Forward
+              {tSafe("common.questionToCarryForward", "Question to Carry Forward")}
             </div>
             <p className="text-sm text-white/90 leading-relaxed">
               {reflectionResponse.questionToCarryForward}
@@ -180,7 +180,7 @@ export function TourReflectionPanel({
           {reflectionResponse.lookNext && (
             <div>
               <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">
-                Look for This Next
+                {tSafe("common.lookForThisNext", "Look for This Next")}
               </div>
               {(() => {
                 const nextObj = getObjectById(reflectionResponse.lookNext);
@@ -205,7 +205,7 @@ export function TourReflectionPanel({
               onClick={() => setShowChangeAnswer(true)}
               className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-medium text-white/70 transition hover:bg-white/10"
             >
-              {t("common.changeAnswer") || "Change My Answer"}
+              {tSafe("common.changeAnswer", "Change My Answer")}
             </button>
           )}
         </motion.div>

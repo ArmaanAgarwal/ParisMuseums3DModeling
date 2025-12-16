@@ -26,18 +26,18 @@ export function ObjectStopLayout({
   onAnswer,
   onSaveObject,
 }: ObjectStopLayoutProps) {
-  const { t } = useTranslation();
+  const { t, tSafe } = useTranslation();
   const { language } = useLanguage();
   const didactics = object.didactics;
   const reflectionChoices = object.tourContent?.reflectionChoices || [];
   
   // Get translated object content using the complete translation system
-  const translatedTitle = t(`objects.${object.id}.title`) || object.title;
-  const translatedWallLabel = t(`objects.${object.id}.wallLabel`) || didactics?.wallLabel || "";
-  const translatedCuratorNote = t(`objects.${object.id}.curatorNote`) || didactics?.curatorNote || "";
-  const translatedWhySignificant = t(`objects.${object.id}.whySignificant`) || didactics?.whySignificant || "";
-  const translatedSignatureMoment = t(`objects.${object.id}.signatureMoment`) || didactics?.signatureMoment || "";
-  const translatedWhyItMatters = t(`objects.${object.id}.whyItMatters`) || didactics?.whyItMatters || "";
+  const translatedTitle = tSafe(`objects.${object.id}.title`, object.title);
+  const translatedWallLabel = tSafe(`objects.${object.id}.wallLabel`, didactics?.wallLabel || "");
+  const translatedCuratorNote = tSafe(`objects.${object.id}.curatorNote`, didactics?.curatorNote || "");
+  const translatedWhySignificant = tSafe(`objects.${object.id}.whySignificant`, didactics?.whySignificant || "");
+  const translatedSignatureMoment = tSafe(`objects.${object.id}.signatureMoment`, didactics?.signatureMoment || "");
+  const translatedWhyItMatters = tSafe(`objects.${object.id}.whyItMatters`, didactics?.whyItMatters || "");
   
   // Use whySignificant if available, otherwise whyItMatters
   const displayWhySignificant = translatedWhySignificant || translatedWhyItMatters || didactics?.whySignificant || didactics?.whyItMatters || "";
@@ -98,17 +98,23 @@ export function ObjectStopLayout({
         )}
 
         {/* Wall Label - REQUIRED */}
-        <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-          <div className="mb-2 text-xs font-semibold text-cyan-400 uppercase tracking-wide">{t("common.wallLabel") || "Wall Label"}</div>
-          <p className="text-lg leading-relaxed text-white/90">
-            {translatedWallLabel || "Wall label missing"}
-          </p>
-        </div>
+        {translatedWallLabel && (
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <div className="mb-2 text-xs font-semibold text-cyan-400 uppercase tracking-wide">
+              {tSafe("common.wallLabel", "Wall label")}
+            </div>
+            <p className="text-lg leading-relaxed text-white/90">
+              {translatedWallLabel}
+            </p>
+          </div>
+        )}
 
         {/* Specific Use Cases - REQUIRED */}
-        <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-          <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">{t("common.specificUseCases")}</div>
-          {didactics?.specificUseCases && didactics.specificUseCases.length > 0 ? (
+        {didactics?.specificUseCases && didactics.specificUseCases.length > 0 && (
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">
+              {tSafe("common.specificUseCases", "Specific use cases")}
+            </div>
             <ul className="space-y-2">
               {didactics.specificUseCases.map((item, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-white/70">
@@ -117,15 +123,15 @@ export function ObjectStopLayout({
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="text-sm text-white/50 italic">Use cases not specified</p>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Signature Moment - REQUIRED */}
         {translatedSignatureMoment && (
           <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-4">
-            <div className="mb-2 text-xs font-semibold text-purple-400 uppercase tracking-wide">{t("common.signatureMoment") || "Signature Moment"}</div>
+            <div className="mb-2 text-xs font-semibold text-purple-400 uppercase tracking-wide">
+              {tSafe("common.signatureMoment", "Signature moment")}
+            </div>
             <p className="text-sm leading-relaxed text-white/80 italic">
               {translatedSignatureMoment}
             </p>
@@ -133,17 +139,23 @@ export function ObjectStopLayout({
         )}
 
         {/* Curator Note - REQUIRED */}
-        <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-          <div className="mb-2 text-xs font-semibold text-purple-400 uppercase tracking-wide">{t("common.curatorNote") || "Curator Note"}</div>
-          <p className="text-sm leading-relaxed text-white/80">
-            {translatedCuratorNote || "Curator note missing"}
-          </p>
-        </div>
+        {translatedCuratorNote && (
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <div className="mb-2 text-xs font-semibold text-purple-400 uppercase tracking-wide">
+              {tSafe("common.curatorNote", "Curator note")}
+            </div>
+            <p className="text-sm leading-relaxed text-white/80">
+              {translatedCuratorNote}
+            </p>
+          </div>
+        )}
 
         {/* Why Significant - REQUIRED */}
         {displayWhySignificant && (
           <div className="rounded-xl border border-white/15 bg-white/5 p-6">
-            <h3 className="mb-3 text-lg font-semibold">{t("common.whySignificant") || "Why Significant"}</h3>
+            <h3 className="mb-3 text-lg font-semibold">
+              {tSafe("common.whyItMatters", "Why it matters")}
+            </h3>
             <p className="text-white/80 leading-relaxed">
               {displayWhySignificant}
             </p>
@@ -153,7 +165,9 @@ export function ObjectStopLayout({
         {/* How It Works - REQUIRED */}
         {didactics?.howItWorks && (
           <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-            <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">{t("common.howItWorks")}</div>
+            <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">
+              {tSafe("common.howItWorks", "How it works")}
+            </div>
             {didactics.howItWorks.bullets && didactics.howItWorks.bullets.length > 0 && (
               <ul className="mb-4 space-y-2">
                 {didactics.howItWorks.bullets.map((bullet, i) => (
@@ -173,9 +187,11 @@ export function ObjectStopLayout({
         )}
 
         {/* Tradeoffs - REQUIRED */}
-        <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-          <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">{t("common.tradeoffs")}</div>
-          {didactics?.tradeoffs && didactics.tradeoffs.length > 0 ? (
+        {didactics?.tradeoffs && didactics.tradeoffs.length > 0 && (
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">
+              {tSafe("common.tradeoffs", "Tradeoffs")}
+            </div>
             <ul className="space-y-2">
               {didactics.tradeoffs.map((item, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-white/70">
@@ -184,10 +200,8 @@ export function ObjectStopLayout({
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="text-sm text-white/50 italic">Tradeoffs not specified</p>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Key Terms - ONLY if terms appear in wallLabel */}
         {shouldShowKeyTerms && didactics.keyTerms && (
@@ -226,7 +240,7 @@ export function ObjectStopLayout({
               onClick={() => onSaveObject(object.id)}
               className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
             >
-              {t("buttons.save")}
+              {tSafe("ui.buttons.save", "Save")}
             </button>
           )}
           <Link
@@ -234,7 +248,7 @@ export function ObjectStopLayout({
             target="_blank"
             className="rounded-lg border border-cyan-500/30 bg-cyan-500/20 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-500/30"
           >
-            {t("buttons.viewDetails")}
+            {tSafe("ui.buttons.viewDetails", "View Details")}
           </Link>
         </div>
       </div>

@@ -29,7 +29,7 @@ export function TourStopRenderer({
   onAnswer,
   onSaveObject,
 }: TourStopRendererProps) {
-  const { t } = useTranslation();
+  const { t, tSafe } = useTranslation();
   const { language } = useLanguage();
   
   // Context Stop
@@ -52,24 +52,24 @@ export function TourStopRenderer({
     }
     
     const translatedTitle = contextKey 
-      ? t(`tour.contextStops.${contextKey}.title`) || stop.title
+      ? tSafe(`tour.contextStops.${contextKey}.title`, stop.title)
       : stop.title;
     const translatedContent = contextKey
-      ? t(`tour.contextStops.${contextKey}.content`) || stop.content
+      ? tSafe(`tour.contextStops.${contextKey}.content`, stop.content)
       : stop.content;
     const translatedPrompt = contextKey
-      ? t(`tour.contextStops.${contextKey}.reflectionPrompt`) || stop.reflectionPrompt
+      ? tSafe(`tour.contextStops.${contextKey}.reflectionPrompt`, stop.reflectionPrompt || "")
       : stop.reflectionPrompt;
     
     // Get translated choices
     const translatedChoices = contextKey && reflectionChoices.length > 0
       ? reflectionChoices.map((choice, idx) => {
           const choiceKey = idx === 0 ? "fairness" : idx === 1 ? "performance" : "understanding";
-          const translatedValue = t(`tour.contextStops.${contextKey}.reflectionChoices.${choiceKey}`);
-          const translatedFeedback = t(`tour.contextStops.${contextKey}.feedback.${choiceKey}`);
+          const translatedValue = tSafe(`tour.contextStops.${contextKey}.reflectionChoices.${choiceKey}`, choice.value);
+          const translatedFeedback = tSafe(`tour.contextStops.${contextKey}.feedback.${choiceKey}`, choice.feedback);
           return {
-            value: translatedValue !== `tour.contextStops.${contextKey}.reflectionChoices.${choiceKey}` ? translatedValue : choice.value,
-            feedback: translatedFeedback !== `tour.contextStops.${contextKey}.feedback.${choiceKey}` ? translatedFeedback : choice.feedback,
+            value: translatedValue,
+            feedback: translatedFeedback,
           };
         })
       : reflectionChoices;
@@ -82,7 +82,7 @@ export function TourStopRenderer({
       <div className="mx-auto max-w-4xl">
         <div className="mb-8">
           <div className="mb-4 text-sm font-semibold text-purple-400 uppercase tracking-wide">
-            {t("tour.contextStop")}: {translatedTitle}
+            {tSafe("tour.contextStop", "Context Stop")}: {translatedTitle}
           </div>
           <h2 className="mb-6 text-4xl font-bold text-white">{translatedTitle}</h2>
           <div className="prose prose-invert max-w-none">
@@ -107,10 +107,10 @@ export function TourStopRenderer({
         {/* What to notice next */}
         <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-6">
           <div className="mb-3 text-xs font-semibold text-white/60 uppercase tracking-wide">
-            {t("tour.whatToNoticeNext") || "What to Notice Next"}
+            {tSafe("tour.whatToNoticeNext", "What to Notice Next")}
           </div>
           <p className="text-sm text-white/70">
-            {t("tour.whatToNoticeNextDesc") || "As you explore the objects in this gallery, notice how they address the problem and tradeoffs we've discussed."}
+            {tSafe("tour.whatToNoticeNextDesc", "As you explore the objects in this gallery, notice how they address the problem and tradeoffs we've discussed.")}
           </p>
         </div>
       </div>
@@ -121,6 +121,7 @@ export function TourStopRenderer({
   if (stop.type === "object" && stop.objectId) {
     const object = getObjectById(stop.objectId);
     if (!object) {
+      console.warn(`Tour stop ${stopIndex + 1} references missing artifact ID: "${stop.objectId}"`);
       return (
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-red-400">Error: Object not found for stop {stopIndex + 1}</p>
